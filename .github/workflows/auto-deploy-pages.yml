@@ -1,0 +1,24 @@
+name: Auto Deploy Pages
+
+on:
+  push:
+    branches:
+      master
+
+jobs:
+  auto-deploy-pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Push Files to Pages Repo
+        uses: nkoppel/push-files-to-another-repository@v1.1.3
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-files: 'VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/*'
+          destination-username: 'xephyrous'
+          destination-repository: 'xephyrous.github.io'
+          destination-directory: './'
+          destination-branch: 'main'
+          commit-email: 'terminatednull@gmail.com'
+          commit-message: 'Auto-Deployment of Pages'
