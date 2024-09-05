@@ -1,0 +1,96 @@
+{
+  "version": "9",
+  "items": {
+    "ea560b882bffc89923ab8323222315c1": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlin\\kotlin-stdlib-wasm-js\\2.0.20\\b1737e1fe6cc45625e963399a96c4237fac80d98\\kotlin-stdlib-wasm-js-2.0.20.klib"
+    },
+    "4d9022a2f3381fff3e0146f503a8aac9": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.runtime\\runtime-wasm-js\\1.6.11\\ab233033131d0d9427efaa1ed2403385720cbe8b\\runtime-wasm-js-1.6.11.klib"
+    },
+    "e4454401ac377a5a45fbd41ba9029c8d": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.collection-internal\\collection-wasm-js\\1.6.11\\99ce48c5646a59da1124e10986869aecfdb1244f\\collection-wasm-js-1.6.11.klib"
+    },
+    "1c6fc0b4d51e510c7517b56b13805943": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlinx\\atomicfu-wasm-js\\0.23.2\\f7046e9f5ce6014c3471098284bd654831bb1f41\\atomicfu-wasm-js-0.23.2.klib"
+    },
+    "dc4ce81dfa41ba7cf602a3afd6153722": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.annotation-internal\\annotation-wasm-js\\1.6.11\\6ad1ebad876a1c2ed51a03c4bcba0486d08fd646\\annotation-wasm-js-1.6.11.klib"
+    },
+    "61108da20006a4cceb8e0b4753db9320": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlinx\\kotlinx-coroutines-core-wasm-js\\1.8.0\\6fa5af0c703e4957c811aef817336eb6f6572e72\\kotlinx-coroutines-core-wasm-js-1.8.0.klib"
+    },
+    "4d5acc401840eed13a6c9ec1e8b74746": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.foundation\\foundation-wasm-js\\1.6.11\\31024c57756a6c9801007d314ca6a5a9d7763197\\foundation-wasm-js-1.6.11.klib"
+    },
+    "68eaef91a0a944ce6652bd86248cbc4d": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.animation\\animation-wasm-js\\1.6.11\\9a7f7190e53da987d2e000e362184a49b590142\\animation-wasm-js-1.6.11.klib"
+    },
+    "4fbe7d36fa6cf9e768552127b3e26fce": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.foundation\\foundation-layout-wasm-js\\1.6.11\\6a3353170d4387ebd5645ccf8a50df21ecef963d\\foundation-layout-wasm-js-1.6.11.klib"
+    },
+    "6f0b58d45075f87c52f414b21825d0ff": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.ui\\ui-wasm-js\\1.6.11\\63061580b890234307c5c799e2ee6171c5d5a6f3\\ui-wasm-js-1.6.11.klib"
+    },
+    "8b54a11a20de1187f0cdf1ae9beeae63": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.androidx.lifecycle\\lifecycle-viewmodel-wasm-js\\2.8.0\\9a144b17e03a9592f253795385a4e64c1ba484ec\\lifecycle-viewmodel-wasm-js-2.8.0.klib"
+    },
+    "0354f00e107bc6050937aa459637f097": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.androidx.lifecycle\\lifecycle-runtime-compose-wasm-js\\2.8.0\\df974a51e2f1254c096d7afc696ade794f36b60a\\lifecycle-runtime-compose-wasm-js-2.8.0.klib"
+    },
+    "1621fd8b6fdd6ef3fa34034bf5c2303d": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.androidx.lifecycle\\lifecycle-runtime-wasm-js\\2.8.0\\718475873ef47922f8137b69ac896cbd55678dd\\lifecycle-runtime-wasm-js-2.8.0.klib"
+    },
+    "e0f0af30101cea81074cc8e2721a8eb5": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.androidx.lifecycle\\lifecycle-common-wasm-js\\2.8.0\\fa641b42c1a25192e15f95defcd568e638b2a665\\lifecycle-common-wasm-js-2.8.0.klib"
+    },
+    "d92a183f0ec73587f8479089e8703c42": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.ui\\ui-text-wasm-js\\1.6.11\\185585ff46707afd28315b3030c1f4083cc9c782\\ui-text-wasm-js-1.6.11.klib"
+    },
+    "ff88ce701259d2890064da50e1c7a679": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.runtime\\runtime-saveable-wasm-js\\1.6.11\\e47efc35a8fb0525c5b1de54d06d335712444671\\runtime-saveable-wasm-js-1.6.11.klib"
+    },
+    "cb6117360967a32199715e1150792c4d": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.ui\\ui-graphics-wasm-js\\1.6.11\\eb30ce6240802a9a6f46502353703db1089bfaad\\ui-graphics-wasm-js-1.6.11.klib"
+    },
+    "35791bc040711d938b4c70d9bc68e7e4": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.ui\\ui-unit-wasm-js\\1.6.11\\a3be9e478aab795bec9fb306b4f0cacba79b4347\\ui-unit-wasm-js-1.6.11.klib"
+    },
+    "dc72df8d890c14c099d6b88e629935cc": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.ui\\ui-geometry-wasm-js\\1.6.11\\37572c8ebfed3cc1d5346bfecbcccbc3c71036f3\\ui-geometry-wasm-js-1.6.11.klib"
+    },
+    "5fa5087eef81a1a2467ff46b1f979111": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.ui\\ui-util-wasm-js\\1.6.11\\ef8720e3751680b3fbc111d919e5ad19a8685dfe\\ui-util-wasm-js-1.6.11.klib"
+    },
+    "f2b8620a81ab77d1566416d735224667": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.skiko\\skiko-wasm-js\\0.8.4\\5f538d322d7a2d3cc8873c5f001d3213dc00f8e6\\skiko-wasm-js-0.8.4.klib",
+      "target": "skiko-wasm-js\\0.8.4"
+    },
+    "7b4d3e246be2d9babdec42e33dd653d5": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.skiko\\skiko-js-wasm-runtime\\0.8.4\\d33595e2e2d579da606b9d17b858636952b01a34\\skiko-js-wasm-runtime-0.8.4.jar",
+      "target": "skiko-js-wasm-runtime\\0.8.4"
+    },
+    "626b3a916a6d70b6abe2d20fd7a9dcff": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.animation\\animation-core-wasm-js\\1.6.11\\57c735cbbdae02f42b150e93930f6455778290e9\\animation-core-wasm-js-1.6.11.klib"
+    },
+    "4222120ab022313e19ee906eaa95ebad": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.material\\material-wasm-js\\1.6.11\\f1ac766c83ac3baf9e5f66490d2b5d50932b9deb\\material-wasm-js-1.6.11.klib"
+    },
+    "6ade141b454301672a70b20d8ab208c5": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.material\\material-ripple-wasm-js\\1.6.11\\ecd3386fa78c7db898a68a87b9beb2459c160393\\material-ripple-wasm-js-1.6.11.klib"
+    },
+    "754d3a947a533d63479e61f53627c081": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.material\\material-icons-core-wasm-js\\1.6.11\\254e7650ca1fc6c632a50364fbb4b2ef99363f85\\material-icons-core-wasm-js-1.6.11.klib"
+    },
+    "bc69240a08ecbfec88aec4b0a77079b2": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.components\\components-resources-wasmJs\\1.6.11\\97848229d9324b9e333c38a68b468665ea0c605e\\library-wasm-js-1.6.11.klib",
+      "target": "components-resources-wasmJs\\1.6.11"
+    },
+    "3d4988c400ef0f100b3270e4394e60a2": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.components\\components-ui-tooling-preview-wasmJs\\1.6.11\\433ef8bb59d98dd38841687ca2343155ffa8751\\library-wasm-js-1.6.11.klib"
+    },
+    "fffad12d968e557f4c38a7f8f56b463e": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlin\\kotlin-test-js-runner\\2.0.20\\99e060b94579ec8542bc53e141b0d7ed9a48ad5d\\kotlin-test-js-runner-2.0.20.jar",
+      "target": "kotlin-test-js-runner\\0.0.2"
+    }
+  }
+}
