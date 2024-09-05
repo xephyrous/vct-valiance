@@ -18,6 +18,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y kotlin
           sudo apt-get install -y openjdk-11-jdk
+          export KOTLIN_HOME=/usr/local/bin/kotlin
+          export PATH=$PATH:$KOTLIN_HOME/bin
 
       - name: Verify Kotlin & Java Installation
         run: |
