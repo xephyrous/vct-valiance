@@ -1,0 +1,42 @@
+name: Build Pages Deployment On Commit
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y kotlin
+          sudo apt-get install -y openjdk-11-jdk
+
+      - name: Verify Kotlin & Java Installation
+        run: |
+          kotlin -version
+          java -version
+
+      - name: Build Gradle
+        run: ./gradlew wasmJsBrowserDistribution
+
+      - name: Clone Pages Repo
+        run: |
+          git clone https://github.com/xephyrous/xephyrous.github.io.git
+          cd xephyrous.github.io
+
+      - name: Copy Artifact Folder to Pages Repo
+        run: |
+          cp -R "VCT Valiance Chatbot/composeApp/build/dist/wasmJs/productionExecutable/* ./
+          git add .
+          git commit -m"Auto Build & Deploy Pages"
+
+      - name: Push to Pages Repo
+        run: git push origin master
