@@ -46,7 +46,7 @@ jobs:
           ls -la "$CLONE_DIRECTORY"
           
           echo "##### Clearing repo files #####"
-          rm -r "$CLONE_DIRECTORY/*"
+          rm -rf $CLONE_DIRECTORY/*
 
           echo
           echo "##### Copying contents to git repo #####"
