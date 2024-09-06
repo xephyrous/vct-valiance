@@ -14,6 +14,8 @@ jobs:
         run: echo "COMMIT_DATETIME=$(date)" >> $GITHUB_ENV
 
       - name: Push Files to Pages Repo
+        env:
+          API_GITHUB_TOKEN: ${{ secrets.API_GITHUB_TOKEN }}
         run: |
           set -e  # if a command fails exit the script
           set -u  # script fails if trying to access an undefined variable
@@ -40,7 +42,7 @@ jobs:
           echo
           echo "##### Cloning destination git repository #####"
 
-          git clone --single-branch --branch main "https://{{ env.API_TOKEN_GITHUB }}@github.com/xephyrous/xephyrous.github.io.git" "$CLONE_DIRECTORY"
+          git clone "https://{{ env.API_TOKEN_GITHUB }}@github.com/xephyrous/xephyrous.github.io.git" "$CLONE_DIRECTORY"
           ls -la "$CLONE_DIRECTORY"
           
           echo "##### Clearing repo files #####"
