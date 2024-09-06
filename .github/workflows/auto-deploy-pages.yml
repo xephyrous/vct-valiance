@@ -14,10 +14,60 @@ jobs:
         run: echo "COMMIT_DATETIME=$(date)" >> $GITHUB_ENV
 
       - name: Push Files to Pages Repo
-        uses: nkoppel/push-files-to-another-repository@v1.1.3
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
+        run: |
+          set -e  # if a command fails exit the script
+          set -u  # script fails if trying to access an undefined variable
+
+          echo
+          echo "##### Starting #####"
+
+          CLONE_DIRECTORY=$(mktemp -d)
+
+          echo
+          echo "##### Cloning source git repository #####"
+          # Setup git
+          git config --global user.email "terminatednull@gmail.com"
+          git config --global user.name "xephyrous"
+
+          # Remove git directory if it exists to prevent errors
+          rm -rf .git
+
+          git clone "https://github.com/$GITHUB_REPOSITORY.git" repo
+
+          cd repo
+          ls -la
+
+          echo
+          echo "##### Cloning destination git repository #####"
+
+          git clone --single-branch --branch "main" "https://{{ env.API_TOKEN_GITHUB }}@github.com/xephyrous/xephyrous.github.io.git" "$CLONE_DIRECTORY"
+          ls -la "$CLONE_DIRECTORY"
+          
+          echo "##### Clearing repo files #####"
+          rm -r "$CLONE_DIRECTORY/*"
+
+          echo
+          echo "##### Copying contents to git repo #####"
+          cp -rvf VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/* "$CLONE_DIRECTORY/"
+          cd "$CLONE_DIRECTORY"
+
+          echo
+          echo "##### Adding git commit #####"
+
+          ORIGIN_COMMIT="https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+          COMMIT_MESSAGE="${Auto-Deployment of Pages [${{ env.COMMIT_DATETIME }}]/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
+
+          git add .
+          git status
+
+          # don't commit if no changes were made
+          git diff-index --quiet HEAD || git commit --message "Auto-Deployment of Pages [${{ env.COMMIT_DATETIME }}]"
+
+          echo
+          echo "##### Pushing git commit #####"
+          # --set-upstream: sets the branch when pushing to a branch that does not exist
+          git push origin --set-upstream "main"
+          
           source-files: 'VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/*'
           destination-username: 'xephyrous'
           destination-repository: 'xephyrous.github.io'
