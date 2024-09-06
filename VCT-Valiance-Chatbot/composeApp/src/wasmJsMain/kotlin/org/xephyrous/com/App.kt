@@ -14,8 +14,12 @@ fun App() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFF181818)) // Apply the new background color
+                .background(Color(0xFF181818)),
         ) {
+            ExpandableChatBackground()
+
+            VCTBlockText()
+
             Valiance()
         }
     }

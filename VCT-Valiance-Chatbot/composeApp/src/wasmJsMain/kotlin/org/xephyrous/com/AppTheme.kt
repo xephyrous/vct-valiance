@@ -14,12 +14,22 @@ import vctvaliancechatbot.composeapp.generated.resources.tungsten_bold
 import vctvaliancechatbot.composeapp.generated.resources.valorant
 
 /**
- * TODO : DOCUMENT
+ * App major heading / splash screen font
  */
 @Composable
-fun ValorantFont() = FontFamily(
-    Font(Res.font.valorant, FontWeight.Normal)
-)
+fun ValorantFont() = FontFamily( Font(Res.font.valorant, FontWeight.Normal) )
+
+/**
+ * Main app font
+ */
+@Composable
+fun FFMarkFont() = FontFamily( Font(Res.font.ff_mark_black, FontWeight.Black) )
+
+/**
+ * Secondary app font
+ */
+@Composable
+fun TungstenFont() = FontFamily( Font(Res.font.tungsten_bold, FontWeight.Bold) )
 
 /**
  * Represents the application's Typography, set for each type of text
