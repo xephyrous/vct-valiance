@@ -40,7 +40,7 @@ jobs:
           echo
           echo "##### Cloning destination git repository #####"
 
-          git clone --single-branch --branch "main" "https://{{ env.API_TOKEN_GITHUB }}@github.com/xephyrous/xephyrous.github.io.git" "$CLONE_DIRECTORY"
+          git clone --single-branch --branch main "https://{{ env.API_TOKEN_GITHUB }}@github.com/xephyrous/xephyrous.github.io.git" "$CLONE_DIRECTORY"
           ls -la "$CLONE_DIRECTORY"
           
           echo "##### Clearing repo files #####"
@@ -66,7 +66,7 @@ jobs:
           echo
           echo "##### Pushing git commit #####"
           # --set-upstream: sets the branch when pushing to a branch that does not exist
-          git push origin --set-upstream "main"
+          git push origin --set-upstream main
           
           source-files: 'VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/*'
           destination-username: 'xephyrous'
