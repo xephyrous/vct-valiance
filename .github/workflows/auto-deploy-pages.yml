@@ -41,7 +41,6 @@ jobs:
 
           echo
           echo "##### Cloning destination git repository #####"
-
           git clone "https://$API_TOKEN_GITHUB@github.com/xephyrous/xephyrous.github.io.git" "$CLONE_DIRECTORY"
           ls -la "$CLONE_DIRECTORY"
           
@@ -50,6 +49,8 @@ jobs:
 
           echo
           echo "##### Copying contents to git repo #####"
+          pwd
+          ls
           cp -rvf VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/* "$CLONE_DIRECTORY/"
           cd "$CLONE_DIRECTORY"
 
