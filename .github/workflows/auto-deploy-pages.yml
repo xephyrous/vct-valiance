@@ -15,7 +15,7 @@ jobs:
 
       - name: Push Files to Pages Repo
         env:
-          API_GITHUB_TOKEN: ${{ secrets.API_GITHUB_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         run: |
           set -e  # if a command fails exit the script
           set -u  # script fails if trying to access an undefined variable
@@ -69,11 +69,3 @@ jobs:
           echo "##### Pushing git commit #####"
           # --set-upstream: sets the branch when pushing to a branch that does not exist
           git push origin --set-upstream main
-          
-          source-files: 'VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/*'
-          destination-username: 'xephyrous'
-          destination-repository: 'xephyrous.github.io'
-          destination-directory: './'
-          destination-branch: 'main'
-          commit-email: 'terminatednull@gmail.com'
-          commit-message: 'Auto-Deployment of Pages [${{ env.COMMIT_DATETIME }}]'
