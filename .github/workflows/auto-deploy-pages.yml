@@ -49,8 +49,6 @@ jobs:
 
           echo
           echo "##### Copying contents to git repo #####"
-          pwd
-          ls
           cp -rvf VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/* "$CLONE_DIRECTORY/"
           cd "$CLONE_DIRECTORY"
 
@@ -58,7 +56,7 @@ jobs:
           echo "##### Adding git commit #####"
 
           ORIGIN_COMMIT="https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
-          COMMIT_MESSAGE="${Auto-Deployment of Pages [${{ env.COMMIT_DATETIME }}]/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
+          COMMIT_MESSAGE="Auto-Deployment of Pages [${{ env.COMMIT_DATETIME }}]/ORIGIN_COMMIT/$ORIGIN_COMMIT"
 
           git add .
           git status
