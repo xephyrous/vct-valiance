@@ -32,12 +32,6 @@ export async function instantiate(imports={}, runInitializer=true) {
                 arrayIndex++;
             }     
              },
-        'kotlin.wasm.internal.importStringFromWasm' : (address, length, prefix) => { 
-            const mem16 = new Uint16Array(wasmExports.memory.buffer, address, length);
-            const str = String.fromCharCode.apply(null, mem16);
-            return (prefix == null) ? str : prefix + str;
-             },
-        'kotlin.wasm.internal.getJsEmptyString' : () => '',
         'kotlin.wasm.internal.externrefToString' : (ref) => String(ref),
         'kotlin.wasm.internal.externrefEquals' : (lhs, rhs) => lhs === rhs,
         'kotlin.wasm.internal.externrefHashCode' : 
@@ -90,6 +84,12 @@ export async function instantiate(imports={}, runInitializer=true) {
             }
         }
         })(),
+        'kotlin.wasm.internal.importStringFromWasm' : (address, length, prefix) => { 
+            const mem16 = new Uint16Array(wasmExports.memory.buffer, address, length);
+            const str = String.fromCharCode.apply(null, mem16);
+            return (prefix == null) ? str : prefix + str;
+             },
+        'kotlin.wasm.internal.getJsEmptyString' : () => '',
         'kotlin.wasm.internal.isNullish' : (ref) => ref == null,
         'kotlin.wasm.internal.externrefToInt' : (ref) => Number(ref),
         'kotlin.wasm.internal.externrefToBoolean' : (ref) => Boolean(ref),
@@ -3506,10 +3506,6 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.mediacapture.deviceId_$external_prop_setter_3' : (_this, v) => _this.deviceId = v,
         'org.w3c.dom.mediacapture.groupId_$external_prop_getter_4' : (_this) => _this.groupId,
         'org.w3c.dom.mediacapture.groupId_$external_prop_setter_3' : (_this, v) => _this.groupId = v,
-        'org.w3c.dom.parsing.DOMParser_$external_fun' : () => new DOMParser(),
-        'org.w3c.dom.parsing.parseFromString_$external_fun' : (_this, p0, p1) => _this.parseFromString(p0, p1),
-        'org.w3c.dom.parsing.DOMParser_$external_class_instanceof' : (x) => x instanceof DOMParser,
-        'org.w3c.dom.parsing.DOMParser_$external_class_get' : () => DOMParser,
         'org.w3c.dom.pointerevents.PointerEvent_$external_fun' : (p0, p1, isDefault0) => new PointerEvent(p0, isDefault0 ? undefined : p1, ),
         'org.w3c.dom.pointerevents.pointerId_$external_prop_getter' : (_this) => _this.pointerId,
         'org.w3c.dom.pointerevents.width_$external_prop_getter' : (_this) => _this.width,

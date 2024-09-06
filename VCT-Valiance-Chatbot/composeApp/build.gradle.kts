@@ -28,7 +28,6 @@ kotlin {
     }
     
     sourceSets {
-        
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -38,8 +37,13 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(compose.components.resources)
         }
     }
 }
 
-
+compose.resources {
+    publicResClass = false
+    packageOfResClass = "vctvaliancechatbot.composeapp.generated.resources"
+    generateResClass = auto
+}
