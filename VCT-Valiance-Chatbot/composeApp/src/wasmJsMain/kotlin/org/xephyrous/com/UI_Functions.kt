@@ -1,8 +1,12 @@
 package org.xephyrous.com
 
+import androidx.annotation.FloatRange
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
@@ -13,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import kotlinx.coroutines.*
@@ -97,6 +102,8 @@ fun Valiance() {
     }
 }
 
+val test = listOf(ChatBox(true, "sample text"), ChatBox(false, "she sample on my text?"))
+
 @Composable
 fun ExpandableChatBackground() {
     Box(
@@ -106,9 +113,18 @@ fun ExpandableChatBackground() {
         Box(
             modifier = Modifier
                 .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
-                .size(1600.dp, 600.dp)
+                .fillMaxSize(.4F)
                 .background(Color(0xFF141414))
-        )
+        ) {
+            LazyColumn (
+                modifier = Modifier.fillMaxSize().padding(10.dp),
+            ) {
+                items(test.size) { item ->
+                    test[item].createBox()
+                    Spacer(Modifier.size(5.dp))
+                }
+            }
+        }
     }
 }
 
