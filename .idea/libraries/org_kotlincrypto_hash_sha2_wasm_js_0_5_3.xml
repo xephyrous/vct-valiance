@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.kotlincrypto.hash:sha2-wasm-js:0.5.3" type="kotlin.wasm" external-system-id="GRADLE">
+    <properties groupId="org.kotlincrypto.hash" artifactId="sha2-wasm-js" version="0.5.3" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.hash/sha2-wasm-js/0.5.3/62a50f60a7f16eb15534257c2e1432b540d211d7/sha2-wasm-js-0.5.3.klib!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.hash/sha2-wasm-js/0.5.3/169c6bcbd3cd69ab5a8a75df550141e359a5ca99/sha2-wasm-js-0.5.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "@aws-sdk/client-bedrock": "^3.650.0"
+    "@aws-sdk/client-bedrock": "^3.650.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.650.0",
+    "boring-webcrypto-sha256": "^1.0.0",
+    "canvas": "^2.11.2",
+    "firebase": "^10.13.1"
   }
 }

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.kotlincrypto.core:digest-wasm-js:0.5.3" type="kotlin.wasm" external-system-id="GRADLE">
+    <properties groupId="org.kotlincrypto.core" artifactId="digest-wasm-js" version="0.5.3" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.core/digest-wasm-js/0.5.3/57cec1dcc9829fda871b87306bad573495b6b766/digest-wasm-js-0.5.3.klib!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.core/digest-wasm-js/0.5.3/593a26356d5d6c9f49da933e5a0f502474c39fc9/digest-wasm-js-0.5.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

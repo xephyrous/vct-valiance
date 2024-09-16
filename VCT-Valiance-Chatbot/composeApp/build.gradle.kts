@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
@@ -26,6 +25,7 @@ kotlin {
         }
         binaries.executable()
     }
+
     
     sourceSets {
         commonMain.dependencies {
@@ -37,7 +37,17 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(compose.components.resources)
+
+            val core = "0.5.3"
+            implementation("org.kotlincrypto.core:digest:$core")
+            implementation("org.kotlincrypto.core:mac:$core")
+            implementation("org.kotlincrypto.core:xof:$core")
+
+            implementation(project.dependencies.platform("org.kotlincrypto.macs:bom:0.5.3"))
+            implementation("org.kotlincrypto.macs:hmac-sha2")
+
+            implementation(project.dependencies.platform("org.kotlincrypto.hash:bom:0.5.3"))
+            implementation("org.kotlincrypto.hash:sha2")
         }
     }
 }

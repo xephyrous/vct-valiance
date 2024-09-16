@@ -119,12 +119,12 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.css.width_$external_prop_setter' : (_this, v) => _this.width = v,
         'org.w3c.dom.css.style_$external_prop_getter' : (_this) => _this.style,
         'org.w3c.dom.encryptedmedia.__convertKotlinClosureToJsClosure_((Js)->Unit)' : (f) => getCachedJsObject(f, (p0) => wasmExports['__callFunction_((Js)->Unit)'](f, p0)),
-        'org.w3c.dom.events.addEventListener_$external_fun' : (_this, p0, p1, p2) => _this.addEventListener(p0, p1, p2),
-        'org.w3c.dom.events.addEventListener_$external_fun_1' : (_this, p0, p1) => _this.addEventListener(p0, p1),
-        'org.w3c.dom.events.removeEventListener_$external_fun' : (_this, p0, p1) => _this.removeEventListener(p0, p1),
         'org.w3c.dom.events.type_$external_prop_getter' : (_this) => _this.type,
         'org.w3c.dom.events.preventDefault_$external_fun' : (_this, ) => _this.preventDefault(),
         'org.w3c.dom.events.Event_$external_class_instanceof' : (x) => x instanceof Event,
+        'org.w3c.dom.events.addEventListener_$external_fun' : (_this, p0, p1, p2) => _this.addEventListener(p0, p1, p2),
+        'org.w3c.dom.events.addEventListener_$external_fun_1' : (_this, p0, p1) => _this.addEventListener(p0, p1),
+        'org.w3c.dom.events.removeEventListener_$external_fun' : (_this, p0, p1) => _this.removeEventListener(p0, p1),
         'org.w3c.dom.events.ctrlKey_$external_prop_getter' : (_this) => _this.ctrlKey,
         'org.w3c.dom.events.shiftKey_$external_prop_getter' : (_this) => _this.shiftKey,
         'org.w3c.dom.events.altKey_$external_prop_getter' : (_this) => _this.altKey,
@@ -250,7 +250,14 @@ export async function instantiate(imports={}, runInitializer=true) {
                 const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
                 mem8.set(src);
             }
-        
+        ,
+        'org.xephyrous.com.JSInterop.JsDate_$external_fun' : () => new Date(),
+        'org.xephyrous.com.JSInterop.getUTCFullYear_$external_fun' : (_this, ) => _this.getUTCFullYear(),
+        'org.xephyrous.com.JSInterop.getUTCMonth_$external_fun' : (_this, ) => _this.getUTCMonth(),
+        'org.xephyrous.com.JSInterop.getUTCDate_$external_fun' : (_this, ) => _this.getUTCDate(),
+        'org.xephyrous.com.JSInterop.getUTCHours_$external_fun' : (_this, ) => _this.getUTCHours(),
+        'org.xephyrous.com.JSInterop.getUTCMinutes_$external_fun' : (_this, ) => _this.getUTCMinutes(),
+        'org.xephyrous.com.JSInterop.getUTCSeconds_$external_fun' : (_this, ) => _this.getUTCSeconds()
     }
     
     // Placed here to give access to it from externals (js_code)
