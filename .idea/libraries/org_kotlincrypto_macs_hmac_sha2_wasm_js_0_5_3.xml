@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.kotlincrypto.macs:hmac-sha2-wasm-js:0.5.3" type="kotlin.wasm" external-system-id="GRADLE">
+    <properties groupId="org.kotlincrypto.macs" artifactId="hmac-sha2-wasm-js" version="0.5.3" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.macs/hmac-sha2-wasm-js/0.5.3/f0a48113e0804751da8d6bd910a81e36c9b8d8f2/hmac-sha2-wasm-js-0.5.3.klib!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.macs/hmac-sha2-wasm-js/0.5.3/bf59a0a6b934a18246fd6da901c4ee49b07020e2/hmac-sha2-wasm-js-0.5.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

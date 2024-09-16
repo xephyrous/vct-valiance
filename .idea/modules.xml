@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/VCT-Valiance.iml" filepath="$PROJECT_DIR$/.idea/VCT-Valiance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/VCTValianceChatbot.iml" filepath="$PROJECT_DIR$/.idea/modules/VCTValianceChatbot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.iml" filepath="$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.commonMain.iml" filepath="$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.commonMain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.commonTest.iml" filepath="$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.commonTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.wasmJsMain.iml" filepath="$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.wasmJsMain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.wasmJsTest.iml" filepath="$PROJECT_DIR$/.idea/modules/composeApp/VCTValianceChatbot.composeApp.wasmJsTest.iml" />
     </modules>
   </component>
 </project>

@@ -10,6 +10,8 @@ export async function instantiate(imports={}, runInitializer=true) {
         return ifNotCached;
     }
 
+    const _ref_Li9qcy9hd3MtYXBpLmpz_ = imports['./js/aws-api.js'];
+    const _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_ = imports['./js/firebase-api.js'];
     const _ref_Li9za2lrby5tanM_ = imports['./skiko.mjs'];
     
     const js_code = {
@@ -4381,7 +4383,26 @@ export async function instantiate(imports={}, runInitializer=true) {
                 const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
                 mem8.set(src);
             }
-        
+        ,
+        'org.xephyrous.com.JSInterop.BedrockRuntime_$external_fun' : () => new _ref_Li9qcy9hd3MtYXBpLmpz_(),
+        'org.xephyrous.com.JSInterop.InvokeModel_$external_fun' : (_this, p0) => _this.InvokeModel(p0),
+        'org.xephyrous.com.JSInterop.BedrockRuntime_$external_object_getInstance' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,
+        'org.xephyrous.com.JSInterop.BedrockRuntime_$external_class_instanceof' : (x) => x instanceof _ref_Li9qcy9hd3MtYXBpLmpz_,
+        'org.xephyrous.com.JSInterop.BedrockRuntime_$external_class_get' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,
+        'org.xephyrous.com.JSInterop.JsDate_$external_fun' : () => new Date(),
+        'org.xephyrous.com.JSInterop.getUTCFullYear_$external_fun' : (_this, ) => _this.getUTCFullYear(),
+        'org.xephyrous.com.JSInterop.getUTCMonth_$external_fun' : (_this, ) => _this.getUTCMonth(),
+        'org.xephyrous.com.JSInterop.getUTCDate_$external_fun' : (_this, ) => _this.getUTCDate(),
+        'org.xephyrous.com.JSInterop.getUTCHours_$external_fun' : (_this, ) => _this.getUTCHours(),
+        'org.xephyrous.com.JSInterop.getUTCMinutes_$external_fun' : (_this, ) => _this.getUTCMinutes(),
+        'org.xephyrous.com.JSInterop.getUTCSeconds_$external_fun' : (_this, ) => _this.getUTCSeconds(),
+        'org.xephyrous.com.JSInterop.JsDate_$external_class_instanceof' : (x) => x instanceof Date,
+        'org.xephyrous.com.JSInterop.JsDate_$external_class_get' : () => Date,
+        'org.xephyrous.com.JSInterop.Firebase_$external_fun' : () => new _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_(),
+        'org.xephyrous.com.JSInterop.createUser_$external_fun' : (_this, ) => _this.createUser(),
+        'org.xephyrous.com.JSInterop.Firebase_$external_object_getInstance' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
+        'org.xephyrous.com.JSInterop.Firebase_$external_class_instanceof' : (x) => x instanceof _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
+        'org.xephyrous.com.JSInterop.Firebase_$external_class_get' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_
     }
     
     // Placed here to give access to it from externals (js_code)

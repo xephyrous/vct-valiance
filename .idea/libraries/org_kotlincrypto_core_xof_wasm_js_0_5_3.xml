@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.kotlincrypto.core:xof-wasm-js:0.5.3" type="kotlin.wasm" external-system-id="GRADLE">
+    <properties groupId="org.kotlincrypto.core" artifactId="xof-wasm-js" version="0.5.3" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.core/xof-wasm-js/0.5.3/cdcf4af4a40e34a54772c80a592bdb4469e7657a/xof-wasm-js-0.5.3.klib!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.core/xof-wasm-js/0.5.3/76c4cc43801b64b90f1f98051ce80f3566608a6f/xof-wasm-js-0.5.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

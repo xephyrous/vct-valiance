@@ -88,9 +88,33 @@
     "3d4988c400ef0f100b3270e4394e60a2": {
       "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.compose.components\\components-ui-tooling-preview-wasmJs\\1.6.11\\433ef8bb59d98dd38841687ca2343155ffa8751\\library-wasm-js-1.6.11.klib"
     },
+    "d1631207b8950057350d51d8cf4c8748": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.kotlincrypto.core\\digest-wasm-js\\0.5.3\\57cec1dcc9829fda871b87306bad573495b6b766\\digest-wasm-js-0.5.3.klib"
+    },
+    "519ce2ee40b16302c29784b8ccaf595a": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.kotlincrypto.core\\common-wasm-js\\0.5.3\\57189644d83de2b5fa3856639ad6fd2739712b96\\common-wasm-js-0.5.3.klib"
+    },
+    "cb8493559077f885ab7f1041081d0dea": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.kotlincrypto.core\\mac-wasm-js\\0.5.3\\6683a5711f550f884ad61ebf8c5a7e0c43a6c105\\mac-wasm-js-0.5.3.klib"
+    },
+    "6b960b2857fdc175db20b42b59ebc660": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.kotlincrypto.core\\xof-wasm-js\\0.5.3\\cdcf4af4a40e34a54772c80a592bdb4469e7657a\\xof-wasm-js-0.5.3.klib"
+    },
+    "7c609fbd35ca6c0b645b331743520dd3": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.kotlincrypto.endians\\endians-wasm-js\\0.3.1\\af35e35af58cdda2a53610fd4fb526c4025a1dd4\\endians-wasm-js-0.3.1.klib"
+    },
     "fffad12d968e557f4c38a7f8f56b463e": {
       "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.jetbrains.kotlin\\kotlin-test-js-runner\\2.0.20\\99e060b94579ec8542bc53e141b0d7ed9a48ad5d\\kotlin-test-js-runner-2.0.20.jar",
       "target": "kotlin-test-js-runner\\0.0.2"
+    },
+    "6578a301f815b92cc4580cc812d93332": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.kotlincrypto.macs\\hmac-sha2-wasm-js\\0.5.3\\f0a48113e0804751da8d6bd910a81e36c9b8d8f2\\hmac-sha2-wasm-js-0.5.3.klib"
+    },
+    "73c8b599b6606d8513eec01596f0e53b": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.kotlincrypto.hash\\sha2-wasm-js\\0.5.3\\62a50f60a7f16eb15534257c2e1432b540d211d7\\sha2-wasm-js-0.5.3.klib"
+    },
+    "0dc39a69b6ea73073cb53ccab478eeb2": {
+      "src": "C:\\Users\\alexa\\.gradle\\caches\\modules-2\\files-2.1\\org.kotlincrypto.macs\\hmac-wasm-js\\0.5.3\\b6e4969bfce3337219fc36dfcf8001e5afc6e31b\\hmac-wasm-js-0.5.3.klib"
     }
   }
 }

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.jetbrains.compose.material:material-ripple-wasm-js:1.6.11" type="kotlin.wasm" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.compose.material" artifactId="material-ripple-wasm-js" version="1.6.11" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.compose.material/material-ripple-wasm-js/1.6.11/ecd3386fa78c7db898a68a87b9beb2459c160393/material-ripple-wasm-js-1.6.11.klib!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.compose.material/material-ripple-wasm-js/1.6.11/9fa7c0950751ac0efa121e4961ab3d533cac62b5/material-ripple-wasm-js-1.6.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

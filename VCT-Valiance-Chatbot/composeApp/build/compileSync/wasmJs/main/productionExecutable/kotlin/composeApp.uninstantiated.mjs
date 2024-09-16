@@ -10,6 +10,8 @@ export async function instantiate(imports={}, runInitializer=true) {
         return ifNotCached;
     }
 
+    const _ref_Li9qcy9hd3MtYXBpLmpz_ = imports['./js/aws-api.js'];
+    const _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_ = imports['./js/firebase-api.js'];
     const _ref_Li9za2lrby5tanM_ = imports['./skiko.mjs'];
     
     const js_code = {

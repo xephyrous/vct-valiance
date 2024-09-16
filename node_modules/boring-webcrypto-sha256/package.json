@@ -1,0 +1,24 @@
+{
+  "name": "boring-webcrypto-sha256",
+  "version": "1.0.0",
+  "description": "A tiny (<10 line) function that uses webcrypto to get a SHA256 hash of a string.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "private": false,
+  "scripts": {
+    "test": "jest",
+    "clean": "rm -f dist/*",
+    "build": "npm run clean && tsup --format cjs,esm",
+    "publish-new-version": "npm run build && npm publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tsup": "^6.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}

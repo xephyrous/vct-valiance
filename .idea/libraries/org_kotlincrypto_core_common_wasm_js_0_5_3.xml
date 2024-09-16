@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.kotlincrypto.core:common-wasm-js:0.5.3" type="kotlin.wasm" external-system-id="GRADLE">
+    <properties groupId="org.kotlincrypto.core" artifactId="common-wasm-js" version="0.5.3" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.core/common-wasm-js/0.5.3/57189644d83de2b5fa3856639ad6fd2739712b96/common-wasm-js-0.5.3.klib!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.kotlincrypto.core/common-wasm-js/0.5.3/b10f2421fa8e6202131ea4406f77fe5b92df418/common-wasm-js-0.5.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

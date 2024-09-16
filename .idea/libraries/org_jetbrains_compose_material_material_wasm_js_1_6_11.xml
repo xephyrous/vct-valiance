@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.jetbrains.compose.material:material-wasm-js:1.6.11" type="kotlin.wasm" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.compose.material" artifactId="material-wasm-js" version="1.6.11" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.compose.material/material-wasm-js/1.6.11/f1ac766c83ac3baf9e5f66490d2b5d50932b9deb/material-wasm-js-1.6.11.klib!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.compose.material/material-wasm-js/1.6.11/8ac031e4c292730573983e5493c214f22e1560d0/material-wasm-js-1.6.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
