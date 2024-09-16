@@ -4400,7 +4400,6 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.xephyrous.com.JSInterop.JsDate_$external_class_get' : () => Date,
         'org.xephyrous.com.JSInterop.Firebase_$external_fun' : () => new _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_(),
         'org.xephyrous.com.JSInterop.createUser_$external_fun' : (_this, ) => _this.createUser(),
-        'org.xephyrous.com.JSInterop.getAWSKey_$external_fun' : (_this, ) => _this.getAWSKey(),
         'org.xephyrous.com.JSInterop.Firebase_$external_object_getInstance' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
         'org.xephyrous.com.JSInterop.Firebase_$external_class_instanceof' : (x) => x instanceof _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
         'org.xephyrous.com.JSInterop.Firebase_$external_class_get' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_

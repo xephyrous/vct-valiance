@@ -9,10 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
 import org.xephyrous.com.Utils.Global
-
-// Debug
-import org.xephyrous.com.JSInterop.BedrockRuntime
-import org.xephyrous.com.JSInterop.Firebase
+import org.xephyrous.com.UI.ExpandableChatBackground
+import org.xephyrous.com.UI.VCTBlockText
+import org.xephyrous.com.UI.Valiance
 
 @Composable
 fun App() {
@@ -25,12 +24,10 @@ fun App() {
             // Setup global size
             Global.viewSize = DpSize(maxWidth, maxHeight)
 
-            BedrockRuntime.InvokeModel("Hello!")
-
-            // Splash screen
-            //ExpandableChatBackground()
-            //VCTBlockText()
-            //Valiance()
+            //Splash screen
+            ExpandableChatBackground()
+            VCTBlockText()
+            Valiance()
         }
     }
 }

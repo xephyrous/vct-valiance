@@ -26,17 +26,10 @@ async function credCallAWS(injectTarget, ...params) {
     })
 }
 
-async function getAWSKey() {
-    await signInAnonymously(auth);
-    await get(ref(database, "aws_credentials")).then((snapshot) => {
-        return snapshot.val().accessKeyId
-    })
-
-    await get(ref(database, "aws_credentials")).then((snapshot) => {
-        return snapshot.val().secretAccessKey
-    })
-}
-
+/**
+ * Creates a new user in the database with the session UUID
+ * @returns {Promise<*>} The current user's session UUID, to be stored locally via cookies
+ */
 async function createUser() {
     const uuid = await calculateSessionUUID();
 
@@ -64,6 +57,5 @@ async function calculateSessionUUID() {
 
 export {
     createUser,
-    calculateSessionUUID,
     credCallAWS
 };
