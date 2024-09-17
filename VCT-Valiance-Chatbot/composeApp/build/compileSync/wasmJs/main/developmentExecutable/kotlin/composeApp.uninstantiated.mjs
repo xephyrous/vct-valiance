@@ -11,6 +11,7 @@ export async function instantiate(imports={}, runInitializer=true) {
     }
 
     const _ref_Li9qcy9hd3MtYXBpLmpz_ = imports['./js/aws-api.js'];
+    const _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_ = imports['./js/cookie-handler.js'];
     const _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_ = imports['./js/firebase-api.js'];
     const _ref_Li9za2lrby5tanM_ = imports['./skiko.mjs'];
     
@@ -4389,6 +4390,13 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.xephyrous.com.JSInterop.BedrockRuntime_$external_object_getInstance' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,
         'org.xephyrous.com.JSInterop.BedrockRuntime_$external_class_instanceof' : (x) => x instanceof _ref_Li9qcy9hd3MtYXBpLmpz_,
         'org.xephyrous.com.JSInterop.BedrockRuntime_$external_class_get' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,
+        'org.xephyrous.com.JSInterop.CookieHandler_$external_fun' : () => new _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_(),
+        'org.xephyrous.com.JSInterop.addCookie_$external_fun' : (_this, p0, p1) => _this.addCookie(p0, p1),
+        'org.xephyrous.com.JSInterop.getCookie_$external_fun' : (_this, p0) => _this.getCookie(p0),
+        'org.xephyrous.com.JSInterop.removeCookie_$external_fun' : (_this, p0) => _this.removeCookie(p0),
+        'org.xephyrous.com.JSInterop.CookieHandler_$external_object_getInstance' : () => _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_,
+        'org.xephyrous.com.JSInterop.CookieHandler_$external_class_instanceof' : (x) => x instanceof _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_,
+        'org.xephyrous.com.JSInterop.CookieHandler_$external_class_get' : () => _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_,
         'org.xephyrous.com.JSInterop.JsDate_$external_fun' : () => new Date(),
         'org.xephyrous.com.JSInterop.getUTCFullYear_$external_fun' : (_this, ) => _this.getUTCFullYear(),
         'org.xephyrous.com.JSInterop.getUTCMonth_$external_fun' : (_this, ) => _this.getUTCMonth(),
@@ -4399,7 +4407,12 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.xephyrous.com.JSInterop.JsDate_$external_class_instanceof' : (x) => x instanceof Date,
         'org.xephyrous.com.JSInterop.JsDate_$external_class_get' : () => Date,
         'org.xephyrous.com.JSInterop.Firebase_$external_fun' : () => new _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_(),
+        'org.xephyrous.com.JSInterop.initializeFirebase_$external_fun' : (_this, ) => _this.initializeFirebase(),
         'org.xephyrous.com.JSInterop.createUser_$external_fun' : (_this, ) => _this.createUser(),
+        'org.xephyrous.com.JSInterop.calculateSessionUUID_$external_fun' : (_this, ) => _this.calculateSessionUUID(),
+        'org.xephyrous.com.JSInterop.setSessionUUID_$external_fun' : (_this, p0) => _this.setSessionUUID(p0),
+        'org.xephyrous.com.JSInterop.debug_$external_fun' : (_this, p0) => _this.debug(p0),
+        'org.xephyrous.com.JSInterop.addMessage_$external_fun' : (_this, p0, p1) => _this.addMessage(p0, p1),
         'org.xephyrous.com.JSInterop.Firebase_$external_object_getInstance' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
         'org.xephyrous.com.JSInterop.Firebase_$external_class_instanceof' : (x) => x instanceof _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
         'org.xephyrous.com.JSInterop.Firebase_$external_class_get' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_

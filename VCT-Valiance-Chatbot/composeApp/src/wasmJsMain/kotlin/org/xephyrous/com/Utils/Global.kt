@@ -8,4 +8,6 @@ import androidx.compose.ui.unit.dp
  */
 object Global {
     var viewSize: DpSize = DpSize(0.dp, 0.dp)
+    var sessionUUID: String? = null
+    var initialized: Boolean = false
 }

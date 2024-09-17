@@ -56,6 +56,12 @@ fun Valiance() {
     val logoOffset = with (LocalDensity.current) { -(Global.viewSize.height / 2.6f).toPx() }
 
     GlobalScope.launch(Dispatchers.Default) {
+        while(true) {
+            if (!Global.initialized) {
+                delay(200)
+            } else { break }
+        }
+
         delay(1200)
         targetPos = IntOffset(0, logoOffset.toInt())
         targetFontSize = 100.sp
@@ -142,6 +148,12 @@ fun VCTBlockText() {
     )
 
     GlobalScope.launch(Dispatchers.Default) {
+        while(true) {
+            if (!Global.initialized) {
+                delay(200)
+            } else { break }
+        }
+
         delay(1200)
         offsetPosState = IntOffset(0, offset.toInt())
         fontSizeState = 30.sp
