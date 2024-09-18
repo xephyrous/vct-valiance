@@ -3,23 +3,30 @@ package org.xephyrous.com.UI
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.Add
+import androidx.compose.material.icons.sharp.PlayArrow
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.*
 import kotlinx.coroutines.*
-import org.xephyrous.com.JSInterop.Firebase
+import org.xephyrous.com.ChatBox
 import org.xephyrous.com.Utils.Global
-import org.xephyrous.com.JSInterop.getUTCTimeISO8601
 import org.xephyrous.com.Utils.textHeightFix
 import org.xephyrous.com.Utils.textSpacingFix
+import androidx.compose.material.Icon as Icon1
 
 /**
  *
@@ -102,17 +109,95 @@ fun Valiance() {
 }
 
 @Composable
-fun ExpandableChatBackground() {
+fun UserChatField() {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth().fillMaxHeight(),
         contentAlignment = Alignment.Center
     ) {
-        Box(
-            modifier = Modifier
-                .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
-                .size(1600.dp, 600.dp)
-                .background(Color(0xFF141414))
-        )
+        Column(
+            modifier = Modifier.fillMaxWidth(.4F).align(Alignment.Center)
+        ) {
+            Spacer(modifier = Modifier.fillMaxHeight(.1F))
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
+                    .fillMaxHeight(.90F)
+                    .background(Color(0xFF141414))
+            ) {
+                val lazyListState = rememberLazyListState()
+                LazyColumn(
+                    state = lazyListState,
+                    modifier = Modifier.fillMaxSize().padding(5.dp)
+                ){
+                    items(Global.loadedMessages.size) { item ->
+                        Global.loadedMessages[item].createBox()
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.fillMaxHeight(.1F))
+            Row {
+                var input by rememberSaveable { mutableStateOf("") }
+
+                Box(modifier = Modifier
+                    .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
+                    .fillMaxWidth(.9F)
+                    .fillMaxHeight(.75F)
+                    .background(Color(0xFF141414))
+                ) {
+                    TextField(
+                        modifier = Modifier.fillMaxSize(),
+                        value = input,
+                        onValueChange = { newText ->
+                            input = newText
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
+                            cursorColor = Color(0xFFFD4556),
+                            focusedIndicatorColor = Color(0xFFFD4556),
+                        ),
+                        singleLine = true,
+                        placeholder = { Text("INPUT TEXT HERE", color = Color(0x15FFFFFF), fontSize = 25.sp, fontFamily = TungstenFont()) },
+                        textStyle = TextStyle(
+                            fontFamily = TungstenFont(),
+                            fontSize = 25.sp,
+                            color = Color.White
+                        )
+                    )
+                }
+                Spacer(Modifier.fillMaxWidth(.15F))
+                Box(
+                    modifier = Modifier
+                        .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
+                        .fillMaxWidth()
+                        .fillMaxHeight(.75F)
+                        .background(Color(0xFF141414))
+                ) {
+                    IconButton(
+                        onClick = {
+                            if (input.isNotEmpty()) {
+                                // Upload the message to the screen
+                                val temp: ArrayList<ChatBox> = arrayListOf()
+                                temp.addAll(Global.loadedMessages)
+                                temp.add(ChatBox(true, input))
+                                Global.loadedMessages = temp
+                                input = ""
+                                // Get response
+                                temp.add(ChatBox(false, "Pretend this is text that the LLM has responded to you with!"))
+                                Global.loadedMessages = temp
+                            } else {
+                                //crash their application or smth idk
+                            }
+                        }
+                    ) {
+                        Icon1(
+                            modifier = Modifier.fillMaxSize(),
+                            imageVector = Icons.Sharp.PlayArrow,
+                            contentDescription = "Sned massage",
+                            tint = Color(0xFFFD4556)
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 

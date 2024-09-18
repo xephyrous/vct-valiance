@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
 import org.xephyrous.com.Utils.Global
-import org.xephyrous.com.UI.ExpandableChatBackground
+import org.xephyrous.com.UI.UserChatField
 import org.xephyrous.com.UI.VCTBlockText
 import org.xephyrous.com.UI.Valiance
 
@@ -25,7 +25,7 @@ fun App() {
             Global.viewSize = DpSize(maxWidth, maxHeight)
 
             //Splash screen
-            ExpandableChatBackground()
+            UserChatField()
             VCTBlockText()
             Valiance()
         }
