@@ -5,7 +5,10 @@ import {
 
 import { credCallAWS } from "./firebase-api";
 
-async function InvokeModel(prompt) {
+
+
+async function InvokeModel(prompt
+) {
     await credCallAWS(_InvokeModel, prompt)
 }
 

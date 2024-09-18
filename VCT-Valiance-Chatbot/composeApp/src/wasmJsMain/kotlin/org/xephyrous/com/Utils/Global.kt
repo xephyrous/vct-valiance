@@ -19,4 +19,6 @@ object Global {
             ChatBox(false, "This is an example of a pre-loaded answer", true)
         )
     )
+    var sessionUUID: String? = null
+    var initialized: Boolean = false
 }
