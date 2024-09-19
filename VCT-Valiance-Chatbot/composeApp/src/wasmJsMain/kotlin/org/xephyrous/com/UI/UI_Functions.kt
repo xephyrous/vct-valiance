@@ -29,7 +29,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.Utils.updateText
 import vctvaliancechatbot.composeapp.generated.resources.Res
-import vctvaliancechatbot.composeapp.generated.resources.logo
+import vctvaliancechatbot.composeapp.generated.resources.VCT_Block
+import vctvaliancechatbot.composeapp.generated.resources.Valiance
 
 /**
  *
@@ -47,12 +48,23 @@ fun Valiance() {
             targetValue = if (Global.initialized) .1f else 1F,
             animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
         )
+        val padding by animateFloatAsState(
+            targetValue = if (Global.initialized) .05f else .35F,
+            animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
+        )
         Column(
             modifier = Modifier.fillMaxWidth(width).fillMaxHeight(height).align(Alignment.TopCenter)
         ) {
-            Spacer(Modifier.fillMaxHeight(.05F))
+            Spacer(Modifier.fillMaxHeight(padding))
             Image(
-                painter = painterResource(resource = Res.drawable.logo),
+                painter = painterResource(resource = Res.drawable.VCT_Block),
+                contentDescription = "",
+                modifier = Modifier.fillMaxHeight(0.2F).fillMaxWidth(),
+                alignment = Alignment.BottomCenter,
+                contentScale = ContentScale.Fit
+            )
+            Image(
+                painter = painterResource(resource = Res.drawable.Valiance),
                 contentDescription = "",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Fit

@@ -6,32 +6,31 @@ import kotlin.OptIn
 import org.jetbrains.compose.resources.DrawableResource
 
 private object CommonMainDrawable0 {
-  public val compose_multiplatform: DrawableResource by 
-      lazy { init_compose_multiplatform() }
+  public val VCT_Block: DrawableResource by 
+      lazy { init_VCT_Block() }
 
-  public val logo: DrawableResource by 
-      lazy { init_logo() }
+  public val Valiance: DrawableResource by 
+      lazy { init_Valiance() }
 }
 
-internal val Res.drawable.compose_multiplatform: DrawableResource
-  get() = CommonMainDrawable0.compose_multiplatform
+internal val Res.drawable.VCT_Block: DrawableResource
+  get() = CommonMainDrawable0.VCT_Block
 
-private fun init_compose_multiplatform(): DrawableResource =
-    org.jetbrains.compose.resources.DrawableResource(
-  "drawable:compose_multiplatform",
+private fun init_VCT_Block(): DrawableResource = org.jetbrains.compose.resources.DrawableResource(
+  "drawable:VCT_Block",
     setOf(
       org.jetbrains.compose.resources.ResourceItem(setOf(),
-    "composeResources/vctvaliancechatbot.composeapp.generated.resources/drawable/compose-multiplatform.xml", -1, -1),
+    "composeResources/vctvaliancechatbot.composeapp.generated.resources/drawable/VCT_Block.png", -1, -1),
     )
 )
 
-internal val Res.drawable.logo: DrawableResource
-  get() = CommonMainDrawable0.logo
+internal val Res.drawable.Valiance: DrawableResource
+  get() = CommonMainDrawable0.Valiance
 
-private fun init_logo(): DrawableResource = org.jetbrains.compose.resources.DrawableResource(
-  "drawable:logo",
+private fun init_Valiance(): DrawableResource = org.jetbrains.compose.resources.DrawableResource(
+  "drawable:Valiance",
     setOf(
       org.jetbrains.compose.resources.ResourceItem(setOf(),
-    "composeResources/vctvaliancechatbot.composeapp.generated.resources/drawable/logo.png", -1, -1),
+    "composeResources/vctvaliancechatbot.composeapp.generated.resources/drawable/Valiance.png", -1, -1),
     )
 )
