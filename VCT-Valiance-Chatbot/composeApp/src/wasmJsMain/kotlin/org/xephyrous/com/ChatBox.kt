@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.xephyrous.com.UI.TungstenFont
+import org.xephyrous.com.Utils.Global
 
 /*
    ok this is kinda annoying to explain
@@ -51,11 +52,11 @@ class ChatBox (
 
 
         Row(
-            modifier = Modifier.fillMaxWidth().width(IntrinsicSize.Min),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = if (user) Arrangement.End else Arrangement.Start,
         ){
             AnimatedVisibility(
-                visible = isVisible
+                visible = isVisible && Global.initialized
             ){
                 Box(
                     modifier = Modifier

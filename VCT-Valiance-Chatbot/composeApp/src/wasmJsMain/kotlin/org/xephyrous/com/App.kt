@@ -13,7 +13,6 @@ import org.xephyrous.com.JSInterop.CookieHandler
 import org.xephyrous.com.JSInterop.Firebase
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.UI.UserChatField
-import org.xephyrous.com.UI.VCTBlockText
 import org.xephyrous.com.UI.Valiance
 import org.xephyrous.com.Utils.Global.initialized
 import org.xephyrous.com.Utils.Global.sessionUUID
@@ -68,7 +67,6 @@ fun App() {
 
             //Splash screen
             UserChatField()
-            VCTBlockText()
             Valiance()
         }
     }

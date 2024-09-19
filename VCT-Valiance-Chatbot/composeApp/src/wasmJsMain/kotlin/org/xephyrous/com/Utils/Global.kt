@@ -20,5 +20,5 @@ object Global {
         )
     )
     var sessionUUID: String? = null
-    var initialized: Boolean = false
+    var initialized: Boolean by mutableStateOf(false)
 }

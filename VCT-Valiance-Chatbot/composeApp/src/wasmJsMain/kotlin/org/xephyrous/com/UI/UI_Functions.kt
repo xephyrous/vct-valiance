@@ -1,116 +1,63 @@
 package org.xephyrous.com.UI
 
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.EaseInOut
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.sharp.Add
 import androidx.compose.material.icons.sharp.PlayArrow
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.*
-import kotlinx.coroutines.*
-import org.xephyrous.com.ChatBox
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.painterResource
 import org.xephyrous.com.Utils.Global
-import org.xephyrous.com.Utils.textHeightFix
-import org.xephyrous.com.Utils.textSpacingFix
-import androidx.compose.material.Icon as Icon1
+import org.xephyrous.com.Utils.updateText
+import vctvaliancechatbot.composeapp.generated.resources.Res
+import vctvaliancechatbot.composeapp.generated.resources.logo
 
 /**
  *
  */
-@OptIn(DelicateCoroutinesApi::class)
 @Composable()
 fun Valiance() {
-    var targetFontSize by remember { mutableStateOf((Global.viewSize.width / 6).value.sp) }
-    var targetPos by remember { mutableStateOf(IntOffset(0, 0)) }
-
-    var topOffsetState by remember { mutableStateOf(IntOffset(10, -10)) }
-    var bottomOffsetState by remember { mutableStateOf(IntOffset(-10, 10)) }
-
-    val offset by animateIntOffsetAsState(
-        targetValue = targetPos,
-        animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
-    )
-
-    val topOffset by animateIntOffsetAsState(
-        targetValue = topOffsetState,
-        animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
-    )
-
-    val bottomOffset by animateIntOffsetAsState(
-        targetValue = bottomOffsetState,
-        animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
-    )
-
-    val fontSize by animateDpAsState(
-        targetValue = with (LocalDensity.current) { targetFontSize.toDp() },
-        animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
-    )
-
-    val logoOffset = with (LocalDensity.current) { -(Global.viewSize.height / 2.6f).toPx() }
-
-    GlobalScope.launch(Dispatchers.Default) {
-        while(true) {
-            if (!Global.initialized) {
-                delay(200)
-            } else { break }
-        }
-
-        delay(1200)
-        targetPos = IntOffset(0, logoOffset.toInt())
-        targetFontSize = 100.sp
-        topOffsetState = IntOffset(5, -5)
-        bottomOffsetState = IntOffset(-5, 5)
-    }
-
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .offset { offset },
-        contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize()
     ) {
-        Text(
-            "VALIANCE",
-            modifier = Modifier.offset(bottomOffset.x.dp, bottomOffset.y.textHeightFix(fontSize)),
-            style = LocalTextStyle.current.copy(
-                color = Color(0xFF53212B),
-                fontSize = fontSize.value.sp,
-                fontFamily = ValorantFont()
-            )
+        val width by animateFloatAsState(
+            targetValue = if (Global.initialized) .4f else .8F,
+            animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
         )
-
-        Text(
-            "VALIANCE",
-            modifier = Modifier.offset(0.dp, (0).textHeightFix(fontSize)),
-            style = LocalTextStyle.current.copy(
-                color = Color(0xFFBD3944),
-                fontSize = fontSize.value.sp,
-                fontFamily = ValorantFont()
-            )
+        val height by animateFloatAsState(
+            targetValue = if (Global.initialized) .1f else 1F,
+            animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
         )
-
-        Text(
-            "VALIANCE",
-            modifier = Modifier.offset(topOffset.x.dp, topOffset.y.textHeightFix(fontSize)),
-            style = LocalTextStyle.current.copy(
-                color = Color(0xFFFD4556),
-                fontSize = fontSize.value.sp,
-                fontFamily = ValorantFont()
+        Column(
+            modifier = Modifier.fillMaxWidth(width).fillMaxHeight(height).align(Alignment.TopCenter)
+        ) {
+            Spacer(Modifier.fillMaxHeight(.05F))
+            Image(
+                painter = painterResource(resource = Res.drawable.logo),
+                contentDescription = "",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Fit
             )
-        )
+        }
     }
 }
 
@@ -152,6 +99,7 @@ fun UserChatField() {
                 ) {
                     TextField(
                         modifier = Modifier.fillMaxSize(),
+                        enabled = Global.initialized,
                         value = input,
                         onValueChange = { newText ->
                             input = newText
@@ -181,20 +129,17 @@ fun UserChatField() {
                         onClick = {
                             if (input.isNotEmpty()) {
                                 // Upload the message to the screen
-                                val temp: ArrayList<ChatBox> = arrayListOf()
-                                temp.addAll(Global.loadedMessages)
-                                temp.add(ChatBox(true, input))
-                                Global.loadedMessages = temp
+                                updateText(true, input)
                                 input = ""
                                 // Get response
-                                temp.add(ChatBox(false, "Pretend this is text that the LLM has responded to you with!"))
-                                Global.loadedMessages = temp
+                                // Placeholder Text
+                                updateText(false, "Pretend this is text that the LLM has responded to you with!")
                             } else {
-                                //crash their application or smth idk
+                                //crash their application or smth IDK
                             }
                         }
                     ) {
-                        Icon1(
+                        Icon(
                             modifier = Modifier.fillMaxSize(),
                             imageVector = Icons.Sharp.PlayArrow,
                             contentDescription = "Sned massage",
@@ -203,70 +148,6 @@ fun UserChatField() {
                     }
                 }
             }
-        }
-    }
-}
-
-@OptIn(DelicateCoroutinesApi::class)
-@Composable
-fun VCTBlockText() {
-    val fontSizeV = with (LocalDensity.current) { (Global.viewSize.width / 6).toPx() }
-    val offset = with (LocalDensity.current) { -(Global.viewSize.height / 2.15f).toPx() }
-
-    var offsetPosState by remember { mutableStateOf(IntOffset(0, -(fontSizeV / 1.6f).toInt())) }
-    var boxSizeState by remember { mutableStateOf(Size(150f, 75f)) }
-    var fontSizeState by remember { mutableStateOf(60.sp) }
-
-    val offsetPos by animateIntOffsetAsState(
-        targetValue = offsetPosState,
-        animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
-    )
-
-    val boxSize by animateSizeAsState(
-        targetValue = boxSizeState,
-        animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
-    )
-
-    val fontSize by animateDpAsState(
-        targetValue = with (LocalDensity.current) { fontSizeState.toDp() },
-        animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
-    )
-
-    GlobalScope.launch(Dispatchers.Default) {
-        while(true) {
-            if (!Global.initialized) {
-                delay(200)
-            } else { break }
-        }
-
-        delay(1200)
-        offsetPosState = IntOffset(0, offset.toInt())
-        fontSizeState = 30.sp
-        boxSizeState = Size(80f, 38f)
-    }
-
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .offset { offsetPos }
-                .size(boxSize.width.dp, boxSize.height.dp)
-                .background(Color(0xFFBD3944)),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                "VCT",
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .offset((0).textSpacingFix(10.sp), 0.dp),
-                letterSpacing = 10.sp,
-                style = LocalTextStyle.current.copy(
-                    fontFamily = TungstenFont(),
-                    fontSize = fontSize.value.sp
-                )
-            )
         }
     }
 }
