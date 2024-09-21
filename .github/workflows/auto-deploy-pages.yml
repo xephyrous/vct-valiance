@@ -45,7 +45,7 @@ jobs:
           ls -la "$CLONE_DIRECTORY"
           
           echo "##### Clearing repo files #####"
-          rm -rf $CLONE_DIRECTORY/*
+          rm -rf $CLONE_DIRECTORY/projects/vct-valiance/*
 
           echo
           echo "##### Copying contents to git repo #####"
