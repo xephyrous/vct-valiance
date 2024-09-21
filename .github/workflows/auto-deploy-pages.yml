@@ -49,7 +49,7 @@ jobs:
 
           echo
           echo "##### Copying contents to git repo #####"
-          cp -rvf VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/* "$CLONE_DIRECTORY/projects/vct-valiance"
+          cp -rvf VCT-Valiance-Chatbot/composeApp/build/dist/wasmJs/productionExecutable/* "$CLONE_DIRECTORY/projects/vct-valiance/"
           cd "$CLONE_DIRECTORY"
 
           echo
