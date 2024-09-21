@@ -25,8 +25,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.*
 import org.jetbrains.compose.resources.painterResource
+import org.xephyrous.com.JSInterop.BedrockRuntime
+import org.xephyrous.com.Utils.ErrorType.*
 import org.xephyrous.com.Utils.Global
+import org.xephyrous.com.Utils.awaitHandled
 import org.xephyrous.com.Utils.updateText
 import vctvaliancechatbot.composeapp.generated.resources.Res
 import vctvaliancechatbot.composeapp.generated.resources.VCT_Block
@@ -73,6 +77,7 @@ fun Valiance() {
     }
 }
 
+@OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun UserChatField() {
     Box(
@@ -142,12 +147,11 @@ fun UserChatField() {
                             if (input.isNotEmpty()) {
                                 // Upload the message to the screen
                                 updateText(true, input)
-                                input = ""
-                                // Get response
-                                // Placeholder Text
-                                updateText(false, "Pretend this is text that the LLM has responded to you with!")
-                            } else {
-                                //crash their application or smth IDK
+
+                                // Send query and wait for response
+                                GlobalScope.launch(Dispatchers.Default) {
+                                    updateText(false, BedrockRuntime.InvokeModel(input).awaitHandled(MODEL_RESPONSE).toString())
+                                }
                             }
                         }
                     ) {

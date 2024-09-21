@@ -19,19 +19,23 @@ enum class ErrorType(val reason: String) {
     COOKIE_SET("Setting Browser Cookie"),
     COOKIE_GET("Getting Browser Cookie"),
     HASH("Generating Session Hash"),
-    INTERNAL("Internally")
+    INTERNAL("Internally"),
+    MODEL_RESPONSE("Handling AI Response")
 }
 
 /**
  * Handles error alerts for asynchronous functions, alerting them to the UI layer
  * @param type The [ErrorType] of the error if it is thrown, provides error details to the UI layer
  */
-suspend fun Promise<JsAny>.awaitHandled(type: ErrorType) : JsAny? {
+suspend fun Promise<JsAny>.awaitHandled(type: ErrorType, then: (JsAny) -> Unit = {}) : JsAny? {
     return try {
-        await<JsAny>()
+        val waitVal = await<JsAny>()
+        then(waitVal)
+        waitVal
     } catch (e: Throwable) {
         // TODO("UI alert here using 'type' for details")
         Firebase.debug(type.reason)
+        Firebase.debug(e.message?:"")
         null
     }
 }
@@ -43,10 +47,10 @@ suspend fun Promise<JsAny>.awaitHandled(type: ErrorType) : JsAny? {
  * @param callback An optional custom callback invoked when a null value is handled
  * @param suppressUI Whether to suppress the UI callback in favor of [callback] (callback must not be empty/undefined!)
  */
-inline fun JsAny?.handleNull(
+fun JsAny?.handleNull(
     type: ErrorType = ErrorType.INTERNAL,
     suppressUI: Boolean = false,
-    noinline callback: () -> Unit = {}
+    callback: () -> Unit = {}
 ) {
     if (this == null) {
         if (!suppressUI && callback != _emptyLambda) {

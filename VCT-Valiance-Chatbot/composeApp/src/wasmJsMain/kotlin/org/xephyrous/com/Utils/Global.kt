@@ -13,12 +13,7 @@ import org.xephyrous.com.ChatBox
 object Global {
     var viewSize: DpSize = DpSize(0.dp, 0.dp)
 
-    var loadedMessages: ArrayList<ChatBox> by mutableStateOf(
-        arrayListOf(
-            ChatBox(true, "This is an example of a pre-loaded question", true),
-            ChatBox(false, "This is an example of a pre-loaded answer", true)
-        )
-    )
+    var loadedMessages: ArrayList<ChatBox> by mutableStateOf(arrayListOf())
     var sessionUUID: String? = null
     var initialized: Boolean by mutableStateOf(false)
 }

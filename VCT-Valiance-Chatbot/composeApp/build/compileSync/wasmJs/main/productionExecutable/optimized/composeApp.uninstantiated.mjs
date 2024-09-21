@@ -11,6 +11,7 @@ export async function instantiate(imports={}, runInitializer=true) {
     }
 
     const _ref_Li9qcy9hd3MtYXBpLmpz_ = imports['./js/aws-api.js'];
+    const _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_ = imports['./js/cookie-handler.js'];
     const _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_ = imports['./js/firebase-api.js'];
     const _ref_Li9za2lrby5tanM_ = imports['./skiko.mjs'];
     
@@ -27,6 +28,12 @@ export async function instantiate(imports={}, runInitializer=true) {
                 arrayIndex++;
             }     
              },
+        'kotlin.wasm.internal.importStringFromWasm' : (address, length, prefix) => { 
+            const mem16 = new Uint16Array(wasmExports.memory.buffer, address, length);
+            const str = String.fromCharCode.apply(null, mem16);
+            return (prefix == null) ? str : prefix + str;
+             },
+        'kotlin.wasm.internal.getJsEmptyString' : () => '',
         'kotlin.wasm.internal.externrefToString' : (ref) => String(ref),
         'kotlin.wasm.internal.externrefEquals' : (lhs, rhs) => lhs === rhs,
         'kotlin.wasm.internal.externrefHashCode' : 
@@ -79,13 +86,8 @@ export async function instantiate(imports={}, runInitializer=true) {
             }
         }
         })(),
-        'kotlin.wasm.internal.importStringFromWasm' : (address, length, prefix) => { 
-            const mem16 = new Uint16Array(wasmExports.memory.buffer, address, length);
-            const str = String.fromCharCode.apply(null, mem16);
-            return (prefix == null) ? str : prefix + str;
-             },
-        'kotlin.wasm.internal.getJsEmptyString' : () => '',
         'kotlin.wasm.internal.isNullish' : (ref) => ref == null,
+        'kotlin.wasm.internal.intToExternref' : (x) => x,
         'kotlin.wasm.internal.getJsTrue' : () => true,
         'kotlin.wasm.internal.getJsFalse' : () => false,
         'kotlin.wasm.internal.getCachedJsObject_$external_fun' : (p0, p1) => getCachedJsObject(p0, p1),
@@ -116,15 +118,24 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.item_$external_fun' : (_this, p0) => _this.item(p0),
         'org.khronos.webgl.Int8Array_$external_fun' : (p0, p1, p2, isDefault0, isDefault1) => new Int8Array(p0, isDefault0 ? undefined : p1, isDefault1 ? undefined : p2, ),
         'org.khronos.webgl.length_$external_prop_getter' : (_this) => _this.length,
+        'org.w3c.dom.clipboard.clipboardData_$external_prop_getter' : (_this) => _this.clipboardData,
+        'org.w3c.dom.clipboard.ClipboardEvent_$external_class_instanceof' : (x) => x instanceof ClipboardEvent,
         'org.w3c.dom.css.cursor_$external_prop_setter' : (_this, v) => _this.cursor = v,
         'org.w3c.dom.css.height_$external_prop_setter' : (_this, v) => _this.height = v,
+        'org.w3c.dom.css.left_$external_prop_setter' : (_this, v) => _this.left = v,
+        'org.w3c.dom.css.top_$external_prop_setter' : (_this, v) => _this.top = v,
         'org.w3c.dom.css.width_$external_prop_setter' : (_this, v) => _this.width = v,
+        'org.w3c.dom.css.setProperty_$external_fun' : (_this, p0, p1, p2, isDefault0) => _this.setProperty(p0, p1, isDefault0 ? undefined : p2, ),
         'org.w3c.dom.css.style_$external_prop_getter' : (_this) => _this.style,
         'org.w3c.dom.encryptedmedia.__convertKotlinClosureToJsClosure_((Js)->Unit)' : (f) => getCachedJsObject(f, (p0) => wasmExports['__callFunction_((Js)->Unit)'](f, p0)),
+        'org.w3c.dom.events.KeyboardEventInit_js_code' : (key, code, location, repeat, isComposing, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, view, detail, bubbles, cancelable, composed) => { return { key, code, location, repeat, isComposing, ctrlKey, shiftKey, altKey, metaKey, modifierAltGraph, modifierCapsLock, modifierFn, modifierFnLock, modifierHyper, modifierNumLock, modifierScrollLock, modifierSuper, modifierSymbol, modifierSymbolLock, view, detail, bubbles, cancelable, composed }; },
         'org.w3c.dom.events.addEventListener_$external_fun' : (_this, p0, p1, p2) => _this.addEventListener(p0, p1, p2),
         'org.w3c.dom.events.addEventListener_$external_fun_1' : (_this, p0, p1) => _this.addEventListener(p0, p1),
+        'org.w3c.dom.events.addEventListener_$external_fun_2' : (_this, p0, p1) => _this.addEventListener(p0, p1),
         'org.w3c.dom.events.removeEventListener_$external_fun' : (_this, p0, p1) => _this.removeEventListener(p0, p1),
+        'org.w3c.dom.events.removeEventListener_$external_fun_1' : (_this, p0, p1) => _this.removeEventListener(p0, p1),
         'org.w3c.dom.events.type_$external_prop_getter' : (_this) => _this.type,
+        'org.w3c.dom.events.stopPropagation_$external_fun' : (_this, ) => _this.stopPropagation(),
         'org.w3c.dom.events.preventDefault_$external_fun' : (_this, ) => _this.preventDefault(),
         'org.w3c.dom.events.Event_$external_class_instanceof' : (x) => x instanceof Event,
         'org.w3c.dom.events.ctrlKey_$external_prop_getter' : (_this) => _this.ctrlKey,
@@ -136,6 +147,7 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.events.offsetX_$external_prop_getter' : (_this) => _this.offsetX,
         'org.w3c.dom.events.offsetY_$external_prop_getter' : (_this) => _this.offsetY,
         'org.w3c.dom.events.MouseEvent_$external_class_instanceof' : (x) => x instanceof MouseEvent,
+        'org.w3c.dom.events.KeyboardEvent_$external_fun' : (p0, p1, isDefault0) => new KeyboardEvent(p0, isDefault0 ? undefined : p1, ),
         'org.w3c.dom.events.key_$external_prop_getter' : (_this) => _this.key,
         'org.w3c.dom.events.location_$external_prop_getter' : (_this) => _this.location,
         'org.w3c.dom.events.ctrlKey_$external_prop_getter_1' : (_this) => _this.ctrlKey,
@@ -157,22 +169,37 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.matchMedia_$external_fun' : (_this, p0) => _this.matchMedia(p0),
         'org.w3c.dom.matches_$external_prop_getter' : (_this) => _this.matches,
         'org.w3c.dom.addListener_$external_fun' : (_this, p0) => _this.addListener(p0),
+        'org.w3c.dom.focus_$external_fun' : (_this, ) => _this.focus(),
+        'org.w3c.dom.blur_$external_fun' : (_this, ) => _this.blur(),
+        'org.w3c.dom.documentElement_$external_prop_getter' : (_this) => _this.documentElement,
         'org.w3c.dom.body_$external_prop_getter' : (_this) => _this.body,
         'org.w3c.dom.createElement_$external_fun' : (_this, p0, p1, isDefault0) => _this.createElement(p0, isDefault0 ? undefined : p1, ),
         'org.w3c.dom.hasFocus_$external_fun' : (_this, ) => _this.hasFocus(),
         'org.w3c.dom.clearTimeout_$external_fun' : (_this, p0, isDefault0) => _this.clearTimeout(isDefault0 ? undefined : p0, ),
         'org.w3c.dom.fetch_$external_fun' : (_this, p0, p1, isDefault0) => _this.fetch(p0, isDefault0 ? undefined : p1, ),
+        'org.w3c.dom.namespaceURI_$external_prop_getter' : (_this) => _this.namespaceURI,
+        'org.w3c.dom.localName_$external_prop_getter' : (_this) => _this.localName,
         'org.w3c.dom.clientWidth_$external_prop_getter' : (_this) => _this.clientWidth,
         'org.w3c.dom.clientHeight_$external_prop_getter' : (_this) => _this.clientHeight,
+        'org.w3c.dom.getAttribute_$external_fun' : (_this, p0) => _this.getAttribute(p0),
+        'org.w3c.dom.getAttributeNS_$external_fun' : (_this, p0, p1) => _this.getAttributeNS(p0, p1),
         'org.w3c.dom.setAttribute_$external_fun' : (_this, p0, p1) => _this.setAttribute(p0, p1),
         'org.w3c.dom.getBoundingClientRect_$external_fun' : (_this, ) => _this.getBoundingClientRect(),
+        'org.w3c.dom.Element_$external_class_instanceof' : (x) => x instanceof Element,
         'org.w3c.dom.language_$external_prop_getter' : (_this) => _this.language,
+        'org.w3c.dom.nodeName_$external_prop_getter' : (_this) => _this.nodeName,
+        'org.w3c.dom.childNodes_$external_prop_getter' : (_this) => _this.childNodes,
+        'org.w3c.dom.lookupPrefix_$external_fun' : (_this, p0) => _this.lookupPrefix(p0),
         'org.w3c.dom.appendChild_$external_fun' : (_this, p0) => _this.appendChild(p0),
+        'org.w3c.dom.item_$external_fun_1' : (_this, p0) => _this.item(p0),
         'org.w3c.dom.identifier_$external_prop_getter' : (_this) => _this.identifier,
         'org.w3c.dom.clientX_$external_prop_getter' : (_this) => _this.clientX,
         'org.w3c.dom.clientY_$external_prop_getter' : (_this) => _this.clientY,
         'org.w3c.dom.top_$external_prop_getter' : (_this) => _this.top,
         'org.w3c.dom.left_$external_prop_getter' : (_this) => _this.left,
+        'org.w3c.dom.remove_$external_fun' : (_this, ) => _this.remove(),
+        'org.w3c.dom.getData_$external_fun' : (_this, p0) => _this.getData(p0),
+        'org.w3c.dom.setData_$external_fun' : (_this, p0, p1) => _this.setData(p0, p1),
         'org.w3c.dom.width_$external_prop_setter' : (_this, v) => _this.width = v,
         'org.w3c.dom.height_$external_prop_setter' : (_this, v) => _this.height = v,
         'org.w3c.dom.HTMLCanvasElement_$external_class_instanceof' : (x) => x instanceof HTMLCanvasElement,
@@ -180,8 +207,15 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.TouchEvent_$external_class_instanceof' : (x) => x instanceof TouchEvent,
         'org.w3c.dom.matches_$external_prop_getter_1' : (_this) => _this.matches,
         'org.w3c.dom.MediaQueryListEvent_$external_class_instanceof' : (x) => x instanceof MediaQueryListEvent,
+        'org.w3c.dom.value_$external_prop_setter' : (_this, v) => _this.value = v,
+        'org.w3c.dom.setSelectionRange_$external_fun' : (_this, p0, p1, p2, isDefault0) => _this.setSelectionRange(p0, p1, isDefault0 ? undefined : p2, ),
+        'org.w3c.dom.HTMLTextAreaElement_$external_class_instanceof' : (x) => x instanceof HTMLTextAreaElement,
+        'org.w3c.dom.parsing.DOMParser_$external_fun' : () => new DOMParser(),
+        'org.w3c.dom.parsing.parseFromString_$external_fun' : (_this, p0, p1) => _this.parseFromString(p0, p1),
         'org.w3c.fetch.ok_$external_prop_getter' : (_this) => _this.ok,
         'org.w3c.fetch.blob_$external_fun' : (_this, ) => _this.blob(),
+        'org.w3c.performance.performance_$external_prop_getter' : (_this) => _this.performance,
+        'org.w3c.performance.now_$external_fun' : (_this, ) => _this.now(),
         'kotlinx.coroutines.tryGetProcess' : () => (typeof(process) !== 'undefined' && typeof(process.nextTick) === 'function') ? process : null,
         'kotlinx.coroutines.tryGetWindow' : () => (typeof(window) !== 'undefined' && window != null && typeof(window.addEventListener) === 'function') ? window : null,
         'kotlinx.coroutines.nextTick_$external_fun' : (_this, p0) => _this.nextTick(p0),
@@ -203,11 +237,13 @@ export async function instantiate(imports={}, runInitializer=true) {
         'kotlinx.coroutines.clearTimeout' : (handle) => { if (typeof clearTimeout !== 'undefined') clearTimeout(handle); },
         'kotlinx.coroutines.setTimeout_$external_fun' : (p0, p1) => setTimeout(p0, p1),
         'org.jetbrains.skiko.w3c.language_$external_prop_getter' : (_this) => _this.language,
+        'org.jetbrains.skiko.w3c.clipboard_$external_prop_getter' : (_this) => _this.clipboard,
         'org.jetbrains.skiko.w3c.userAgent_$external_prop_getter' : (_this) => _this.userAgent,
         'org.jetbrains.skiko.w3c.navigator_$external_prop_getter' : (_this) => _this.navigator,
         'org.jetbrains.skiko.w3c.performance_$external_prop_getter' : (_this) => _this.performance,
         'org.jetbrains.skiko.w3c.requestAnimationFrame_$external_fun' : (_this, p0) => _this.requestAnimationFrame(p0),
         'org.jetbrains.skiko.w3c.window_$external_object_getInstance' : () => window,
+        'org.jetbrains.skiko.w3c.writeText_$external_fun' : (_this, p0) => _this.writeText(p0),
         'org.jetbrains.skiko.w3c.now_$external_fun' : (_this, ) => _this.now(),
         'org.jetbrains.skiko.w3c.width_$external_prop_getter' : (_this) => _this.width,
         'org.jetbrains.skiko.w3c.height_$external_prop_getter' : (_this) => _this.height,
@@ -243,7 +279,11 @@ export async function instantiate(imports={}, runInitializer=true) {
         'androidx.compose.ui.text.intl.region_$external_prop_getter' : (_this) => _this.region,
         'androidx.compose.ui.text.intl.baseName_$external_prop_getter' : (_this) => _this.baseName,
         'androidx.compose.ui.window.isMatchMediaSupported' : () => window.matchMedia != undefined,
+        'androidx.compose.ui.platform.inputType_$external_prop_getter' : (_this) => _this.inputType,
+        'androidx.compose.ui.platform.data_$external_prop_getter' : (_this) => _this.data,
+        'androidx.compose.ui.platform.keyCode_$external_prop_setter' : (_this, v) => _this.keyCode = v,
         'androidx.compose.ui.window.force_$external_prop_getter' : (_this) => _this.force,
+        'androidx.compose.foundation.text.EventListener' : (handler) => (event) => { handler(event) },
         'org.jetbrains.compose.resources.Locale_$external_fun' : (p0) => new Intl.Locale(p0),
         'org.jetbrains.compose.resources.language_$external_prop_getter' : (_this) => _this.language,
         'org.jetbrains.compose.resources.region_$external_prop_getter' : (_this) => _this.region,
@@ -252,7 +292,18 @@ export async function instantiate(imports={}, runInitializer=true) {
                 const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
                 mem8.set(src);
             }
-        
+        ,
+        'org.xephyrous.com.JSInterop.InvokeModel_$external_fun' : (_this, p0) => _this.InvokeModel(p0),
+        'org.xephyrous.com.JSInterop.BedrockRuntime_$external_object_getInstance' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,
+        'org.xephyrous.com.JSInterop.addCookie_$external_fun' : (_this, p0, p1) => _this.addCookie(p0, p1),
+        'org.xephyrous.com.JSInterop.getCookie_$external_fun' : (_this, p0) => _this.getCookie(p0),
+        'org.xephyrous.com.JSInterop.CookieHandler_$external_object_getInstance' : () => _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_,
+        'org.xephyrous.com.JSInterop.initializeFirebase_$external_fun' : (_this, ) => _this.initializeFirebase(),
+        'org.xephyrous.com.JSInterop.createUser_$external_fun' : (_this, ) => _this.createUser(),
+        'org.xephyrous.com.JSInterop.calculateSessionUUID_$external_fun' : (_this, ) => _this.calculateSessionUUID(),
+        'org.xephyrous.com.JSInterop.setSessionUUID_$external_fun' : (_this, p0) => _this.setSessionUUID(p0),
+        'org.xephyrous.com.JSInterop.debug_$external_fun' : (_this, p0) => _this.debug(p0),
+        'org.xephyrous.com.JSInterop.Firebase_$external_object_getInstance' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_
     }
     
     // Placed here to give access to it from externals (js_code)

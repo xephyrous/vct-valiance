@@ -5,8 +5,11 @@ import {
 
 import { credCallAWS } from "./firebase-api";
 
-async function InvokeModel(prompt) {
-    await credCallAWS(_InvokeModel, prompt)
+
+
+async function InvokeModel(prompt
+) {
+    return await credCallAWS(_InvokeModel, prompt)
 }
 
 async function _InvokeModel(prompt, inject) {
@@ -41,8 +44,6 @@ async function _InvokeModel(prompt, inject) {
 
         const decodedResponseBody = new TextDecoder().decode(response.body);
         const responseBody = JSON.parse(decodedResponseBody);
-
-        console.log(responseBody.results[0].outputText.toString())
 
         return responseBody.results[0].outputText.toString();
     } catch (err) {

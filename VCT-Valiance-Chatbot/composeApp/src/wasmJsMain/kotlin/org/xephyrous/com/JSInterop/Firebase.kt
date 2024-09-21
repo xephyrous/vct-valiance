@@ -15,4 +15,5 @@ external object Firebase {
     fun setSessionUUID(uuid: String)
     fun debug(str: String)
     fun addMessage(message: String, role: String) : Promise<JsAny>
+    fun addTeam(teamObj: String) : Promise<JsAny>
 }

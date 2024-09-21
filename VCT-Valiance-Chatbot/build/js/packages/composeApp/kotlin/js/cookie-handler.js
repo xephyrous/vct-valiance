@@ -3,24 +3,26 @@
  * @param name The name of the cookie to set
  * @param value The value of the cookie to set
  * @param expires When the cookie expires, defaults to maximum value (epoch)
- * @returns {number} 1 if successful, 0 if not
+ * @returns {any} nothing (undefined) if successful, null if not
  */
-function addCookie(name, value, expires=2147483647) {
+function addCookie(
+    name, value,
+    expires = 2147483647
+) {
     try {
         document.cookie = `${name}=${value}; expires=${expires}; path=/`
-    } catch (e) {
-        return 0;
-    }
-
-    return 1;
+    } catch (_) { return null; }
 }
 
 /**
  * Removes a browser cookie by setting its expiration date to The first (0) epoch time
- * @param name
+ * @param name The name of the cookie to remove
+ * @returns {any} nothing (undefined) if successful, null if not
  */
 function removeCookie(name) {
-    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+    try {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+    } catch (_) { return null }
 }
 
 /**
@@ -28,7 +30,7 @@ function removeCookie(name) {
  * @param name THe name of the cookie to get
  * @returns {string} The value of the cookie
  */
-function getCookie(name) {
+function getCookie(name)  {
     let fullName = name + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -41,6 +43,7 @@ function getCookie(name) {
             return c.substring(fullName.length, c.length);
         }
     }
+
     return "";
 }
 
