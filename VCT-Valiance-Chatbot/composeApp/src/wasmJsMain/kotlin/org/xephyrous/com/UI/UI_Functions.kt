@@ -151,6 +151,7 @@ fun UserChatField() {
                                 // Send query and wait for response
                                 GlobalScope.launch(Dispatchers.Default) {
                                     updateText(false, BedrockRuntime.InvokeModel(input).awaitHandled(MODEL_RESPONSE).toString())
+                                    input = ""
                                 }
                             }
                         }
