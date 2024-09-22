@@ -42,7 +42,7 @@ jobs:
           echo
           echo "##### Cloning destination git repository #####"
           git clone "https://$API_TOKEN_GITHUB@github.com/xephyrous/xephyrous.github.io.git" "$CLONE_DIRECTORY"
-          ls -la "$CLONE_DIRECTORY"
+          tree "$CLONE_DIRECTORY"
           
           echo "##### Clearing repo files #####"
           rm -rf $CLONE_DIRECTORY/projects/vct-valiance/*
