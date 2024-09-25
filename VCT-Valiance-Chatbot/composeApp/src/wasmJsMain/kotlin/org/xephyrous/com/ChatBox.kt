@@ -42,7 +42,7 @@ class ChatBox (
         LaunchedEffect(isVisible) {
             if (!loaded) {
                 textToAnimate = text
-                index.animateTo(text.length, tween(durationMillis = text.length * 50, easing = LinearEasing))
+                index.animateTo(text.length, tween(durationMillis = text.length * 25, easing = LinearEasing))
                 loaded = true
             } else {
                 textToAnimate = text

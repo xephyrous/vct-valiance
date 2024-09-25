@@ -1,9 +1,11 @@
 package org.xephyrous.com.UI
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.EaseInOut
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,29 +29,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key
-import androidx.compose.ui.input.key.key
-import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.node.ParentDataModifierNode
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
-import org.xephyrous.com.JSInterop.BedrockRuntime
-import org.xephyrous.com.Utils.ErrorType.MODEL_RESPONSE
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.Utils.agentMap
-import org.xephyrous.com.Utils.awaitHandled
-import org.xephyrous.com.Utils.updateText
-import vctvaliancechatbot.composeapp.generated.resources.*
+import org.xephyrous.com.Utils.sendMessage
+import vctvaliancechatbot.composeapp.generated.resources.IGL
 import vctvaliancechatbot.composeapp.generated.resources.Res
 import vctvaliancechatbot.composeapp.generated.resources.VCT_Block
 import vctvaliancechatbot.composeapp.generated.resources.Valiance
@@ -141,21 +131,8 @@ fun UserChatField() {
                             imeAction = ImeAction.Done
                         ),
                         keyboardActions = KeyboardActions(onDone = {
-                            if (input.isNotEmpty() || Global.sendingMessage) {
-                                Global.sendingMessage = true
-
-                                val tempText = input
-                                input = ""
-
-                                // Upload the message to the screen
-                                updateText(true, tempText)
-
-                                // Send query and wait for response
-                                GlobalScope.launch(Dispatchers.Default) {
-                                    updateText(false, BedrockRuntime.InvokeModel(tempText).awaitHandled(MODEL_RESPONSE).toString())
-                                    Global.sendingMessage = false
-                                }
-                            }
+                            sendMessage(input)
+                            input = ""
                         }),
                         onValueChange = { newText ->
                             input = newText
@@ -183,21 +160,8 @@ fun UserChatField() {
                 ) {
                     IconButton(
                         onClick = {
-                            if (input.isNotEmpty() || Global.sendingMessage) {
-                                Global.sendingMessage = true
-
-                                val tempText = input
-                                input = ""
-
-                                // Upload the message to the screen
-                                updateText(true, tempText)
-
-                                // Send query and wait for response
-                                GlobalScope.launch(Dispatchers.Default) {
-                                    updateText(false, BedrockRuntime.InvokeModel(tempText).awaitHandled(MODEL_RESPONSE).toString())
-                                    Global.sendingMessage = false
-                                }
-                            }
+                            sendMessage(input)
+                            input = ""
                         }
                     ) {
                         Icon(
