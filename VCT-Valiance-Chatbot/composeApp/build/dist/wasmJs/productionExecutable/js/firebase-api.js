@@ -2,6 +2,7 @@ import { getSHA256Hash } from "boring-webcrypto-sha256";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, update } from "firebase/database";
 import { getAuth, signInAnonymously } from "firebase/auth";
+import {teamDataToJSON} from "./js-utils";
 
 
 
@@ -27,7 +28,6 @@ async function initializeFirebase() {
     database = getDatabase(app);
     auth = getAuth(app);
     await signInAnonymously(auth);
-    return ""
 }
 
 /**
@@ -57,9 +57,9 @@ function setSessionUUID(uuid) {
 async function createUser() {
     await set(ref(database, `users/${sessionUUID}`), {
         lastAccess: Date.now(),
-        systemMessages: [""],
         userMessages: [""],
-        teams: [""]
+        systemMessages: [""],
+        teams: [""],
     });
 }
 
@@ -91,35 +91,48 @@ async function addMessage(message, role) {
 
 /**
  * Adds a team object to the database
- * @param teamObj
+ * @param rawString The model response containing the team data
  * @returns {Promise<void>}
  */
-async function addTeam(teamObj) {
-    var jsonObj = JSON.parse(teamObj)
-
-    if ( // Validate JSON fields
-        !jsonObj.hasOwnProperty("name")
-         || !jsonObj.hasOwnProperty("members")
-         || !jsonObj.hasOwnProperty("roles")
-         || !jsonObj.hasOwnProperty("agents")
-         || !jsonObj.hasOwnProperty("theme")
-    ) { throw Error("") }
-
-    if ( // Validate field entries
-        jsonObj["name"] === ""
-         || jsonObj["members"].length !== 5
-         || jsonObj["roles"].length !== 5
-         || jsonObj["agents"].length !== 5
-         || jsonObj["theme"].length !== 3 // TODO("Update based on theme components")
-    ) { throw Error("") }
+async function addTeam(rawString) {
+    const teamJSON = teamDataToJSON(rawString, false);
 
     const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
         .then(snapshot => {
             return snapshot.val()
         })
 
-    teamsList.push(jsonObj)
+    teamsList.push(teamJSON)
     await set(ref(database, `users/${sessionUUID}/teams`), teamsList)
+}
+
+async function getTeamNames() {
+    let names = [];
+
+    const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
+        .then(snapshot => {
+            return snapshot.val()
+        })
+
+    teamsList.forEach((value) => {
+        names += value["name"]
+    })
+
+    return names
+}
+
+/**
+ * Gets a team object from the database list at the provided index
+ * @param index The index of the team object to retrieve
+ */
+async function getTeamIndexed(index) {
+    const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
+        .then(snapshot => {
+            return snapshot.val()
+        })
+
+    // Offset by 1 to account for dummy object
+    return JSON.stringify(teamsList[index + 1])
 }
 
 /**
@@ -145,8 +158,11 @@ export {
     setSessionUUID,
     addMessage,
     addTeam,
+    getTeamNames,
+    getTeamIndexed,
+    updateAccessTime,
     sessionUUID,
 
-    // Debug only!
+    // TODO : Debug only!
     debug,
 };

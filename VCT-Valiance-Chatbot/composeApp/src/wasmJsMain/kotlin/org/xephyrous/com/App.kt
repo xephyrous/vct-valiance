@@ -15,50 +15,60 @@ import org.xephyrous.com.JSInterop.Firebase
 import org.xephyrous.com.UI.TeamDisplay
 import org.xephyrous.com.UI.TeamSelect
 import org.xephyrous.com.Utils.Global
+import org.xephyrous.com.JSInterop.*
 import org.xephyrous.com.UI.UserChatField
 import org.xephyrous.com.UI.Valiance
+import org.xephyrous.com.Utils.*
 import org.xephyrous.com.Utils.Global.initialized
+import org.xephyrous.com.Utils.Global.initializing
 import org.xephyrous.com.Utils.Global.sessionUUID
-import org.xephyrous.com.Utils.awaitHandled
-import org.xephyrous.com.Utils.handleNull
-import org.xephyrous.com.Utils.ErrorType.*
-import org.xephyrous.com.Utils.updateText
 
 @OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun App() {
     // Setup app connections and initialize resources
-    if (!initialized) {
+    if (!initialized && !initializing) {
+        initializing = true
+
         GlobalScope.launch(Dispatchers.Default) {
-            Firebase.initializeFirebase().awaitHandled(DATABASE_INIT)
-                ?: {
-                    this.cancel("Could not initialize database connection!")
-                    TODO("Initialization failure UI")
+            Firebase.initializeFirebase().onFailure {
+                this.cancel("Could not initialize database connection!")
+                TODO("Initialization failure UI alert")
+            }
+
+            CookieHandler.getCookie("vctSessionUUID").onFailure {
+                this.cancel("Could not initialize session!")
+                TODO("Enable cookies and reload application UI alert")
+            }.onSuccess {
+                if (it == "") {
+                    Firebase.calculateSessionUUID().onSuccess { uuid -> sessionUUID = uuid }
+                    Firebase.setSessionUUID(sessionUUID!!)
+
+                    CookieHandler.addCookie("vctSessionUUID", sessionUUID!!)
+                        .onFailure {
+                            this.cancel("Could not initialize session!")
+                            TODO("Enable cookies and reload application UI alert")
+                        }
+
+                    Firebase.createUser()
+                } else {
+                    CookieHandler.getCookie("vctSessionUUID")
+                        .onSuccess { sessionUUID = it }
+                        .onFailure {
+                            this.cancel("Could not initialize session!")
+                            TODO("Enable cookies and reload application UI alert")
+                        }
+                    Firebase.setSessionUUID(sessionUUID!!)
                 }
-
-            if (CookieHandler.getCookie("vctSessionUUID") == "") {
-                sessionUUID = Firebase.calculateSessionUUID().awaitHandled(HASH).toString()
-                Firebase.setSessionUUID(sessionUUID!!)
-
-                CookieHandler.addCookie("vctSessionUUID", sessionUUID!!)
-                    .handleNull(COOKIE_SET) {
-                        this.cancel("Could not initialize session!")
-                        TODO("Enable cookies and reload application UI")
-                    }
-
-                Firebase.createUser().awaitHandled(DATABASE_SET)
-            } else {
-                sessionUUID = CookieHandler.getCookie("vctSessionUUID")
-                    .handleNull(COOKIE_SET) {
-                        this.cancel("Could not initialize session!")
-                        TODO("Enable cookies and reload application UI")
-                    }
-                Firebase.setSessionUUID(sessionUUID!!)
             }
 
             // Get initial greeting
-            updateText(false, BedrockRuntime.InvokeModel("Hello!").awaitHandled(MODEL_RESPONSE).toString())
+            BedrockRuntime.InvokeModel("Hello!").onFailure {
+                this.cancel("Model failed to load response!")
+                // TODO("Model failure UI alert")
+            }.onSuccess { updateText(false, it) }
 
+            initializing = false
             initialized = true
         }
     }
