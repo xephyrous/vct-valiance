@@ -7,7 +7,7 @@ class TeamData(teamMessage: String) {
     lateinit var members: Array<String>
     lateinit var roles: Array<String>
     lateinit var agents: Array<String>
-    lateinit var theme: Array<String>
+    lateinit var theme: Array<Long>
 }
 
 @JsModule("./js/js-utils.js")

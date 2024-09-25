@@ -71,7 +71,6 @@ class ChatBox (
                             .padding(5.dp),
                         color = Color.LightGray,
                         fontFamily = TungstenFont()
-
                     )
                 }
             }
