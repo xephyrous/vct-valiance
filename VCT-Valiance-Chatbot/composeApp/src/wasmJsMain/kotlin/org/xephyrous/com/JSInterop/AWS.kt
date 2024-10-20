@@ -1,8 +1,14 @@
 package org.xephyrous.com.JSInterop
 
-import kotlin.js.Promise
+import kotlinx.coroutines.await
+import org.xephyrous.com.Utils.ErrorType
+import org.xephyrous.com.Utils.awaitHandled
 
-@JsModule("./js/aws-api.js")
-external object BedrockRuntime {
-    fun InvokeModel(prompt: String) : Promise<JsString>
+object BedrockRuntime {
+    suspend fun InvokeModel(prompt: String) : Result<String> {
+        val result = JSBedrockRuntime.InvokeModel(prompt).awaitHandled<JsString>(ErrorType.MODEL_RESPONSE)
+            ?: return Result.failure(Exception(""))
+
+        return Result.success(result.toString())
+    }
 }

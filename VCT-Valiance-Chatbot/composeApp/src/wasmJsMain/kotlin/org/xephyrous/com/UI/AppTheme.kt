@@ -7,8 +7,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.Font
+import vctvaliancechatbot.composeapp.generated.resources.*
 import vctvaliancechatbot.composeapp.generated.resources.Res
-import vctvaliancechatbot.composeapp.generated.resources.ff_mark_black
 import vctvaliancechatbot.composeapp.generated.resources.tungsten_bold
 import vctvaliancechatbot.composeapp.generated.resources.valorant
 
@@ -22,7 +22,16 @@ fun ValorantFont() = FontFamily( Font(Res.font.valorant, FontWeight.Normal) )
  * Main app font
  */
 @Composable
-fun FFMarkFont() = FontFamily( Font(Res.font.ff_mark_black, FontWeight.Black) )
+fun FFMarkFont() = FontFamily(
+    Font(Res.font.Mark_Bold, FontWeight.Bold),
+    Font(Res.font.Mark_Black, FontWeight.Black),
+    Font(Res.font.Mark_Extralight, FontWeight.ExtraLight),
+    Font(Res.font.Mark_Light, FontWeight.Light),
+    Font(Res.font.Mark_Medium, FontWeight.Medium),
+    Font(Res.font.Mark_Regular, FontWeight.Normal),
+    Font(Res.font.Mark_SmallCaps_Black, FontWeight.Black)
+)
+
 
 /**
  * Secondary app font

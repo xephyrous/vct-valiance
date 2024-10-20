@@ -2,6 +2,8 @@ package org.xephyrous.com.Utils
 
 import kotlinx.coroutines.await
 import org.xephyrous.com.JSInterop.Firebase
+import org.xephyrous.com.JSInterop.JSFirebase
+import vctvaliancechatbot.composeapp.generated.resources.Res
 import kotlin.js.Promise
 
 val _emptyLambda: () -> Unit = {}
@@ -27,16 +29,28 @@ enum class ErrorType(val reason: String) {
  * Handles error alerts for asynchronous functions, alerting them to the UI layer
  * @param type The [ErrorType] of the error if it is thrown, provides error details to the UI layer
  */
-suspend fun Promise<JsAny>.awaitHandled(type: ErrorType, then: (JsAny) -> Unit = {}) : JsAny? {
+suspend fun <T> Promise<JsAny>.awaitHandled(type: ErrorType, then: (JsAny) -> Unit = {}) : T? {
     return try {
         val waitVal = await<JsAny>()
         then(waitVal)
-        waitVal
+        waitVal as T
     } catch (e: Throwable) {
         // TODO("UI alert here using 'type' for details")
-        Firebase.debug(type.reason)
-        Firebase.debug(e.message?:"")
+        JSFirebase.debug("HIT")
+        JSFirebase.debug(e.stackTraceToString());
         null
+    }
+}
+
+suspend fun Promise<*>.awaitHandledUnit(type: ErrorType) : Result<Unit> {
+    return try {
+        await<JsAny>()
+        Result.success(Unit)
+    } catch(e: Throwable) {
+        // TODO("UI alert here using 'type' for details")
+        JSFirebase.debug("HIT2")
+        JSFirebase.debug(e.stackTraceToString());
+        Result.failure(Exception(""))
     }
 }
 

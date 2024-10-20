@@ -41,14 +41,11 @@ async function _InvokeModel(prompt, inject) {
 
     try {
         const response = await client.send(command);
-
         const decodedResponseBody = new TextDecoder().decode(response.body);
         const responseBody = JSON.parse(decodedResponseBody);
 
         return responseBody.results[0].outputText.toString();
-    } catch (err) {
-        console.error(`ERROR: Can't invoke ${modelId}. Reason: ${err}`);
-    }
+    } catch(_) { return null; }
 }
 
 export {

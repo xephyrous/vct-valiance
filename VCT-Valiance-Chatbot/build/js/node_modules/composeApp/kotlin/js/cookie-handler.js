@@ -12,6 +12,8 @@ function addCookie(
     try {
         document.cookie = `${name}=${value}; expires=${expires}; path=/`
     } catch (_) { return null; }
+
+    return ""
 }
 
 /**
@@ -23,17 +25,20 @@ function removeCookie(name) {
     try {
         document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
     } catch (_) { return null }
+
+    return ""
 }
 
 /**
  * Gets a browser cookie by name
  * @param name THe name of the cookie to get
- * @returns {string} The value of the cookie
+ * @returns {string|null} The value of the cookie
  */
 function getCookie(name)  {
     let fullName = name + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
+
     for(let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) === ' ') {

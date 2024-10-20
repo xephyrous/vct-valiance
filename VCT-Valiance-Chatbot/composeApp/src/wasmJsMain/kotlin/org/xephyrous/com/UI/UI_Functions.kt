@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.*
 import org.jetbrains.compose.resources.painterResource
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.Utils.agentMap
@@ -142,9 +143,9 @@ fun UserChatField() {
                             focusedIndicatorColor = Color(0xFFFD4556),
                         ),
                         singleLine = true,
-                        placeholder = { Text("INPUT TEXT HERE", color = Color(0x15FFFFFF), fontSize = 25.sp, fontFamily = TungstenFont()) },
+                        placeholder = { Text("Ask Away!", color = Color(0x15FFFFFF), fontSize = 25.sp, fontFamily = FFMarkFont()) },
                         textStyle = TextStyle(
-                            fontFamily = TungstenFont(),
+                            fontFamily = FFMarkFont(),
                             fontSize = 25.sp,
                             color = Color.White
                         )
@@ -162,12 +163,33 @@ fun UserChatField() {
                         onClick = {
                             sendMessage(input)
                             input = ""
+                            if (input.isNotEmpty() || Global.sendingMessage) {
+                                Global.sendingMessage = true
+
+                                val tempText = input
+                                input = ""
+
+                                // Upload the message to the screen
+                                updateText(true, tempText)
+
+                                val temp = input
+                                input = ""
+
+                                // Send query and wait for response
+                                GlobalScope.launch(Dispatchers.Default) {
+                                    BedrockRuntime.InvokeModel(tempText).onFailure {
+                                        this.cancel("Model failed to load response!")
+                                        // TODO("Model failure UI alert")
+                                    }.onSuccess { updateText(false, it) }
+                                    Global.sendingMessage = false
+                                }
+                            }
                         }
                     ) {
                         Icon(
                             modifier = Modifier.fillMaxSize(),
                             imageVector = Icons.Sharp.PlayArrow,
-                            contentDescription = "Sned massage",
+                            contentDescription = "Send massage",
                             tint = Color(0xFFFD4556)
                         )
                     }

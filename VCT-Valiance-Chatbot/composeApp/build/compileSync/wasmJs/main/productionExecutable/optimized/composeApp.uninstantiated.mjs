@@ -13,6 +13,7 @@ export async function instantiate(imports={}, runInitializer=true) {
     const _ref_Li9qcy9hd3MtYXBpLmpz_ = imports['./js/aws-api.js'];
     const _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_ = imports['./js/cookie-handler.js'];
     const _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_ = imports['./js/firebase-api.js'];
+    const _ref_Li9qcy9qcy11dGlscy5qcw_ = imports['./js/js-utils.js'];
     const _ref_Li9za2lrby5tanM_ = imports['./skiko.mjs'];
     
     const js_code = {
@@ -293,17 +294,17 @@ export async function instantiate(imports={}, runInitializer=true) {
                 mem8.set(src);
             }
         ,
-        'org.xephyrous.com.JSInterop.InvokeModel_$external_fun' : (_this, p0) => _this.InvokeModel(p0),
-        'org.xephyrous.com.JSInterop.BedrockRuntime_$external_object_getInstance' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,
-        'org.xephyrous.com.JSInterop.addCookie_$external_fun' : (_this, p0, p1) => _this.addCookie(p0, p1),
-        'org.xephyrous.com.JSInterop.getCookie_$external_fun' : (_this, p0) => _this.getCookie(p0),
-        'org.xephyrous.com.JSInterop.CookieHandler_$external_object_getInstance' : () => _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_,
         'org.xephyrous.com.JSInterop.initializeFirebase_$external_fun' : (_this, ) => _this.initializeFirebase(),
         'org.xephyrous.com.JSInterop.createUser_$external_fun' : (_this, ) => _this.createUser(),
         'org.xephyrous.com.JSInterop.calculateSessionUUID_$external_fun' : (_this, ) => _this.calculateSessionUUID(),
         'org.xephyrous.com.JSInterop.setSessionUUID_$external_fun' : (_this, p0) => _this.setSessionUUID(p0),
         'org.xephyrous.com.JSInterop.debug_$external_fun' : (_this, p0) => _this.debug(p0),
-        'org.xephyrous.com.JSInterop.Firebase_$external_object_getInstance' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_
+        'org.xephyrous.com.JSInterop.JSFirebase_$external_object_getInstance' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
+        'org.xephyrous.com.JSInterop.InvokeModel_$external_fun' : (_this, p0) => _this.InvokeModel(p0),
+        'org.xephyrous.com.JSInterop.JSBedrockRuntime_$external_object_getInstance' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,
+        'org.xephyrous.com.JSInterop.addCookie_$external_fun' : (_this, p0, p1) => _this.addCookie(p0, p1),
+        'org.xephyrous.com.JSInterop.getCookie_$external_fun' : (_this, p0) => _this.getCookie(p0),
+        'org.xephyrous.com.JSInterop.JSCookieHandler_$external_object_getInstance' : () => _ref_Li9qcy9jb29raWUtaGFuZGxlci5qcw_
     }
     
     // Placed here to give access to it from externals (js_code)
