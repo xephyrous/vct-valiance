@@ -12,12 +12,9 @@ import kotlinx.coroutines.*
 import org.xephyrous.com.JSInterop.BedrockRuntime
 import org.xephyrous.com.JSInterop.CookieHandler
 import org.xephyrous.com.JSInterop.Firebase
-import org.xephyrous.com.UI.TeamDisplay
-import org.xephyrous.com.UI.TeamSelect
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.JSInterop.*
-import org.xephyrous.com.UI.UserChatField
-import org.xephyrous.com.UI.Valiance
+import org.xephyrous.com.UI.*
 import org.xephyrous.com.Utils.*
 import org.xephyrous.com.Utils.Global.initialized
 import org.xephyrous.com.Utils.Global.initializing
@@ -82,17 +79,10 @@ fun App() {
         ) {
             Global.viewSize = DpSize(maxWidth, maxHeight)
 
-            Global.selectedTeam.name = "Sentinels"
-            Global.selectedTeam.coach = "Kaplan"
-            Global.selectedTeam.members = arrayOf("Tenz", "Zellsis", "JohnQT", "Zekken", "Sacy")
-            Global.selectedTeam.igl = "JohnQT"
-            Global.selectedTeam.agents = arrayOf("KAY/O", "Killjoy", "Viper", "Jett", "Sova")
-            Global.selectedTeam.theme = arrayOf(4291890968, 4293620601, 4293283413, 4294967295, 4278190080)
-
             UserChatField()
-            TeamSelect()
             TeamDisplay()
             Valiance()
+            Settings()
         }
     }
 }

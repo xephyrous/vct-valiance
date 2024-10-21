@@ -1,9 +1,6 @@
 package org.xephyrous.com.Utils
 
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.xephyrous.com.ChatBox
 import org.xephyrous.com.JSInterop.BedrockRuntime
 import org.xephyrous.com.Utils.ErrorType.MODEL_RESPONSE
@@ -30,7 +27,10 @@ fun sendMessage(
 
         // Send query and wait for response
         GlobalScope.launch(Dispatchers.Default) {
-            updateText(false, BedrockRuntime.InvokeModel(input).awaitHandled(MODEL_RESPONSE).toString())
+            BedrockRuntime.InvokeModel(input).onFailure {
+                this.cancel("Model failed to load response!")
+                // TODO("Model failure UI alert")
+            }.onSuccess { updateText(false, it) }
             Global.sendingMessage = false
         }
     }

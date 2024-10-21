@@ -4,14 +4,13 @@
     <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
       <configuration version="5" platform="Wasm " allPlatforms="Wasm []" useProjectSettings="false" isTestModule="true" externalProjectId=":composeApp" isHmppProject="true">
         <additionalVisibleModuleNames>
-          <friend>:composeApp:wasmJsMain</friend>
           <friend>:composeApp:commonMain</friend>
+          <friend>:composeApp:wasmJsMain</friend>
         </additionalVisibleModuleNames>
         <newMppModelJpsModuleKind>SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
         <externalSystemTestTasks>
           <externalSystemTestTask>wasmJsBrowserTest|:composeApp|wasmJs|wasm</externalSystemTestTask>
         </externalSystemTestTasks>
-        <compilerSettings />
         <compilerArguments>
           <flagArguments>
             <flagArg name="multiPlatform" arg="true" />

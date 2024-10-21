@@ -17,8 +17,13 @@ object Global {
 
     var sendingMessage by mutableStateOf(false)
 
-    val selectedTeam by mutableStateOf(TeamData())
+    var createdTeams: ArrayList<String> by mutableStateOf(arrayListOf("zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels",
+        ))
+
+    var selectedTeam: TeamData? by mutableStateOf(null)
     var displayingTeam by mutableStateOf(false)
+    var menuOpened by mutableStateOf(false)
+    var selectingTeam by mutableStateOf(false)
 
     var sessionUUID: String? = null
     var initialized: Boolean by mutableStateOf(false)

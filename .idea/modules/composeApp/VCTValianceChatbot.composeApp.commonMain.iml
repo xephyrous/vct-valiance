@@ -4,7 +4,6 @@
     <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
       <configuration version="5" platform="Wasm " allPlatforms="Wasm []" useProjectSettings="false" isTestModule="false" externalProjectId=":composeApp" isHmppProject="true">
         <newMppModelJpsModuleKind>SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
-        <compilerSettings />
         <compilerArguments>
           <flagArguments>
             <flagArg name="multiPlatform" arg="true" />

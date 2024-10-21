@@ -18,7 +18,9 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.Close
 import androidx.compose.material.icons.sharp.PlayArrow
+import androidx.compose.material.icons.sharp.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,7 +36,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.*
 import org.jetbrains.compose.resources.painterResource
 import org.xephyrous.com.Utils.Global
@@ -44,6 +45,181 @@ import vctvaliancechatbot.composeapp.generated.resources.IGL
 import vctvaliancechatbot.composeapp.generated.resources.Res
 import vctvaliancechatbot.composeapp.generated.resources.VCT_Block
 import vctvaliancechatbot.composeapp.generated.resources.Valiance
+
+@Composable
+fun Settings() {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        if (Global.initialized) {
+            IconButton(
+                onClick = {
+                    Global.menuOpened = !Global.menuOpened
+                }
+            ) {
+                Icon(
+                    imageVector = if (Global.menuOpened) Icons.Sharp.Close else Icons.Sharp.Settings,
+                    contentDescription = "Settings",
+                    tint = Color(0xFFFD4556)
+                )
+            }
+            val open by animateFloatAsState(
+                targetValue = if (Global.menuOpened) .05f else 1F,
+                animationSpec = tween(durationMillis = 300, easing = EaseInOut)
+            )
+            Column(
+                modifier = Modifier.fillMaxHeight().fillMaxWidth(.225F)
+            ) {
+                Spacer(
+                    modifier = Modifier.fillMaxHeight(open)
+                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color(0xFF141414))
+                        .clip(shape = RoundedCornerShape(0.dp, 15.dp, 0.dp, 0.dp))
+                ) {
+                    AnimatedVisibility ( // Main Settings Menu
+                        visible = !Global.selectingTeam,
+                        enter = fadeIn(
+                            animationSpec = tween(250)
+                        ),
+                        exit = fadeOut(
+                            animationSpec = tween(250)
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                        ) {
+                            Spacer(modifier = Modifier.fillMaxHeight(.03F))
+                            Text(
+                                text = "Valiance Settings",
+                                modifier = Modifier.align(Alignment.CenterHorizontally),
+                                color = Color(0xFFFD4556),
+                                fontFamily = TungstenFont(),
+                                fontSize = 35.sp
+                            )
+                            Spacer(modifier = Modifier.fillMaxHeight(.03F))
+                            Box(
+                                modifier = Modifier.fillMaxWidth(.9F).fillMaxHeight(.003F).align(Alignment.CenterHorizontally).background(Color.Black)
+                            )
+                            Spacer(modifier = Modifier.fillMaxHeight(.032F))
+                            Box(
+                                modifier = Modifier.fillMaxWidth().fillMaxHeight(.05F)
+                            ) {
+                                Button(
+                                    onClick = {
+                                        Global.selectingTeam = true
+                                    },
+                                    modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
+                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+                                ) {
+                                    Text(
+                                        text = "Select Custom Team",
+                                        color = Color(0xFFFD4556),
+                                        fontFamily = TungstenFont(),
+                                        fontSize = 20.sp
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    AnimatedVisibility ( // Select Team
+                        visible = Global.selectingTeam,
+                        enter = fadeIn(
+                            animationSpec = tween(250)
+                        ),
+                        exit = fadeOut(
+                            animationSpec = tween(250)
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                        ) {
+                            Spacer(modifier = Modifier.fillMaxHeight(.03F))
+                            Text(
+                                text = "Select Custom Team",
+                                modifier = Modifier.align(Alignment.CenterHorizontally),
+                                color = Color(0xFFFD4556),
+                                fontFamily = TungstenFont(),
+                                fontSize = 35.sp
+                            )
+                            Spacer(modifier = Modifier.fillMaxHeight(.03F))
+                            Box(
+                                modifier = Modifier.fillMaxWidth(.9F).fillMaxHeight(.003F).align(Alignment.CenterHorizontally).background(Color.Black)
+                            )
+                            Spacer(modifier = Modifier.fillMaxHeight(.032F))
+                            val listState = rememberLazyListState()
+                            LazyColumn(
+                                state = listState,
+                                modifier = Modifier.fillMaxWidth(.8F).fillMaxHeight(.75F).align(Alignment.CenterHorizontally)
+                            ) {
+                                items(Global.createdTeams.size) { item ->
+                                    Box(
+                                        modifier = Modifier.fillMaxWidth().fillMaxHeight(.25F)
+                                    ) {
+                                        Button(
+                                            onClick = {
+                                                // Add Code to grab team and set Global.selectedTeam to that
+                                            },
+                                            modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
+                                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+                                        ) {
+                                            Text(
+                                                text = Global.createdTeams[item],
+                                                color = Color(0xFFFD4556),
+                                                fontFamily = TungstenFont(),
+                                                fontSize = 20.sp
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                            Spacer(modifier = Modifier.fillMaxHeight(.2F))
+                            Box(
+                                modifier = Modifier.fillMaxWidth().fillMaxHeight(.25F)
+                            ) {
+                                Button(
+                                    onClick = {
+                                        if (Global.selectedTeam != null) { Global.displayingTeam = !Global.displayingTeam }
+                                    },
+                                    modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
+                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+                                ) {
+                                    Text(
+                                        text = "Toggle Custom Team Display",
+                                        color = Color(0xFFFD4556),
+                                        fontFamily = TungstenFont(),
+                                        fontSize = 20.sp
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.fillMaxHeight(.3333F))
+                            Box(
+                                modifier = Modifier.fillMaxWidth().fillMaxHeight(.5F)
+                            ) {
+                                Button(
+                                    onClick = {
+                                        Global.selectingTeam = false
+                                    },
+                                    modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
+                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+                                ) {
+                                    Text(
+                                        text = "Return Home",
+                                        color = Color(0xFFFD4556),
+                                        fontFamily = TungstenFont(),
+                                        fontSize = 20.sp
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 /**
  *
@@ -163,27 +339,6 @@ fun UserChatField() {
                         onClick = {
                             sendMessage(input)
                             input = ""
-                            if (input.isNotEmpty() || Global.sendingMessage) {
-                                Global.sendingMessage = true
-
-                                val tempText = input
-                                input = ""
-
-                                // Upload the message to the screen
-                                updateText(true, tempText)
-
-                                val temp = input
-                                input = ""
-
-                                // Send query and wait for response
-                                GlobalScope.launch(Dispatchers.Default) {
-                                    BedrockRuntime.InvokeModel(tempText).onFailure {
-                                        this.cancel("Model failed to load response!")
-                                        // TODO("Model failure UI alert")
-                                    }.onSuccess { updateText(false, it) }
-                                    Global.sendingMessage = false
-                                }
-                            }
                         }
                     ) {
                         Icon(
@@ -195,22 +350,6 @@ fun UserChatField() {
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun TeamSelect() {
-    Box(
-        modifier = Modifier.fillMaxWidth().fillMaxHeight()
-    ) {
-        Button(
-            onClick = {
-                Global.displayingTeam = !Global.displayingTeam
-            },
-            modifier = Modifier.size(250.dp, 250.dp)
-        ) {
-            Text("this is a temp button, if you are seeing this the ui designer forgot to remove it :D")
         }
     }
 }
@@ -245,13 +384,13 @@ fun TeamDisplay() {
                             modifier = Modifier
                                 .fillMaxWidth(.3F)
                                 .fillMaxHeight(.7F)
-                                .background(Color(Global.selectedTeam.theme[1])),
+                                .background(Color(Global.selectedTeam!!.theme[1])),
                         ) {
                             Text(
-                                text = Global.selectedTeam.name,
+                                text = Global.selectedTeam!!.name,
                                 modifier = Modifier
                                     .align(Alignment.Center),
-                                color = Color(Global.selectedTeam.theme[3]),
+                                color = Color(Global.selectedTeam!!.theme[3]),
                                 fontFamily = TungstenFont(),
                                 fontSize = 25.sp
                             )
@@ -261,12 +400,12 @@ fun TeamDisplay() {
                             modifier = Modifier
                                 .fillMaxWidth(.3F)
                                 .fillMaxHeight(.05F)
-                                .background(Color(Global.selectedTeam.theme[2]))
+                                .background(Color(Global.selectedTeam!!.theme[2]))
                         )
                         Spacer(modifier = Modifier.fillMaxWidth(.09F))
                         Text(
-                            text = "Coach: " + Global.selectedTeam.coach,
-                            color = Color(Global.selectedTeam.theme[3]),
+                            text = "Coach: " + Global.selectedTeam!!.coach,
+                            color = Color(Global.selectedTeam!!.theme[3]),
                             fontFamily = TungstenFont(),
                             fontSize = 25.sp
                         )
@@ -284,7 +423,7 @@ fun TeamDisplay() {
                             modifier = Modifier
                                 .fillMaxWidth(.7F)
                                 .fillMaxHeight(.05F)
-                                .background(Color(Global.selectedTeam.theme[2]))
+                                .background(Color(Global.selectedTeam!!.theme[2]))
                         )
                     }
                 }
@@ -295,15 +434,15 @@ fun TeamDisplay() {
                     Spacer(modifier = Modifier.fillMaxHeight(.25F))
                     Row(
                         modifier = Modifier.fillMaxWidth(.9F).fillMaxHeight(.15F)
-                            .background(Color(Global.selectedTeam.theme[1]))
-                            .border(BorderStroke(2.dp, Color(Global.selectedTeam.theme[0]))),
+                            .background(Color(Global.selectedTeam!!.theme[1]))
+                            .border(BorderStroke(2.dp, Color(Global.selectedTeam!!.theme[0]))),
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Box(
-                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam.theme[0])),
+                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam!!.theme[0])),
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[0].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[0].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxSize().padding(5.dp),
                                 alignment = Alignment.Center,
@@ -317,12 +456,12 @@ fun TeamDisplay() {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = Global.selectedTeam.members[0],
-                                color = Color(Global.selectedTeam.theme[4]),
+                                text = Global.selectedTeam!!.members[0],
+                                color = Color(Global.selectedTeam!!.theme[4]),
                                 fontFamily = TungstenFont(),
                                 fontSize = 45.sp
                             )
-                            if(Global.selectedTeam.members[0] == Global.selectedTeam.igl) {
+                            if(Global.selectedTeam!!.members[0] == Global.selectedTeam!!.igl) {
                                 Image(
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
@@ -334,7 +473,7 @@ fun TeamDisplay() {
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[0].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[0].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxHeight().scale(-1F, 1F),
                                 alignment = Alignment.Center,
@@ -350,15 +489,15 @@ fun TeamDisplay() {
                     Spacer(modifier = Modifier.fillMaxHeight(.4F))
                     Row(
                         modifier = Modifier.fillMaxWidth(.9F).fillMaxHeight(.1875F)
-                            .background(Color(Global.selectedTeam.theme[1]))
-                            .border(BorderStroke(2.dp, Color(Global.selectedTeam.theme[0]))),
+                            .background(Color(Global.selectedTeam!!.theme[1]))
+                            .border(BorderStroke(2.dp, Color(Global.selectedTeam!!.theme[0]))),
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Box(
-                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam.theme[0])),
+                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam!!.theme[0])),
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[1].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[1].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxSize().padding(5.dp),
                                 alignment = Alignment.Center,
@@ -372,12 +511,12 @@ fun TeamDisplay() {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = Global.selectedTeam.members[1],
-                                color = Color(Global.selectedTeam.theme[4]),
+                                text = Global.selectedTeam!!.members[1],
+                                color = Color(Global.selectedTeam!!.theme[4]),
                                 fontFamily = TungstenFont(),
                                 fontSize = 45.sp
                             )
-                            if(Global.selectedTeam.members[1] == Global.selectedTeam.igl) {
+                            if(Global.selectedTeam!!.members[1] == Global.selectedTeam!!.igl) {
                                 Image(
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
@@ -389,7 +528,7 @@ fun TeamDisplay() {
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[1].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[1].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxHeight().scale(-1F, 1F),
                                 alignment = Alignment.Center,
@@ -405,15 +544,15 @@ fun TeamDisplay() {
                     Spacer(modifier = Modifier.fillMaxHeight(.55F))
                     Row(
                         modifier = Modifier.fillMaxWidth(.9F).fillMaxHeight(.25F)
-                            .background(Color(Global.selectedTeam.theme[1]))
-                            .border(BorderStroke(2.dp, Color(Global.selectedTeam.theme[0]))),
+                            .background(Color(Global.selectedTeam!!.theme[1]))
+                            .border(BorderStroke(2.dp, Color(Global.selectedTeam!!.theme[0]))),
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Box(
-                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam.theme[0])),
+                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam!!.theme[0])),
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[2].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[2].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxSize().padding(5.dp),
                                 alignment = Alignment.Center,
@@ -427,12 +566,12 @@ fun TeamDisplay() {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = Global.selectedTeam.members[2],
-                                color = Color(Global.selectedTeam.theme[4]),
+                                text = Global.selectedTeam!!.members[2],
+                                color = Color(Global.selectedTeam!!.theme[4]),
                                 fontFamily = TungstenFont(),
                                 fontSize = 45.sp
                             )
-                            if(Global.selectedTeam.members[2] == Global.selectedTeam.igl) {
+                            if(Global.selectedTeam!!.members[2] == Global.selectedTeam!!.igl) {
                                 Image(
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
@@ -444,7 +583,7 @@ fun TeamDisplay() {
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[2].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[2].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxHeight().scale(-1F, 1F),
                                 alignment = Alignment.Center,
@@ -460,15 +599,15 @@ fun TeamDisplay() {
                     Spacer(modifier = Modifier.fillMaxHeight(.7F))
                     Row(
                         modifier = Modifier.fillMaxWidth(.9F).fillMaxHeight(.375F)
-                            .background(Color(Global.selectedTeam.theme[1]))
-                            .border(BorderStroke(2.dp, Color(Global.selectedTeam.theme[0]))),
+                            .background(Color(Global.selectedTeam!!.theme[1]))
+                            .border(BorderStroke(2.dp, Color(Global.selectedTeam!!.theme[0]))),
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Box(
-                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam.theme[0])),
+                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam!!.theme[0])),
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[3].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[3].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxSize().padding(5.dp),
                                 alignment = Alignment.Center,
@@ -482,12 +621,12 @@ fun TeamDisplay() {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = Global.selectedTeam.members[3],
-                                color = Color(Global.selectedTeam.theme[4]),
+                                text = Global.selectedTeam!!.members[3],
+                                color = Color(Global.selectedTeam!!.theme[4]),
                                 fontFamily = TungstenFont(),
                                 fontSize = 45.sp
                             )
-                            if(Global.selectedTeam.members[3] == Global.selectedTeam.igl) {
+                            if(Global.selectedTeam!!.members[3] == Global.selectedTeam!!.igl) {
                                 Image(
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
@@ -499,7 +638,7 @@ fun TeamDisplay() {
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[3].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[3].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxHeight().scale(-1F, 1F),
                                 alignment = Alignment.Center,
@@ -517,15 +656,15 @@ fun TeamDisplay() {
                         modifier = Modifier
                             .fillMaxWidth(.9F)
                             .fillMaxHeight(.75F)
-                            .background(Color(Global.selectedTeam.theme[1]))
-                            .border(BorderStroke(2.dp, Color(Global.selectedTeam.theme[0]))),
+                            .background(Color(Global.selectedTeam!!.theme[1]))
+                            .border(BorderStroke(2.dp, Color(Global.selectedTeam!!.theme[0]))),
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Box(
-                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam.theme[0])),
+                            modifier = Modifier.fillMaxHeight().fillMaxWidth(.22F).background(Color(Global.selectedTeam!!.theme[0])),
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[4].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[4].lowercase()]?.get(0) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxSize().padding(5.dp),
                                 alignment = Alignment.Center,
@@ -539,12 +678,12 @@ fun TeamDisplay() {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = Global.selectedTeam.members[4],
-                                color = Color(Global.selectedTeam.theme[4]),
+                                text = Global.selectedTeam!!.members[4],
+                                color = Color(Global.selectedTeam!!.theme[4]),
                                 fontFamily = TungstenFont(),
                                 fontSize = 45.sp
                             )
-                            if(Global.selectedTeam.members[4] == Global.selectedTeam.igl) {
+                            if(Global.selectedTeam!!.members[4] == Global.selectedTeam!!.igl) {
                                 Image(
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
@@ -556,7 +695,7 @@ fun TeamDisplay() {
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Image(
-                                painter = painterResource(resource = agentMap[Global.selectedTeam.agents[4].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
+                                painter = painterResource(resource = agentMap[Global.selectedTeam!!.agents[4].lowercase()]?.get(1) ?: Res.drawable.VCT_Block),
                                 contentDescription = "",
                                 modifier = Modifier.fillMaxHeight().scale(-1F, 1F),
                                 alignment = Alignment.Center,
