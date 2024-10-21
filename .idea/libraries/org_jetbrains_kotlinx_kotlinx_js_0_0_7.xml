@@ -1,8 +1,0 @@
-<component name="libraryTable">
-  <library name="org.jetbrains.kotlinx:kotlinx-js:0.0.7" type="java-imported" external-system-id="GRADLE">
-    <properties groupId="org.jetbrains.kotlinx" artifactId="kotlinx-js" version="0.0.7" />
-    <CLASSES />
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -1,8 +1,0 @@
-<component name="libraryTable">
-  <library name="io.ktor:ktor-client-serialization:2.3.12" type="java-imported" external-system-id="GRADLE">
-    <properties groupId="io.ktor" artifactId="ktor-client-serialization" version="2.3.12" />
-    <CLASSES />
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

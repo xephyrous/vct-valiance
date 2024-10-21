@@ -42,7 +42,7 @@ config.ignoreWarnings = [
 config.devServer = {
   "open": true,
   "static": [
-    "C:\\Users\\aidan\\IdeaProjects\\vct-valiance\\VCT-Valiance-Chatbot\\composeApp"
+    "C:\\Users\\alexa\\IdeaProjects\\vct-valiance\\VCT-Valiance-Chatbot\\composeApp"
   ]
 };
 

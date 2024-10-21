@@ -3,6 +3,7 @@ package org.xephyrous.com.Utils
 import kotlinx.coroutines.*
 import org.xephyrous.com.ChatBox
 import org.xephyrous.com.JSInterop.BedrockRuntime
+import org.xephyrous.com.JSInterop.JSFirebase
 import org.xephyrous.com.Utils.ErrorType.MODEL_RESPONSE
 
 fun updateText(
@@ -27,11 +28,25 @@ fun sendMessage(
 
         // Send query and wait for response
         GlobalScope.launch(Dispatchers.Default) {
-            BedrockRuntime.InvokeModel(input).onFailure {
-                this.cancel("Model failed to load response!")
-                // TODO("Model failure UI alert")
-            }.onSuccess { updateText(false, it) }
-            Global.sendingMessage = false
+            // Validate prompt prior to sending
+            Validator.validatePrompt(input).onSuccess { validation ->
+                if (validation.first) { // Good response
+                    BedrockRuntime.InvokeModel(input).onFailure {
+                        this.cancel("Model failed to load response!")
+                        // TODO("Model failure UI alert")
+                    }.onSuccess { response ->
+                        updateText(false, response)
+                    }
+
+                    Global.sendingMessage = false
+                    return@launch
+                }
+
+                // Response flagged
+                updateText(false, validation.second)
+            }.onFailure {
+                JSFirebase.debug("Bad!")
+            }
         }
     }
 }

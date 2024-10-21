@@ -1,0 +1,11 @@
+abi_version=1.8.0
+builtins_platform=WASM
+compiler_version=2.0.20
+depends=components.resources\:library components.ui-tooling-preview\:library org.jetbrains.androidx.lifecycle\:lifecycle-viewmodel org.kotlincrypto.hash\:sha2 org.kotlincrypto.core\:digest org.kotlincrypto.macs\:hmac-sha2 org.kotlincrypto.macs\:hmac org.kotlincrypto.core\:mac org.kotlincrypto.core\:xof org.jetbrains.androidx.lifecycle\:lifecycle-runtime-compose org.jetbrains.androidx.lifecycle\:lifecycle-runtime org.jetbrains.androidx.lifecycle\:lifecycle-common org.jetbrains.compose.annotation-internal\:annotation org.jetbrains.compose.material\:material org.jetbrains.compose.material\:material-ripple org.jetbrains.compose.foundation\:foundation org.jetbrains.compose.animation\:animation org.jetbrains.compose.animation\:animation-core org.jetbrains.kotlinx\:kotlinx-coroutines-core org.kotlincrypto.core\:common org.jetbrains.kotlinx\:atomicfu org.jetbrains.compose.material\:material-icons-core org.jetbrains.compose.foundation\:foundation-layout org.jetbrains.compose.ui\:ui org.jetbrains.compose.runtime\:runtime-saveable kotlin org.jetbrains.compose.runtime\:runtime org.jetbrains.compose.ui\:ui-text org.jetbrains.compose.ui\:ui-graphics org.jetbrains.compose.ui\:ui-unit org.jetbrains.skiko\:skiko org.jetbrains.compose.ui\:ui-geometry org.jetbrains.compose.ui\:ui-util
+ir_signature_versions=1,2
+jsOutputName=composeApp
+metadata_version=1.4.1
+serializedIrFileFingerprints=3unda85wd0xpi.15u9x3pya3qjt 34u8d64s2oo1a.uqu8xz1phhr8 1k0vsysy54cfp.10cp85fpz5k74 3v6wzz9ub6yl5.1gaio16owiu36 ko8fww02mr1c.2emgxrm63q4z4 20l6t8030mtkk.3hhppu223i9gg 2p76zkz3c1tyc.2uman65b7wsnz 20crziy0ao4ce.2pvd9wr0403tg 1ufr7migse8dg.3e7hx0346e34k 3082bzhmbk7uq.2agv028jlcjz5 2cclm3oxrbr23.if1vaf6z8b85 nf65cjlf5sf.1wyzytgfgzm6o 2zy1b1dy6xbp5.3temp60i9hhbc xp90qevzpkxi.21nhjlh366uoq 11hm0zw0zyd6k.1yriskxytju5p 1m6ff0q5u97qr.1ppcl9pna4b55 387bv5g1lxsoq.2sone753w0n3j 2ujateerj7he6.22820roi7dj5c lujekqilwx18.1kvdy6npvfr57 1tm47tg2182lr.3fuzj0o6xvln3
+serializedKlibFingerprint=1e930aayeazhl.2bk9ibme0jtzs
+unique_name=VCTValianceChatbot\:composeApp
+wasm_targets=wasm-js

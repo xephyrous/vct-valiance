@@ -29,6 +29,7 @@ enum class ErrorType(val reason: String) {
  * Handles error alerts for asynchronous functions, alerting them to the UI layer
  * @param type The [ErrorType] of the error if it is thrown, provides error details to the UI layer
  */
+@Suppress("UNCHECKED_CAST")
 suspend fun <T> Promise<JsAny>.awaitHandled(type: ErrorType, then: (JsAny) -> Unit = {}) : T? {
     return try {
         val waitVal = await<JsAny>()
@@ -36,7 +37,6 @@ suspend fun <T> Promise<JsAny>.awaitHandled(type: ErrorType, then: (JsAny) -> Un
         waitVal as T
     } catch (e: Throwable) {
         // TODO("UI alert here using 'type' for details")
-        JSFirebase.debug("HIT")
         JSFirebase.debug(e.stackTraceToString());
         null
     }
@@ -48,7 +48,6 @@ suspend fun Promise<*>.awaitHandledUnit(type: ErrorType) : Result<Unit> {
         Result.success(Unit)
     } catch(e: Throwable) {
         // TODO("UI alert here using 'type' for details")
-        JSFirebase.debug("HIT2")
         JSFirebase.debug(e.stackTraceToString());
         Result.failure(Exception(""))
     }

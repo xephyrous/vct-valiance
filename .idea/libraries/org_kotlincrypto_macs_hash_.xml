@@ -1,8 +1,0 @@
-<component name="libraryTable">
-  <library name="org.kotlincrypto.macs:hash:" type="java-imported" external-system-id="GRADLE">
-    <properties groupId="org.kotlincrypto.macs" artifactId="hash" />
-    <CLASSES />
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

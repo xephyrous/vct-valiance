@@ -1,0 +1,19 @@
+{
+  "name": "composeApp",
+  "version": "0.0.0-unspecified",
+  "main": "composeApp.mjs",
+  "types": "composeApp.d.ts",
+  "devDependencies": {
+    "webpack": "5.93.0",
+    "webpack-cli": "5.1.4",
+    "source-map-loader": "5.0.0",
+    "webpack-dev-server": "4.15.2",
+    "typescript": "5.5.4"
+  },
+  "dependencies": {
+    "format-util": "^1.0.5"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}
