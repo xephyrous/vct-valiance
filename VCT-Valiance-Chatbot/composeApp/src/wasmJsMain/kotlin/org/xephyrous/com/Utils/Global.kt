@@ -17,8 +17,8 @@ object Global {
 
     var sendingMessage by mutableStateOf(false)
 
-    var createdTeams: ArrayList<String> by mutableStateOf(arrayListOf("zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels","zekkenels",
-        ))
+    var createdTeams: ArrayList<String> by mutableStateOf(arrayListOf())
+    var createdUUIDS: ArrayList<String> by mutableStateOf(arrayListOf())
 
     var selectedTeam: TeamData? by mutableStateOf(null)
     var displayingTeam by mutableStateOf(false)

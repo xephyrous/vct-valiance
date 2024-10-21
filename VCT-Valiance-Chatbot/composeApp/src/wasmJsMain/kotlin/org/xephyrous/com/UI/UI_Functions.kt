@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.*
 import org.jetbrains.compose.resources.painterResource
+import org.xephyrous.com.JSInterop.Firebase
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.Utils.agentMap
 import org.xephyrous.com.Utils.sendMessage
@@ -104,24 +105,33 @@ fun Settings() {
                                 modifier = Modifier.fillMaxWidth(.9F).fillMaxHeight(.003F).align(Alignment.CenterHorizontally).background(Color.Black)
                             )
                             Spacer(modifier = Modifier.fillMaxHeight(.032F))
-                            Box(
-                                modifier = Modifier.fillMaxWidth().fillMaxHeight(.05F)
-                            ) {
-                                Button(
-                                    onClick = {
-                                        Global.selectingTeam = true
-                                    },
-                                    modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
-                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+                            Column(modifier = Modifier.fillMaxWidth().fillMaxHeight(.95F)) {
+                                Box(
+                                    modifier = Modifier.fillMaxWidth().fillMaxHeight(.05263158F)
                                 ) {
-                                    Text(
-                                        text = "Select Custom Team",
-                                        color = Color(0xFFFD4556),
-                                        fontFamily = TungstenFont(),
-                                        fontSize = 20.sp
-                                    )
+                                    Button(
+                                        onClick = {
+                                            Global.selectingTeam = true
+                                        },
+                                        modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
+                                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+                                    ) {
+                                        Text(
+                                            text = "Select Custom Team",
+                                            color = Color(0xFFFD4556),
+                                            fontFamily = TungstenFont(),
+                                            fontSize = 20.sp
+                                        )
+                                    }
                                 }
                             }
+                            Text(
+                                text = Global.sessionUUID!!,
+                                modifier = Modifier.align(Alignment.CenterHorizontally),
+                                color = Color(0xFFFD4556),
+                                fontFamily = TungstenFont(),
+                                fontSize = 10.sp
+                            )
                         }
                     }
                     AnimatedVisibility ( // Select Team
@@ -161,6 +171,7 @@ fun Settings() {
                                         Button(
                                             onClick = {
                                                 // Add Code to grab team and set Global.selectedTeam to that
+
                                             },
                                             modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
                                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
@@ -194,9 +205,28 @@ fun Settings() {
                                     )
                                 }
                             }
-                            Spacer(modifier = Modifier.fillMaxHeight(.3333F))
+                            Spacer(modifier = Modifier.fillMaxHeight(.1F))
                             Box(
-                                modifier = Modifier.fillMaxWidth().fillMaxHeight(.5F)
+                                modifier = Modifier.fillMaxWidth().fillMaxHeight(.37037F)
+                            ) {
+                                Button(
+                                    onClick = {
+                                        // Code to grab teams from FireBase
+                                    },
+                                    modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
+                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+                                ) {
+                                    Text(
+                                        text = "Refresh Teams",
+                                        color = Color(0xFFFD4556),
+                                        fontFamily = TungstenFont(),
+                                        fontSize = 20.sp
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.fillMaxHeight(.17647F))
+                            Box(
+                                modifier = Modifier.fillMaxWidth().fillMaxHeight(.71429F)
                             ) {
                                 Button(
                                     onClick = {
@@ -238,27 +268,35 @@ fun Valiance() {
             animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
         )
         val padding by animateFloatAsState(
-            targetValue = if (Global.initialized) .05f else .35F,
+            targetValue = if (Global.initialized) .0025F else .25F,
             animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
         )
         Column(
-            modifier = Modifier.fillMaxWidth(width).fillMaxHeight(height).align(Alignment.TopCenter)
+            modifier = Modifier.fillMaxWidth().fillMaxHeight().align(Alignment.TopCenter)
         ) {
             Spacer(Modifier.fillMaxHeight(padding))
-            Image(
-                painter = painterResource(resource = Res.drawable.VCT_Block),
-                contentDescription = "",
-                modifier = Modifier.fillMaxHeight(0.2F).fillMaxWidth(),
-                alignment = Alignment.BottomCenter,
-                contentScale = ContentScale.Fit
-            )
-            Image(
-                painter = painterResource(resource = Res.drawable.Valiance),
-                contentDescription = "",
-                modifier = Modifier.fillMaxSize(),
-                alignment = Alignment.TopCenter,
-                contentScale = ContentScale.Fit
-            )
+            Box(
+                modifier = Modifier.fillMaxWidth(width/10).fillMaxHeight(height/4).align(Alignment.CenterHorizontally)
+            ) {
+                Image(
+                    painter = painterResource(resource = Res.drawable.VCT_Block),
+                    contentDescription = "",
+                    modifier = Modifier.fillMaxHeight().fillMaxWidth(),
+                    alignment = Alignment.BottomCenter,
+                    contentScale = ContentScale.Fit
+                )
+            }
+            Box(
+                modifier = Modifier.fillMaxWidth(width).fillMaxHeight(height).align(Alignment.CenterHorizontally),
+            ) {
+                Image(
+                    painter = painterResource(resource = Res.drawable.Valiance),
+                    contentDescription = "",
+                    modifier = Modifier.fillMaxHeight().fillMaxWidth(),
+                    alignment = Alignment.TopCenter,
+                    contentScale = ContentScale.Fit
+                )
+            }
         }
     }
 }
