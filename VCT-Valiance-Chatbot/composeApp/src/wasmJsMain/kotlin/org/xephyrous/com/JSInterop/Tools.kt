@@ -4,7 +4,7 @@ object Tools {
     /**
      * Wrapper function for [JSUtils.teamDataToJSON] to handle errors
      * @param rawString The model's response string containing the team data as JSON
-     * @param pureJSON Whether or not the string is pure JSON, or a full model response string
+     * @param pureJSON Whether the string is pure JSON, or a full model response string
      * @return The inputted team data as a JS JSON object
      */
     fun teamDataToJSON(rawString: String, pureJSON: Boolean) : Result<JsAny> {
@@ -19,8 +19,17 @@ object Tools {
      * @param key The key of the array in the JSON
      * @param caster The casting function to use in type conversion
      */
-    inline fun <reified T> extractJSONArray(key: String, caster: (String) -> T) : Array<T> {
-        return JSUtils.extractJSONArray(key).split(",").map(caster).toTypedArray()
+    inline fun <reified T> extractJSONArray(key: String, caster: (String) -> T, commas: Boolean = false) : Array<T> {
+        val arr: Array<T>
+
+        if (commas) {
+            arr = JSUtils.extractJSONArray(key, true).split(",").map(caster).toTypedArray()
+            for (i in arr.indices) { arr[i] = arr[i].toString().replace("~|COMMA|~", ",") as T }
+        } else {
+            arr = JSUtils.extractJSONArray(key, false).split(",").map(caster).toTypedArray()
+        }
+
+        return arr
     }
 
     /**

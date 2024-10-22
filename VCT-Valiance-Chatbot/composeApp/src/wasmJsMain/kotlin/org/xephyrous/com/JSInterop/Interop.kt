@@ -6,7 +6,7 @@ import kotlin.js.Promise
 external object JSUtils {
     fun teamDataToJSON(rawString: String, pureJSON: Boolean) : JsAny?
     fun extractJSONObject(key: String) : String
-    fun extractJSONArray(key: String) : String
+    fun extractJSONArray(key: String, commas: Boolean) : String
     fun cacheJSON(json: JsAny)
     fun clearJSONCache()
 }
@@ -20,8 +20,10 @@ external object JSFirebase {
     fun addMessage(message: String, role: String) : Promise<JsAny>
     fun addTeam(teamObj: String) : Promise<JsAny>
     fun getTeamNames() : Promise<JsArray<JsString>>
-    fun getTeamIndexed(index: Int) : Promise<JsString>
+    fun getTeamUUIDs() : Promise<JsArray<JsString>>
+    fun getTeamByUUID(uuid: String) : Promise<JsAny>
     fun updateAccessTime() : Promise<JsAny>
+    fun getMessages() : Promise<JsAny>
 
     fun debug(str: String) // TODO : Remove for production
 }

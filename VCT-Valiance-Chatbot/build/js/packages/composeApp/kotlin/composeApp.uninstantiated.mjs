@@ -294,10 +294,16 @@ export async function instantiate(imports={}, runInitializer=true) {
                 mem8.set(src);
             }
         ,
+        'org.xephyrous.com.JSInterop.extractJSONArray_$external_fun' : (_this, p0, p1) => _this.extractJSONArray(p0, p1),
+        'org.xephyrous.com.JSInterop.cacheJSON_$external_fun' : (_this, p0) => _this.cacheJSON(p0),
+        'org.xephyrous.com.JSInterop.clearJSONCache_$external_fun' : (_this, ) => _this.clearJSONCache(),
+        'org.xephyrous.com.JSInterop.JSUtils_$external_object_getInstance' : () => _ref_Li9qcy9qcy11dGlscy5qcw_,
         'org.xephyrous.com.JSInterop.initializeFirebase_$external_fun' : (_this, ) => _this.initializeFirebase(),
         'org.xephyrous.com.JSInterop.createUser_$external_fun' : (_this, ) => _this.createUser(),
         'org.xephyrous.com.JSInterop.calculateSessionUUID_$external_fun' : (_this, ) => _this.calculateSessionUUID(),
         'org.xephyrous.com.JSInterop.setSessionUUID_$external_fun' : (_this, p0) => _this.setSessionUUID(p0),
+        'org.xephyrous.com.JSInterop.addMessage_$external_fun' : (_this, p0, p1) => _this.addMessage(p0, p1),
+        'org.xephyrous.com.JSInterop.getMessages_$external_fun' : (_this, ) => _this.getMessages(),
         'org.xephyrous.com.JSInterop.debug_$external_fun' : (_this, p0) => _this.debug(p0),
         'org.xephyrous.com.JSInterop.JSFirebase_$external_object_getInstance' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
         'org.xephyrous.com.JSInterop.InvokeModel_$external_fun' : (_this, p0) => _this.InvokeModel(p0),

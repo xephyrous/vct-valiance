@@ -32,7 +32,6 @@ object Validator {
                 result = Result.failure(Exception("Model failed to load response!"))
             }
             .onSuccess {
-                JSFirebase.debug("Validator Response: $it")
                 result = if (it.contains("~|GOOD_RESPONSE|~")) {
                     Result.success(Pair(true, ""))
                 } else {

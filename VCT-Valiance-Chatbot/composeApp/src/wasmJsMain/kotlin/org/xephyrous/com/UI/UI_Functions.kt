@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.*
 import org.jetbrains.compose.resources.painterResource
+import org.xephyrous.com.JSInterop.Firebase
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.Utils.agentMap
 import org.xephyrous.com.Utils.sendMessage
@@ -300,6 +301,7 @@ fun Valiance() {
     }
 }
 
+@OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun UserChatField() {
     Box(
@@ -345,6 +347,7 @@ fun UserChatField() {
                         ),
                         keyboardActions = KeyboardActions(onDone = {
                             sendMessage(input)
+
                             input = ""
                         }),
                         onValueChange = { newText ->

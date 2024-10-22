@@ -56,7 +56,6 @@ function teamDataToJSON(rawString, pureJSON) {
  */
 function cacheJSON(json) {
     cachedJSON = json
-    console.log(`JSON CACHED : ${json}`)
     // Lord help me if this gets passed invalid JSON, I'm not stopping whatever hell follows
 }
 
@@ -102,16 +101,26 @@ function extractJSONSubObject(keys) {
 /**
  * Turns an array into a splittable string to be parsed on the kotlin side
  */
-function extractJSONArray(key) {
+function extractJSONArray(key, commas) {
     if (cachedJSON === "") {
         console.warn("JSON needs to be cached before calling an extraction function!");
         return "";
     } // Skill issue, cache the JSON first dumbass, no data for you
 
-    let str = cachedJSON[key].toString().replaceAll("\"", "");
-    str.substring(0, str.length - 1)
+    let arr = [];
+    cachedJSON[key].forEach(function(it) {
+        if (commas) {
+            arr.push(it.replaceAll(",", "~|COMMA|~"));
+            return;
+        }
 
-    return str
+        arr.push(it)
+    })
+
+    let str = arr.toString().replaceAll("\"", "");
+    str.substring(0, str.length - 1);
+
+    return str;
 }
 
 export {

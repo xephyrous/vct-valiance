@@ -28,16 +28,18 @@ fun App() {
         initializing = true
 
         GlobalScope.launch(Dispatchers.Default) {
+            // Initialize Firebase connection
             Firebase.initializeFirebase().onFailure {
                 this.cancel("Could not initialize database connection!")
                 TODO("Initialization failure UI alert")
             }
 
+            // Initialize session
             CookieHandler.getCookie("vctSessionUUID").onFailure {
                 this.cancel("Could not initialize session!")
                 TODO("Enable cookies and reload application UI alert")
             }.onSuccess {
-                if (it == "") {
+                if (it == "") { // No existing session / cookie
                     Firebase.calculateSessionUUID().onSuccess { uuid -> sessionUUID = uuid }
                     Firebase.setSessionUUID(sessionUUID!!)
 
@@ -48,22 +50,46 @@ fun App() {
                         }
 
                     Firebase.createUser()
-                } else {
+
+                    // Get initial greeting
+                    BedrockRuntime.InvokeModel("Hello!").onFailure {
+                        this.cancel("Model failed to load response!")
+                        // TODO("Model failure UI alert")
+                    }.onSuccess { response ->
+                        updateText(false, response)
+                        Firebase.addMessage(response, "system")
+                    }
+                } else { // Existing session / cookie
                     CookieHandler.getCookie("vctSessionUUID")
-                        .onSuccess { sessionUUID = it }
+                        .onSuccess { uuid -> sessionUUID = uuid }
                         .onFailure {
                             this.cancel("Could not initialize session!")
                             TODO("Enable cookies and reload application UI alert")
                         }
                     Firebase.setSessionUUID(sessionUUID!!)
+
+                    // Initialize messages
+                    val messages = Firebase.getMessages().onSuccess { messages ->
+                        val temp: ArrayList<ChatBox> = arrayListOf()
+
+                        for (i in 0..<messages.first.size) {
+                            if (i < messages.first.size) {
+                                if (messages.first[i].isNotEmpty())
+                                    temp.add(ChatBox(false, messages.first[i], true))
+                            }
+
+                            if (i < messages.second.size) {
+                                if (messages.second[i].isNotEmpty())
+                                    temp.add(ChatBox(true, messages.second[i], true))
+                            }
+                        }
+
+                        Global.loadedMessages = temp
+                    }.onFailure {
+                        TODO("Failed to load session messages UI alert")
+                    }
                 }
             }
-
-            // Get initial greeting
-            BedrockRuntime.InvokeModel("Hello!").onFailure {
-                this.cancel("Model failed to load response!")
-                // TODO("Model failure UI alert")
-            }.onSuccess { updateText(false, it) }
 
             initializing = false
             initialized = true

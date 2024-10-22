@@ -3,6 +3,7 @@ package org.xephyrous.com.Utils
 import kotlinx.coroutines.*
 import org.xephyrous.com.ChatBox
 import org.xephyrous.com.JSInterop.BedrockRuntime
+import org.xephyrous.com.JSInterop.Firebase
 import org.xephyrous.com.JSInterop.JSFirebase
 import org.xephyrous.com.Utils.ErrorType.MODEL_RESPONSE
 
@@ -28,6 +29,9 @@ fun sendMessage(
 
         // Send query and wait for response
         GlobalScope.launch(Dispatchers.Default) {
+            // Add user message
+            Firebase.addMessage(input, "user")
+
             // Validate prompt prior to sending
             Validator.validatePrompt(input).onSuccess { validation ->
                 if (validation.first) { // Good response
@@ -36,17 +40,21 @@ fun sendMessage(
                         // TODO("Model failure UI alert")
                     }.onSuccess { response ->
                         updateText(false, response)
+
+                        // Add system message
+                        Firebase.addMessage(response, "system")
                     }
 
-                    Global.sendingMessage = false
                     return@launch
                 }
 
                 // Response flagged
                 updateText(false, validation.second)
             }.onFailure {
-                JSFirebase.debug("Bad!")
+                // TODO("Failed to validate prompt UI alert)
             }
+
+            Global.sendingMessage = false
         }
     }
 }

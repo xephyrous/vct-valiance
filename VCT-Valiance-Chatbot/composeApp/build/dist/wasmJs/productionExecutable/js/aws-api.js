@@ -30,9 +30,6 @@ async function _InvokeModel(prompt, inject) {
         }
     };
 
-    console.log("[ QUERY ]");
-    console.log(JSON.stringify(payload));
-
     const command = new InvokeModelCommand({
         contentType: "application/json",
         body: JSON.stringify(payload),

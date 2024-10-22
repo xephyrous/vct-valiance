@@ -4,6 +4,7 @@ import org.xephyrous.com.Utils.ErrorType
 import org.xephyrous.com.Utils.TeamData
 import org.xephyrous.com.Utils.awaitHandled
 import org.xephyrous.com.Utils.awaitHandledUnit
+import vctvaliancechatbot.composeapp.generated.resources.Res
 
 enum class Role(val strValue: String) {
     USER("user"),
@@ -83,18 +84,45 @@ object Firebase {
     }
 
     /**
-     * Wrapper function for [JSFirebase.getTeamIndexed] to convert to a [TeamData] object,
+     * Wrapper for [JSFirebase.getTeamUUIDs] to convert to an [Array] and to handle errors
+     * @return An [Array] of all stored team UUIDs
+     */
+    suspend fun getTeamUUIDs() : Result<Array<String>> {
+        return JSFirebase.getTeamNames().awaitHandled<Array<String>>(ErrorType.DATABASE_GET)
+            ?.let { Result.success(it) }
+            ?: Result.failure(Exception(""))
+    }
+
+    /**
+     * Wrapper function for [JSFirebase.getTeamByUUID] to convert to a [TeamData] object,
      * and to handle errors
-     * @param index The index of the team object to retrieve
+     * @param index The UUID of the team object to retrieve
      * @return A TeamData object at the given position in the database
      */
-    suspend fun getTeamIndexed(index: Int) : TeamData {
-        val data = JSFirebase.getTeamIndexed(index).awaitHandled<JsString>(ErrorType.DATABASE_GET).toString()
+    suspend fun getTeamByUUID(uuid: String) : Result<TeamData> {
+        return JSFirebase.getTeamByUUID(uuid).awaitHandled<JsString>(ErrorType.DATABASE_GET)
+            ?.let {
+                val data = TeamData()
+                data.loadJSON(it.toString(), true)
+                Result.success(data)
+            }
+            ?: Result.failure(Exception(""))
+    }
 
-        val teamData = TeamData()
-        teamData.loadJSON(data, true)
+    /**
+     * Wrapper function for [JSFirebase.getMessages] to convert to a [Pair] object,
+     * and to handle errors
+     */
+    suspend fun getMessages() : Result<Pair<Array<String>, Array<String>>> {
+        val data = JSFirebase.getMessages().awaitHandled<JsAny>(ErrorType.DATABASE_GET)
+            ?: return Result.failure(Exception(""))
+        JSUtils.cacheJSON(data)
 
-        return teamData
+        val sysMsg = Tools.extractJSONArray("systemMessages", String::toString, true)
+        val usrMsg = Tools.extractJSONArray("userMessages", String::toString, true)
+
+        JSUtils.clearJSONCache()
+        return Result.success(Pair(sysMsg, usrMsg))
     }
 
     suspend fun updateAccessTime() : Result<Unit> {
