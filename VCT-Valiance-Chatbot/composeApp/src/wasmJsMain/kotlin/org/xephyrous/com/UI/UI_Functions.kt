@@ -53,7 +53,15 @@ fun Settings() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        if (Global.initialized) {
+        AnimatedVisibility (
+            visible = Global.initialized,
+            enter = fadeIn(
+                animationSpec = tween(250)
+            ),
+            exit = fadeOut(
+                animationSpec = tween(250)
+            )
+        ) {
             IconButton(
                 onClick = {
                     Global.menuOpened = !Global.menuOpened
@@ -286,7 +294,7 @@ fun Valiance() {
             animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
         )
         val padding by animateFloatAsState(
-            targetValue = if (Global.initialized) .0025F else .25F,
+            targetValue = if (Global.initialized) .0025F else .26F,
             animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
         )
         Column(
@@ -326,14 +334,30 @@ fun UserChatField() {
         modifier = Modifier.fillMaxWidth().fillMaxHeight(),
         contentAlignment = Alignment.Center
     ) {
+        val width by animateFloatAsState(
+            targetValue = if (Global.initialized) .4f else .8F,
+            animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
+        )
+        val main by animateFloatAsState(
+            targetValue = if (Global.initialized) .9f else .475F,
+            animationSpec = tween(durationMillis = 500, easing = EaseInOut)
+        )
+        val secondary by animateFloatAsState(
+            targetValue = if (Global.initialized) .1F else 0F,
+            animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
+        )
+        val auxiliary by animateFloatAsState(
+            targetValue = if (Global.initialized) .75f else 0F,
+            animationSpec = tween(durationMillis = 1000, easing = EaseInOut)
+        )
         Column(
-            modifier = Modifier.fillMaxWidth(.4F).align(Alignment.Center)
+            modifier = Modifier.fillMaxWidth(width).align(Alignment.Center)
         ) {
             Spacer(modifier = Modifier.fillMaxHeight(.1F))
             Box(
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
-                    .fillMaxHeight(.90F)
+                    .fillMaxHeight(main)
                     .background(Color(0xFF141414))
             ) {
                 val lazyListState = rememberLazyListState()
@@ -346,14 +370,14 @@ fun UserChatField() {
                     }
                 }
             }
-            Spacer(modifier = Modifier.fillMaxHeight(.1F))
+            Spacer(modifier = Modifier.fillMaxHeight(secondary))
             Row {
                 var input by rememberSaveable { mutableStateOf("") }
 
                 Box(modifier = Modifier
                     .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
                     .fillMaxWidth(.9F)
-                    .fillMaxHeight(.75F)
+                    .fillMaxHeight(auxiliary)
                     .background(Color(0xFF141414))
                 ) {
                     TextField(
@@ -389,7 +413,7 @@ fun UserChatField() {
                     modifier = Modifier
                         .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
                         .fillMaxWidth()
-                        .fillMaxHeight(.75F)
+                        .fillMaxHeight(auxiliary)
                         .background(Color(0xFF141414))
                 ) {
                     IconButton(
