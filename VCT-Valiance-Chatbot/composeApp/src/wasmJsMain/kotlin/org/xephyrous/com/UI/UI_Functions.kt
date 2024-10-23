@@ -47,6 +47,7 @@ import vctvaliancechatbot.composeapp.generated.resources.Res
 import vctvaliancechatbot.composeapp.generated.resources.VCT_Block
 import vctvaliancechatbot.composeapp.generated.resources.Valiance
 
+@OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun Settings() {
     Box(
@@ -170,8 +171,16 @@ fun Settings() {
                                     ) {
                                         Button(
                                             onClick = {
-                                                // Add Code to grab team and set Global.selectedTeam to that
-
+                                                GlobalScope.launch(Dispatchers.Default) {
+                                                    Global.sendingMessage = true
+                                                    Firebase.getTeamByUUID(Global.createdUUIDS[item])
+                                                        .onSuccess {
+                                                            team -> Global.selectedTeam = team
+                                                            Global.displayingTeam = true
+                                                        }
+                                                        .onFailure { TODO("KILL") }
+                                                    Global.sendingMessage = false
+                                                }
                                             },
                                             modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
                                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
@@ -211,7 +220,16 @@ fun Settings() {
                             ) {
                                 Button(
                                     onClick = {
-                                        // Code to grab teams from FireBase
+                                        GlobalScope.launch(Dispatchers.Default) {
+                                            Global.sendingMessage = true
+                                            Firebase.getTeamNames()
+                                                .onSuccess { result -> Global.createdTeams = result }
+                                                .onFailure { TODO("Kill") }
+                                            Firebase.getTeamUUIDs()
+                                                .onSuccess { result -> Global.createdUUIDS = result }
+                                                .onFailure { TODO("KILL AGAIN)") }
+                                            Global.sendingMessage = false
+                                        }
                                     },
                                     modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
                                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)

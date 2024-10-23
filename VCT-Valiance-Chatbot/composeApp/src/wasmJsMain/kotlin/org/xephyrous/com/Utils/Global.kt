@@ -17,8 +17,8 @@ object Global {
 
     var sendingMessage by mutableStateOf(false)
 
-    var createdTeams: ArrayList<String> by mutableStateOf(arrayListOf())
-    var createdUUIDS: ArrayList<String> by mutableStateOf(arrayListOf())
+    var createdTeams: Array<String> by mutableStateOf(arrayOf<String>())
+    var createdUUIDS: Array<String> by mutableStateOf(arrayOf<String>())
 
     var selectedTeam: TeamData? by mutableStateOf(null)
     var displayingTeam by mutableStateOf(false)
