@@ -4412,6 +4412,7 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.xephyrous.com.JSInterop.getTeamByUUID_$external_fun' : (_this, p0) => _this.getTeamByUUID(p0),
         'org.xephyrous.com.JSInterop.updateAccessTime_$external_fun' : (_this, ) => _this.updateAccessTime(),
         'org.xephyrous.com.JSInterop.getMessages_$external_fun' : (_this, ) => _this.getMessages(),
+        'org.xephyrous.com.JSInterop.clearMessages_$external_fun' : (_this, ) => _this.clearMessages(),
         'org.xephyrous.com.JSInterop.debug_$external_fun' : (_this, p0) => _this.debug(p0),
         'org.xephyrous.com.JSInterop.JSFirebase_$external_object_getInstance' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
         'org.xephyrous.com.JSInterop.JSFirebase_$external_class_instanceof' : (x) => x instanceof _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,

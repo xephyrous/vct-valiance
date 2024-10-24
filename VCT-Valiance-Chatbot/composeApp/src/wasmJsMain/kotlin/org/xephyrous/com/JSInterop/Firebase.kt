@@ -3,6 +3,7 @@ package org.xephyrous.com.JSInterop
 import kotlinx.coroutines.await
 import org.xephyrous.com.Utils.*
 import vctvaliancechatbot.composeapp.generated.resources.Res
+import kotlin.js.Promise
 
 enum class Role(val strValue: String) {
     USER("user"),
@@ -84,6 +85,19 @@ object Firebase {
         JSUtils.clearJSONCache()
 
         return Result.success(names.drop(1).toTypedArray())
+    }
+
+    /**
+     * Wrapper for [JSFirebase.clearMessages] to update the UI and handle errors
+     */
+    suspend fun clearMessages() : Result<Unit> {
+        JSFirebase.clearMessages().awaitHandled<JsAny>(ErrorType.DATABASE_SET)
+            ?.let {
+                Global.loadedMessages.clear()
+                updateText()
+                return Result.success(Unit)
+            }
+            ?: return Result.failure(Exception(""))
     }
 
     /**

@@ -77,7 +77,8 @@ async function _InvokeRAG(prompt, inject) {
                             "you cannot ever have more than ONE of the same agent on a team UNIQUE AGENTS ONLY," +
                             "If there are multiple of the same agent then CHANGE IT," +
                             "the team data must come AFTER your response, at the very end, each role must be the CORRECT" +
-                            " role for their agent. Here is the JSON structure:\n" +
+                            " role for their agent. If there is any ambiguity or lack of information in the user's prompt " +
+                            "fill it in to the best of your ability, but DO NOT LEAVE ANYTHING OUT OF THE JSON. Here is the JSON structure:\n" +
                             "~||TEAMDATA||~\n" +
                             "{\n" +
                             "  \"name\": \"TEAM_NAME\",\n" +

@@ -24,6 +24,7 @@ external object JSFirebase {
     fun getTeamByUUID(uuid: String) : Promise<JsString>
     fun updateAccessTime() : Promise<JsAny>
     fun getMessages() : Promise<JsAny>
+    fun clearMessages() : Promise<JsAny>
 
     fun debug(str: String) // TODO : Remove for production
 }

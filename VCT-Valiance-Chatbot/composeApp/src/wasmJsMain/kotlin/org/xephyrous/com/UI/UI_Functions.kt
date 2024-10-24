@@ -566,6 +566,7 @@ fun TeamDisplay() {
                             )
                             if(Global.selectedTeam!!.members[0] == Global.selectedTeam!!.igl) {
                                 Image(
+                                    modifier = Modifier.padding(20.dp),
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
                                     contentScale = ContentScale.Fit
@@ -621,6 +622,7 @@ fun TeamDisplay() {
                             )
                             if(Global.selectedTeam!!.members[1] == Global.selectedTeam!!.igl) {
                                 Image(
+                                    modifier = Modifier.padding(20.dp),
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
                                     contentScale = ContentScale.Fit
@@ -672,10 +674,11 @@ fun TeamDisplay() {
                                 text = Global.selectedTeam!!.members[2],
                                 color = Color(Global.selectedTeam!!.theme[4]),
                                 fontFamily = TungstenFont(),
-                                fontSize = 45.sp
+                                fontSize = 37.sp
                             )
                             if(Global.selectedTeam!!.members[2] == Global.selectedTeam!!.igl) {
                                 Image(
+                                    modifier = Modifier.padding(20.dp),
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
                                     contentScale = ContentScale.Fit
@@ -731,6 +734,7 @@ fun TeamDisplay() {
                             )
                             if(Global.selectedTeam!!.members[3] == Global.selectedTeam!!.igl) {
                                 Image(
+                                    modifier = Modifier.padding(20.dp),
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
                                     contentScale = ContentScale.Fit
@@ -788,6 +792,7 @@ fun TeamDisplay() {
                             )
                             if(Global.selectedTeam!!.members[4] == Global.selectedTeam!!.igl) {
                                 Image(
+                                    modifier = Modifier.padding(20.dp),
                                     painter = painterResource(resource = Res.drawable.IGL),
                                     contentDescription = "",
                                     contentScale = ContentScale.Fit

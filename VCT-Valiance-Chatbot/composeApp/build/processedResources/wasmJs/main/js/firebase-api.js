@@ -89,6 +89,14 @@ async function addMessage(message, role) {
 }
 
 /**
+ * Clears all chat messages
+ */
+async function clearMessages() {
+    await set(ref(database, `users/${sessionUUID}/userMessages`), [""]);
+    await set(ref(database, `users/${sessionUUID}/systemMessages`), [""]);
+}
+
+/**
  * Adds a team object to the database
  * @param rawString The model response containing the team data
  */
@@ -196,6 +204,7 @@ export {
     updateAccessTime,
     getMessages,
     getTeamUUIDs,
+    clearMessages,
     sessionUUID,
 
     // TODO : Debug only!
