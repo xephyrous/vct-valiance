@@ -17,6 +17,27 @@ fun updateText(
     Global.loadedMessages = temp
 }
 
+fun updateText(
+    message: ChatBox
+) {
+    val temp: ArrayList<ChatBox> = arrayListOf()
+    temp.addAll(Global.loadedMessages)
+    temp.add(message)
+    Global.loadedMessages = temp
+}
+
+fun updateText() {
+    val temp: ArrayList<ChatBox> = arrayListOf()
+    temp.addAll(Global.loadedMessages)
+    Global.loadedMessages = temp
+}
+
+fun debugText(
+    text: String
+) {
+    updateText(true, "DEBUG: $text")
+}
+
 @OptIn(DelicateCoroutinesApi::class)
 fun sendMessage(
     input: String
@@ -32,6 +53,12 @@ fun sendMessage(
             // Add user message
             Firebase.addMessage(input, "user")
 
+            delay(input.length*25L)
+
+            val mlResponse = ChatBox(false, "", false, true)
+
+            updateText(mlResponse)
+
             // Validate prompt prior to sending
             Validator.validatePrompt(input).onSuccess { validation ->
                 if (validation.first) { // Good response
@@ -39,21 +66,21 @@ fun sendMessage(
                         this.cancel("Model failed to load response!")
                         // TODO("Model failure UI alert")
                     }.onSuccess { response ->
-                        updateText(false, response)
+                        mlResponse.finalizeLoad(response)
 
                         // Add system message
                         Firebase.addMessage(response, "system")
                     }
+                    Global.sendingMessage = false
 
                     return@launch
                 }
 
                 // Response flagged
-                updateText(false, validation.second)
+                mlResponse.finalizeLoad(validation.second)
             }.onFailure {
                 // TODO("Failed to validate prompt UI alert)
             }
-
             Global.sendingMessage = false
         }
     }

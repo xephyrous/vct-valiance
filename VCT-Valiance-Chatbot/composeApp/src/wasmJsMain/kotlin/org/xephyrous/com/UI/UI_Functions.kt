@@ -21,11 +21,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.Close
 import androidx.compose.material.icons.sharp.PlayArrow
 import androidx.compose.material.icons.sharp.Settings
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,6 +38,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.xephyrous.com.JSInterop.Firebase
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.Utils.agentMap
+import org.xephyrous.com.Utils.debugText
 import org.xephyrous.com.Utils.sendMessage
 import vctvaliancechatbot.composeapp.generated.resources.IGL
 import vctvaliancechatbot.composeapp.generated.resources.Res
@@ -230,6 +228,7 @@ fun Settings() {
                                     onClick = {
                                         GlobalScope.launch(Dispatchers.Default) {
                                             Global.sendingMessage = true
+                                            debugText("LOCKED MESSAGES")
                                             Firebase.getTeamNames()
                                                 .onSuccess { result -> Global.createdTeams = result }
                                                 .onFailure { TODO("Kill") }
@@ -354,19 +353,34 @@ fun UserChatField() {
             modifier = Modifier.fillMaxWidth(width).align(Alignment.Center)
         ) {
             Spacer(modifier = Modifier.fillMaxHeight(.1F))
-            Box(
+            Column(
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(15.dp, 15.dp, 15.dp, 15.dp))
                     .fillMaxHeight(main)
                     .background(Color(0xFF141414))
             ) {
-                val lazyListState = rememberLazyListState()
-                LazyColumn(
-                    state = lazyListState,
-                    modifier = Modifier.fillMaxSize().padding(5.dp)
-                ){
-                    items(Global.loadedMessages.size) { item ->
-                        Global.loadedMessages[item].createBox()
+                AnimatedVisibility(
+                    visible = Global.initialized,
+                    enter = fadeIn(
+                        animationSpec = tween(500, delayMillis = 1000)
+                    ),
+                    exit = fadeOut(
+                        animationSpec = tween(500, delayMillis = 0)
+                    )
+                ) {
+                    val lazyListState = rememberLazyListState()
+
+                    LaunchedEffect(Global.loadedMessages) {
+                        lazyListState.scrollToItem(Global.loadedMessages.size-1)
+                    }
+
+                    LazyColumn(
+                        state = lazyListState,
+                        modifier = Modifier.fillMaxSize().padding(5.dp)
+                    ){
+                        items(Global.loadedMessages.size) { item ->
+                            Global.loadedMessages[item].createBox()
+                        }
                     }
                 }
             }
@@ -400,7 +414,7 @@ fun UserChatField() {
                             focusedIndicatorColor = Color(0xFFFD4556),
                         ),
                         singleLine = true,
-                        placeholder = { Text("Ask Away!", color = Color(0x15FFFFFF), fontSize = 25.sp, fontFamily = FFMarkFont()) },
+                        placeholder = { Text(if (Global.sendingMessage) "Please Wait!" else "Ask Away!", color = Color(0x15FFFFFF), fontSize = 25.sp, fontFamily = FFMarkFont()) },
                         textStyle = TextStyle(
                             fontFamily = FFMarkFont(),
                             fontSize = 25.sp,
