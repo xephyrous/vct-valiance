@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.*
 import org.jetbrains.compose.resources.painterResource
 import org.xephyrous.com.JSInterop.Firebase
+import org.xephyrous.com.JSInterop.JSFirebase
 import org.xephyrous.com.Utils.Global
 import org.xephyrous.com.Utils.agentMap
 import org.xephyrous.com.Utils.sendMessage
@@ -186,7 +187,7 @@ fun Settings() {
                                                             team -> Global.selectedTeam = team
                                                             Global.displayingTeam = true
                                                         }
-                                                        .onFailure { TODO("KILL") }
+                                                        .onFailure { /* TODO("Failed to fetch teams list UI alert")  */ }
                                                     Global.sendingMessage = false
                                                 }
                                             },

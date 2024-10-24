@@ -35,7 +35,9 @@ fun sendMessage(
             // Validate prompt prior to sending
             Validator.validatePrompt(input).onSuccess { validation ->
                 if (validation.first) { // Good response
-                    BedrockRuntime.InvokeModel(input).onFailure {
+
+                    // Get RAG data for context
+                    BedrockRuntime.InvokeRAG(input).onFailure {
                         this.cancel("Model failed to load response!")
                         // TODO("Model failure UI alert")
                     }.onSuccess { response ->
@@ -44,6 +46,8 @@ fun sendMessage(
                         // Add system message
                         Firebase.addMessage(response, "system")
                     }
+
+                    // Get full response with data
 
                     return@launch
                 }

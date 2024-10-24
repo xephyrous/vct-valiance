@@ -78,9 +78,14 @@ object Firebase {
      * @return An [Array] of all stored team names
      */
     suspend fun getTeamNames() : Result<Array<String>> {
-        return JSFirebase.getTeamNames().awaitHandled<Array<String>>(ErrorType.DATABASE_GET)
-            ?.let { Result.success(it) }
-            ?: Result.failure(Exception(""))
+        val data = JSFirebase.getTeamNames().awaitHandled<JsAny>(ErrorType.DATABASE_GET)
+            ?: return Result.failure(Exception(""))
+
+        JSUtils.cacheJSON(data)
+        val names = Tools.extractJSONArray("names", String::toString, false)
+        JSUtils.clearJSONCache()
+
+        return Result.success(names)
     }
 
     /**
@@ -88,9 +93,14 @@ object Firebase {
      * @return An [Array] of all stored team UUIDs
      */
     suspend fun getTeamUUIDs() : Result<Array<String>> {
-        return JSFirebase.getTeamNames().awaitHandled<Array<String>>(ErrorType.DATABASE_GET)
-            ?.let { Result.success(it) }
-            ?: Result.failure(Exception(""))
+        val data = JSFirebase.getTeamUUIDs().awaitHandled<JsAny>(ErrorType.DATABASE_GET)
+            ?: return Result.failure(Exception(""))
+
+        JSUtils.cacheJSON(data)
+        val uuids = Tools.extractJSONArray("uuids", String::toString, false)
+        JSUtils.clearJSONCache()
+
+        return Result.success(uuids)
     }
 
     /**
@@ -102,8 +112,10 @@ object Firebase {
     suspend fun getTeamByUUID(uuid: String) : Result<TeamData> {
         return JSFirebase.getTeamByUUID(uuid).awaitHandled<JsString>(ErrorType.DATABASE_GET)
             ?.let {
+                JSFirebase.debug("Returned")
                 val data = TeamData()
                 data.loadJSON(it.toString(), true)
+                JSFirebase.debug("Finished?")
                 Result.success(data)
             }
             ?: Result.failure(Exception(""))
@@ -116,12 +128,12 @@ object Firebase {
     suspend fun getMessages() : Result<Pair<Array<String>, Array<String>>> {
         val data = JSFirebase.getMessages().awaitHandled<JsAny>(ErrorType.DATABASE_GET)
             ?: return Result.failure(Exception(""))
-        JSUtils.cacheJSON(data)
 
+        JSUtils.cacheJSON(data)
         val sysMsg = Tools.extractJSONArray("systemMessages", String::toString, true)
         val usrMsg = Tools.extractJSONArray("userMessages", String::toString, true)
-
         JSUtils.clearJSONCache()
+
         return Result.success(Pair(sysMsg, usrMsg))
     }
 

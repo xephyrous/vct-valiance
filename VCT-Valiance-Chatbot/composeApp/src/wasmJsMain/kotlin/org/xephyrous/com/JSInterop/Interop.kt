@@ -19,8 +19,8 @@ external object JSFirebase {
     fun setSessionUUID(uuid: String)
     fun addMessage(message: String, role: String) : Promise<JsAny>
     fun addTeam(teamObj: String) : Promise<JsAny>
-    fun getTeamNames() : Promise<JsArray<JsString>>
-    fun getTeamUUIDs() : Promise<JsArray<JsString>>
+    fun getTeamNames() : Promise<JsAny>
+    fun getTeamUUIDs() : Promise<JsAny>
     fun getTeamByUUID(uuid: String) : Promise<JsAny>
     fun updateAccessTime() : Promise<JsAny>
     fun getMessages() : Promise<JsAny>
@@ -31,6 +31,7 @@ external object JSFirebase {
 @JsModule("./js/aws-api.js")
 external object JSBedrockRuntime {
     fun InvokeModel(prompt: String) : Promise<JsString>
+    fun InvokeRAG(prompt: String) : Promise<JsString>
 }
 
 @JsModule("./js/cookie-handler.js")

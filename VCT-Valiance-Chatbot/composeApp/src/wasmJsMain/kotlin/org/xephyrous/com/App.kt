@@ -70,13 +70,6 @@ fun App() {
 
                     // Initialize messages
                     val messages = Firebase.getMessages().onSuccess { messages ->
-                        // Begin animations
-                        initializing = false
-                        initialized = true
-
-                        // Delay for animations to finish
-                        delay(1000)
-
                         val temp: ArrayList<ChatBox> = arrayListOf()
 
                         for (i in 0..<messages.first.size) {
