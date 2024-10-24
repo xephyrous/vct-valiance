@@ -209,6 +209,7 @@ fun Settings() {
                                 Button(
                                     onClick = {
                                         if (Global.selectedTeam != null) { Global.displayingTeam = !Global.displayingTeam }
+                                        else { Alerts.displayAlert("No teams are loaded to the browser") }
                                     },
                                     modifier = Modifier.align(Alignment.Center).fillMaxHeight().fillMaxWidth(.8F),
                                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
