@@ -108,7 +108,8 @@ async function addTeam(rawString) {
  * Gets all stored team names for the current user
  */
 async function getTeamNames() {
-    let names = [];
+    const jsonStr = '{"names": []}';
+    let jsonObj = JSON.parse(jsonStr);
 
     const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
         .then(snapshot => {
@@ -116,17 +117,18 @@ async function getTeamNames() {
         })
 
     teamsList.forEach((value) => {
-        names += value["name"]
-    })
+        jsonObj.names.push(value["name"]);
+    });
 
-    return names
+    return jsonObj;
 }
 
 /**
  * Gets all stored team UUIDs for the current user
  */
 async function getTeamUUIDs() {
-    let uuids = [];
+    const jsonStr = '{"uuids": []}';
+    let jsonObj = JSON.parse(jsonStr);
 
     const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
         .then(snapshot => {
@@ -134,27 +136,25 @@ async function getTeamUUIDs() {
         })
 
     teamsList.forEach((value) => {
-        uuids += value["uuid"]
-    })
+        jsonObj.uuids.push(value["uuid"]);
+    });
 
-    return uuids
+    return jsonObj;
 }
 
 /**
  * Gets a team object from the database list with the provided UUID
  * @param index The UUID of the team object to retrieve
  */
-async function getTeamByUUID(index) {
+async function getTeamByUUID(uuid) {
     const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
         .then(snapshot => { return snapshot.val() })
 
-    for (let obj in teamsList) {
-        let jsonObj = JSON.parse(obj);
+    teamsList.forEach((value) => {
+        if (value["uuid"] === uuid) { return value; }
+    });
 
-        if (jsonObj["uuid"] === index) {
-            return jsonObj;
-        }
-    }
+    // Uhh I don't think it's possible to get here unless the database de-syncs (🙏)
 }
 
 /**
