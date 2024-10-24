@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@aws-sdk/client-bedrock": "^3.650.0",
+    "@aws-sdk/client-bedrock-agent-runtime": "^3.678.0",
     "@aws-sdk/client-bedrock-runtime": "^3.650.0",
     "aws-sdk": "^2.1691.0",
     "boring-webcrypto-sha256": "^1.0.0",

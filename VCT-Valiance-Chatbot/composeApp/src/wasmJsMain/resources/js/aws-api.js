@@ -8,7 +8,10 @@ import {
     RetrieveAndGenerateCommand,
 } from "@aws-sdk/client-bedrock-agent-runtime";
 
-import { credCallAWS } from "./firebase-api";
+import {
+    credCallAWS,
+    getMessages
+} from "./firebase-api";
 
 async function InvokeModel(prompt
 ) {
@@ -25,6 +28,23 @@ async function _InvokeRAG(prompt, inject) {
         region: "us-east-1",
         credentials: inject
     });
+
+    const messages = await getMessages();
+    let history = "BEGIN HISTORY";
+
+    // Build conversation history
+    for (let i = 0; i < messages["systemMessages"].length; i++) {
+        if (messages["systemMessages"][i].length !== 0) {
+            history += "System: " + messages["systemMessages"][i] + "\n";
+        }
+        if (messages["userMessages"][i].length !== 0 && i !== messages.length) {
+            history += "User: " + messages["userMessages"][i] + "\n";
+        }
+    }
+
+    history += "END HISTORY";
+
+    console.log(history);
 
     // Prepare the command for Retrieve and Generate
     const command = new RetrieveAndGenerateCommand({
@@ -44,21 +64,26 @@ async function _InvokeRAG(prompt, inject) {
                 },
                 generationConfiguration: {
                     promptTemplate: {
-                        textPromptTemplate: "You are a helpful assistant that provides information on Valorant's Pro " +
-                            "scene and Valorant as a game. Here is information relating to the user's query that may aid" +
-                            " you in your response: $search_results$ Please respond according to these rules, however do" +
-                            " NOT reference any of the rules directly or mention them in your response\n\nHuman:" +
-                            "If a user requests that you generate a team, you will respond with the specified JSON template" +
-                            ", filled out to your generated team's specific values, do not add any extraneous elements or" +
-                            " anything to the json structure. For roles that you may place in the roles places, you may " +
-                            "choose from the following ONLY: duelist, controller, sentinel, and initiator. Place the " +
-                            "JSON object at the very END of your response, and place a concise explanation of the team's " +
-                            "composition and reasoning behind the players and their roles in the team, followed by a " +
-                            "newline, the string '~|TEAM_JSON|~', another newline, then the json." +
-                            " Here is the exact JSON structure to follow:{\n" +
+                        textPromptTemplate: "You are a helpful assistant focused on providing information about Valorant's " +
+                            "Pro scene and game-related questions. Here is relevant information from external sources: $search_results$. " +
+                            "This is the history of your conversation of the user so far:" + history +
+                            "Respond to user inquiries based on the information above.\n\n" +
+                            "Do NOT generate a team unless the user explicitly requests one. Otherwise, simply answer their query.\n\n" +
+                            "If a user requests team generation, use this exact format for your response. First, provide a concise explanation " +
+                            "about the team's composition and reasoning, then follow the JSON structure below noting the following rules, " +
+                            "only use the following roles (controller, sentinel, initiator, duelist), the members' names " +
+                            "must be their in-game username, the coach's name in the 'coach' field MUST be one of the members on the team," +
+                            "every member must be a vct player or professional valorant player's username (do not place the agent's name instead)," +
+                            "you cannot ever have more than ONE of the same agent on a team UNIQUE AGENTS ONLY," +
+                            "If there are multiple of the same agent then CHANGE IT," +
+                            "the team data must come AFTER your response, at the very end, each role must be the CORRECT" +
+                            " role for their agent. Here is the JSON structure:\n" +
+                            "~||TEAMDATA||~\n" +
+                            "{\n" +
                             "  \"name\": \"TEAM_NAME\",\n" +
                             "  \"igl\": \"IGL_MEMBER_NAME\",\n" +
                             "  \"coach\": \"COACH_NAME\",\n" +
+                            "  \"uuid\": \"\",\n" +
                             "  \"members\": [\n" +
                             "    \"MEMBER_1_USERNAME\",\n" +
                             "    \"MEMBER_2_USERNAME\",\n" +
@@ -80,7 +105,8 @@ async function _InvokeRAG(prompt, inject) {
                             "    \"MEMBER_4_AGENT\",\n" +
                             "    \"MEMBER_5_AGENT\"\n" +
                             "  ]\n" +
-                            "}\n\nAssistant:",
+                            "}\n\n" +
+                            "Human: " + prompt + "\nAssistant:",
                     },
                     inferenceConfig: {
                         textInferenceConfig: {

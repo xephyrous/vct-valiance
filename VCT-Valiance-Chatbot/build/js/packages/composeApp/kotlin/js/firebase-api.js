@@ -94,6 +94,7 @@ async function addMessage(message, role) {
  */
 async function addTeam(rawString) {
     const teamJSON = teamDataToJSON(rawString, false);
+    teamJSON["uuid"] = await calculateSessionUUID();
 
     const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
         .then(snapshot => {
@@ -108,7 +109,8 @@ async function addTeam(rawString) {
  * Gets all stored team names for the current user
  */
 async function getTeamNames() {
-    let names = [];
+    const jsonStr = '{"names": []}';
+    let jsonObj = JSON.parse(jsonStr);
 
     const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
         .then(snapshot => {
@@ -116,17 +118,18 @@ async function getTeamNames() {
         })
 
     teamsList.forEach((value) => {
-        names += value["name"]
-    })
+        jsonObj.names.push(value["name"]);
+    });
 
-    return names
+    return jsonObj;
 }
 
 /**
  * Gets all stored team UUIDs for the current user
  */
 async function getTeamUUIDs() {
-    let uuids = [];
+    const jsonStr = '{"uuids": []}';
+    let jsonObj = JSON.parse(jsonStr);
 
     const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
         .then(snapshot => {
@@ -134,27 +137,27 @@ async function getTeamUUIDs() {
         })
 
     teamsList.forEach((value) => {
-        uuids += value["uuid"]
-    })
+        jsonObj.uuids.push(value["uuid"]);
+    });
 
-    return uuids
+    return jsonObj;
 }
 
 /**
  * Gets a team object from the database list with the provided UUID
- * @param index The UUID of the team object to retrieve
+ * @param uuid The UUID of the team object to retrieve
  */
-async function getTeamByUUID(index) {
+async function getTeamByUUID(uuid) {
     const teamsList = await get(ref(database, `users/${sessionUUID}/teams`))
         .then(snapshot => { return snapshot.val() })
 
-    for (let obj in teamsList) {
-        let jsonObj = JSON.parse(obj);
+    let obj = null;
 
-        if (jsonObj["uuid"] === index) {
-            return jsonObj;
-        }
-    }
+    teamsList.forEach((value) => {
+        if (value["uuid"] === uuid) { obj = value; }
+    });
+
+    return JSON.stringify(obj);
 }
 
 /**

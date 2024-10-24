@@ -3,6 +3,7 @@ package org.xephyrous.com.Utils
 import kotlinx.coroutines.await
 import org.xephyrous.com.JSInterop.Firebase
 import org.xephyrous.com.JSInterop.JSFirebase
+import org.xephyrous.com.UI.Alerts
 import vctvaliancechatbot.composeapp.generated.resources.Res
 import kotlin.js.Promise
 
@@ -36,8 +37,25 @@ suspend fun <T> Promise<JsAny>.awaitHandled(type: ErrorType, then: (JsAny) -> Un
         then(waitVal)
         waitVal as T
     } catch (e: Throwable) {
-        // TODO("UI alert here using 'type' for details")
-        JSFirebase.debug(e.stackTraceToString());
+        JSFirebase.debug(e.toString())
+        Alerts.displayAlert("Error ${type.reason}")
+        null
+    }
+}
+
+/**
+ * Handles error alerts for asynchronous functions, that does not perform any casts, alerting them to the UI layer
+ * This acts only on JsAny returning functions, in order to avoid type degradation
+ * @param type The [ErrorType] of the error if it is thrown, provides error details to the UI layer
+ */
+suspend fun Promise<JsAny>.awaitHandledNoCast(type: ErrorType, then: (JsAny) -> Unit = {}) : JsAny? {
+    return try {
+        val waitVal = await<JsAny>()
+        then(waitVal)
+        waitVal
+    } catch (e: Throwable) {
+        JSFirebase.debug(e.toString())
+        Alerts.displayAlert("Error ${type.reason}")
         null
     }
 }
@@ -47,8 +65,7 @@ suspend fun Promise<*>.awaitHandledUnit(type: ErrorType) : Result<Unit> {
         await<JsAny>()
         Result.success(Unit)
     } catch(e: Throwable) {
-        // TODO("UI alert here using 'type' for details")
-        JSFirebase.debug(e.stackTraceToString());
+        Alerts.displayAlert("Error ${type.reason}")
         Result.failure(Exception(""))
     }
 }

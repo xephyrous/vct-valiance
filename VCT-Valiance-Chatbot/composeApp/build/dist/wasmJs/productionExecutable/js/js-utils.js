@@ -1,7 +1,6 @@
-// TODO : Explain about this bullshit (ㆆ_ㆆ)
+// JSON objects degrade their types so quickly when passing between Kotlin and JS,
+// So we are required to instead cache the result as a pure json object. (Represented as JsAny on the Kotlin side)
 let cachedJSON = "";
-
-
 
 /**
  * Digests a team string from the model's response and parses it into a JSON object
@@ -22,7 +21,6 @@ function teamDataToJSON(rawString, pureJSON) {
             teamJSON = JSON.parse(
                 rawString.substring(
                     rawString.indexOf("~||TEAMDATA||~") + 14,
-                    rawString.length
                 )
             );
         }
@@ -35,7 +33,7 @@ function teamDataToJSON(rawString, pureJSON) {
         || !teamJSON.hasOwnProperty("members")
         || !teamJSON.hasOwnProperty("roles")
         || !teamJSON.hasOwnProperty("agents")
-        || !teamJSON.hasOwnProperty("theme")
+        || !teamJSON.hasOwnProperty("uuid")
     ) { return null; }
 
     if ( // Validate field entries
@@ -45,7 +43,7 @@ function teamDataToJSON(rawString, pureJSON) {
         || teamJSON["members"].length !== 5
         || teamJSON["roles"].length !== 5
         || teamJSON["agents"].length !== 5
-    ) { return null; } // TODO : Add theme validation here, after it's finalized
+    ) { return null; }
 
     return teamJSON;
 }
@@ -56,6 +54,7 @@ function teamDataToJSON(rawString, pureJSON) {
  */
 function cacheJSON(json) {
     cachedJSON = json
+    console.log(json)
     // Lord help me if this gets passed invalid JSON, I'm not stopping whatever hell follows
 }
 
@@ -78,24 +77,6 @@ function extractJSONObject(key) {
     } // Skill issue, cache the JSON first dumbass, no data for you
 
     return cachedJSON[key]
-}
-
-/**
- * TODO : Validate if this works and if this is needed (hopefully not, keep the nesting to a low)
- */
-function extractJSONSubObject(keys) {
-    if (cachedJSON.length === 0) {
-        console.warn("JSON needs to be cached before calling an extraction function!");
-        return "";
-    } // Skill issue, cache the JSON first dumbass, no data for you
-
-    let currValue;
-
-    keys.forEach((value) =>{
-        currValue = cacheJSON[value]
-    })
-
-    return currValue;
 }
 
 /**

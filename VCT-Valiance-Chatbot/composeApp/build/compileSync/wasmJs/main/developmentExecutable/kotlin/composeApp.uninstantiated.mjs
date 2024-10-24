@@ -4418,6 +4418,7 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.xephyrous.com.JSInterop.JSFirebase_$external_class_get' : () => _ref_Li9qcy9maXJlYmFzZS1hcGkuanM_,
         'org.xephyrous.com.JSInterop.JSBedrockRuntime_$external_fun' : () => new _ref_Li9qcy9hd3MtYXBpLmpz_(),
         'org.xephyrous.com.JSInterop.InvokeModel_$external_fun' : (_this, p0) => _this.InvokeModel(p0),
+        'org.xephyrous.com.JSInterop.InvokeRAG_$external_fun' : (_this, p0) => _this.InvokeRAG(p0),
         'org.xephyrous.com.JSInterop.JSBedrockRuntime_$external_object_getInstance' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,
         'org.xephyrous.com.JSInterop.JSBedrockRuntime_$external_class_instanceof' : (x) => x instanceof _ref_Li9qcy9hd3MtYXBpLmpz_,
         'org.xephyrous.com.JSInterop.JSBedrockRuntime_$external_class_get' : () => _ref_Li9qcy9hd3MtYXBpLmpz_,

@@ -5,6 +5,7 @@ import org.xephyrous.com.ChatBox
 import org.xephyrous.com.JSInterop.BedrockRuntime
 import org.xephyrous.com.JSInterop.Firebase
 import org.xephyrous.com.JSInterop.JSFirebase
+import org.xephyrous.com.JSInterop.Tools
 import org.xephyrous.com.Utils.ErrorType.MODEL_RESPONSE
 
 fun updateText(
@@ -68,10 +69,26 @@ fun sendMessage(
                         this.cancel("Model failed to load response!")
                         // TODO("Model failure UI alert")
                     }.onSuccess { response ->
-                        mlResponse.finalizeLoad(response)
+                        var text: String = response
+
+                        if (response.contains("~||TEAMDATA||~")) {
+                            text = response.substring(0, response.indexOf("~||TEAMDATA||~") - 2)
+
+                            // Load JSON to UI
+                            val newTeam = TeamData()
+                            newTeam.loadJSON(response, false)
+
+                            Firebase.addTeam(response).onFailure { /* Uhhhhhhhhhhhhh nah */ }
+
+                            Global.selectedTeam = newTeam
+                            Global.displayingTeam = true
+                        }
+
+                        // Display to screen
+                        mlResponse.finalizeLoad(text)
 
                         // Add system message
-                        Firebase.addMessage(response, "system")
+                        Firebase.addMessage(text, "system")
                     }
                     Global.sendingMessage = false
 
@@ -82,6 +99,7 @@ fun sendMessage(
 
                 // Response flagged
                 mlResponse.finalizeLoad(validation.second)
+                Firebase.addMessage(validation.second, "system")
             }.onFailure {
                 // TODO("Failed to validate prompt UI alert)
             }

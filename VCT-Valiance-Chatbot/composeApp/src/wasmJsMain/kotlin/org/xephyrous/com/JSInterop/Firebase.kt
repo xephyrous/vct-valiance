@@ -1,9 +1,7 @@
 package org.xephyrous.com.JSInterop
 
-import org.xephyrous.com.Utils.ErrorType
-import org.xephyrous.com.Utils.TeamData
-import org.xephyrous.com.Utils.awaitHandled
-import org.xephyrous.com.Utils.awaitHandledUnit
+import kotlinx.coroutines.await
+import org.xephyrous.com.Utils.*
 import vctvaliancechatbot.composeapp.generated.resources.Res
 
 enum class Role(val strValue: String) {
@@ -85,7 +83,7 @@ object Firebase {
         val names = Tools.extractJSONArray("names", String::toString, false)
         JSUtils.clearJSONCache()
 
-        return Result.success(names)
+        return Result.success(names.drop(1).toTypedArray())
     }
 
     /**
@@ -100,22 +98,20 @@ object Firebase {
         val uuids = Tools.extractJSONArray("uuids", String::toString, false)
         JSUtils.clearJSONCache()
 
-        return Result.success(uuids)
+        return Result.success(uuids.drop(1).toTypedArray())
     }
 
     /**
      * Wrapper function for [JSFirebase.getTeamByUUID] to convert to a [TeamData] object,
      * and to handle errors
-     * @param index The UUID of the team object to retrieve
+     * @param uuid The UUID of the team object to retrieve
      * @return A TeamData object at the given position in the database
      */
     suspend fun getTeamByUUID(uuid: String) : Result<TeamData> {
         return JSFirebase.getTeamByUUID(uuid).awaitHandled<JsString>(ErrorType.DATABASE_GET)
             ?.let {
-                JSFirebase.debug("Returned")
                 val data = TeamData()
                 data.loadJSON(it.toString(), true)
-                JSFirebase.debug("Finished?")
                 Result.success(data)
             }
             ?: Result.failure(Exception(""))

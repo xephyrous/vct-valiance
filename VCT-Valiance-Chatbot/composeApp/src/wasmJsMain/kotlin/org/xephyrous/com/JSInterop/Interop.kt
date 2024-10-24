@@ -21,7 +21,7 @@ external object JSFirebase {
     fun addTeam(teamObj: String) : Promise<JsAny>
     fun getTeamNames() : Promise<JsAny>
     fun getTeamUUIDs() : Promise<JsAny>
-    fun getTeamByUUID(uuid: String) : Promise<JsAny>
+    fun getTeamByUUID(uuid: String) : Promise<JsString>
     fun updateAccessTime() : Promise<JsAny>
     fun getMessages() : Promise<JsAny>
 

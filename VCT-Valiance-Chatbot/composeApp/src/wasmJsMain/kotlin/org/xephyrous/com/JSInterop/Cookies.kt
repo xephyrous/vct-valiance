@@ -1,7 +1,5 @@
 package org.xephyrous.com.JSInterop
 
-import org.xephyrous.com.Utils.handleNull
-
 object CookieHandler {
     fun addCookie(name: String, value: String) : Result<Unit> {
         JSCookieHandler.addCookie(name, value)

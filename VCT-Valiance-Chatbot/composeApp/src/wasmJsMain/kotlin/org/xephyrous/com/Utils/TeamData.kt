@@ -1,46 +1,45 @@
 package org.xephyrous.com.Utils
 
 import org.xephyrous.com.JSInterop.*
-
-enum class TeamDataTheme {
-    BORDER_COLOR,
-    BG_COLOR,
-    ACCENT_COLOR,
-    HEADER_TEXT,
-    PLAYER_TEXT
-}
+import org.xephyrous.com.UI.Alerts
 
 /**
  * Digests the response from digestTeam() into individual data members
- * @param rawString The model's response string containing the team data as JSON
- * @param pureJSON Whether the string is pure JSON, or a full model response string
  */
-@Suppress("UNCHECKED_CAST")
 class TeamData {
-    lateinit var name: String
-    lateinit var igl: String
-    lateinit var coach: String
+    var name: String = "Default Name"
+    var uuid: String = "0"
+    var igl: String = "Default IGL"
+    var coach: String = "Default Coach"
     lateinit var members: Array<String>
     lateinit var roles: Array<String>
     lateinit var agents: Array<String>
-    lateinit var theme: Array<Long>
+    val theme = ArrayList<Long>()
+
+    init {
+        theme.add(4279505940) // Border
+        theme.add(4279505940) // Background
+        theme.add(4290591044) // Accent
+        theme.add(4294967295) // Header
+        theme.add(4294967295) // Player
+    }
 
     fun loadJSON(rawString: String, pureJSON: Boolean) {
         try {
-            val json = Tools.teamDataToJSON(rawString, pureJSON).onSuccess {
+            Tools.teamDataToJSON(rawString, pureJSON).onSuccess {
                 Tools.cacheJSON(it)
             }.onFailure {
-                // TODO("Invalid model response UI alert")
-                // Handle this somehow?
+                Alerts.displayAlert("Invalid model response, failed to load team object!")
+                return
             }
 
             this.name = Tools.extractJSONObject("name", String::toString)
+            this.uuid = Tools.extractJSONObject("uuid", String::toString)
             this.igl = Tools.extractJSONObject("igl", String::toString)
             this.coach = Tools.extractJSONObject("coach", String::toString)
             this.members = Tools.extractJSONArray("members", String::toString)
             this.roles = Tools.extractJSONArray("roles", String::toString)
             this.agents = Tools.extractJSONArray("agents", String::toString)
-            this.theme = Tools.extractJSONArray("theme", String::toLong)
 
             Tools.clearJSONCache()
         } catch (e: Exception) {

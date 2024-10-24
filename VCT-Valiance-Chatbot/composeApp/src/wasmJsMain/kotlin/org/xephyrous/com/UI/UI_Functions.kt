@@ -185,7 +185,9 @@ fun Settings() {
                                                             team -> Global.selectedTeam = team
                                                             Global.displayingTeam = true
                                                         }
-                                                        .onFailure { /* TODO("Failed to fetch teams list UI alert")  */ }
+                                                        .onFailure {
+                                                            Alerts.displayAlert("Failed to load team!")
+                                                        }
                                                     Global.sendingMessage = false
                                                 }
                                             },
@@ -230,13 +232,16 @@ fun Settings() {
                                     onClick = {
                                         GlobalScope.launch(Dispatchers.Default) {
                                             Global.sendingMessage = true
-                                            debugText("LOCKED MESSAGES")
                                             Firebase.getTeamNames()
                                                 .onSuccess { result -> Global.createdTeams = result }
-                                                .onFailure { TODO("Kill") }
+                                                .onFailure {
+                                                    Alerts.displayAlert("Failed to load saved teams!")
+                                                }
                                             Firebase.getTeamUUIDs()
                                                 .onSuccess { result -> Global.createdUUIDS = result }
-                                                .onFailure { TODO("KILL AGAIN)") }
+                                                .onFailure {
+                                                    Alerts.displayAlert("Failed to load saved teams!")
+                                                }
                                             Global.sendingMessage = false
                                         }
                                     },
@@ -532,7 +537,8 @@ fun TeamDisplay() {
                     Row(
                         modifier = Modifier.fillMaxWidth(.9F).fillMaxHeight(.15F)
                             .background(Color(Global.selectedTeam!!.theme[1]))
-                            .border(BorderStroke(2.dp, Color(Global.selectedTeam!!.theme[0]))),
+                            .border(BorderStroke(4.dp, Color(Global.selectedTeam!!.theme[0])))
+                            .clip(RoundedCornerShape(8.dp)),
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Box(

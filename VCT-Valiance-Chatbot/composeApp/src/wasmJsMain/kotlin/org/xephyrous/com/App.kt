@@ -30,15 +30,15 @@ fun App() {
             // Initialize Firebase connection
             Firebase.initializeFirebase().onFailure {
                 this.cancel("Could not initialize database connection!")
-                Alerts.displayUnmovingAlert("Initialization failure")
-                TODO("Initialization failure UI alert")
+                Alerts.displayUnmovingAlert("Initialization failure! Please refresh the application")
             }
 
             // Initialize session
             CookieHandler.getCookie("vctSessionUUID").onFailure {
                 this.cancel("Could not initialize session!")
-                Alerts.displayUnmovingAlert("Please Enable cookies and refresh application")
-                TODO("Enable cookies and reload application UI alert")
+                Alerts.displayUnmovingAlert(
+                    "Could not initialize session! Please enable cookies and refresh the application"
+                )
             }.onSuccess {
                 if (it == "") { // No existing session / cookie
 
@@ -48,8 +48,9 @@ fun App() {
                     CookieHandler.addCookie("vctSessionUUID", sessionUUID!!)
                         .onFailure {
                             this.cancel("Could not initialize session!")
-                            Alerts.displayUnmovingAlert("Please Enable cookies and refresh application")
-                            TODO("Enable cookies and reload application UI alert")
+                            Alerts.displayUnmovingAlert(
+                                "Could not initialize session! Please enable cookies and refresh the application"
+                            )
                         }
 
                     Firebase.createUser()
@@ -58,7 +59,6 @@ fun App() {
                     BedrockRuntime.InvokeModel("Hello!").onFailure {
                         this.cancel("Model failed to load response!")
                         Alerts.displayUnmovingAlert("Model Initialization Failed")
-                        // TODO("Model failure UI alert")
                     }.onSuccess { response ->
                         updateText(false, response)
                         Firebase.addMessage(response, "system")
@@ -68,14 +68,14 @@ fun App() {
                         .onSuccess { uuid -> sessionUUID = uuid }
                         .onFailure {
                             this.cancel("Could not initialize session!")
-                            Alerts.displayUnmovingAlert("Please Enable cookies and refresh application")
-                            TODO("Enable cookies and reload application UI alert")
+                            Alerts.displayUnmovingAlert(
+                                "Could not initialize session! Please enable cookies and refresh the application"
+                            )
                         }
                     Firebase.setSessionUUID(sessionUUID!!)
 
                     // Initialize messages
                     val messages = Firebase.getMessages().onSuccess { messages ->
-
                         val temp: ArrayList<ChatBox> = arrayListOf()
 
                         for (i in 0..<messages.first.size) {
@@ -92,8 +92,9 @@ fun App() {
 
                         Global.loadedMessages = temp
                     }.onFailure {
-                        Alerts.displayUnmovingAlert("Session Messages Failed to load")
-                        TODO("Failed to load session messages UI alert")
+                        Alerts.displayUnmovingAlert(
+                            "Failed to load session messages! Please refresh the application"
+                        )
                     }
                 }
             }
